@@ -193,6 +193,7 @@ export default function App() {
                     selection={w.selection}
                     onSelect={w.setSelection}
                     onChange={w.update}
+                    onPositionsChange={w.moveNodes}
                     editing={w.view === 'editor'}
                     grid={grid}
                     snap={w.view === 'editor' && snap}

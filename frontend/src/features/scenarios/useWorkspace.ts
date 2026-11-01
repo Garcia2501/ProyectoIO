@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import type { Scenario } from '../../types/network'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import type { NetworkNode, Scenario } from '../../types/network'
 import type { StoredResult } from '../../types/results'
 import { referenceScenario } from '../network/referenceScenario'
 import { validateNetwork } from '../network/validation'
@@ -40,6 +40,30 @@ export function useWorkspace() {
       'Cambios en memoria. Vuelve a optimizar para actualizar los resultados.',
     )
   }
+  // Coordinates belong to the canvas, not to the optimization model.
+  const moveNodes = useCallback(
+    (positions: Pick<NetworkNode, 'id' | 'x' | 'y'>[]) => {
+      const moved = new Map(
+        positions.map((position) => [position.id, position]),
+      )
+      setScenarios((all) =>
+        all.map((scenario, i) =>
+          i !== active
+            ? scenario
+            : {
+                ...scenario,
+                nodes: scenario.nodes.map((node) => {
+                  const position = moved.get(node.id)
+                  return position
+                    ? { ...node, x: position.x, y: position.y }
+                    : node
+                }),
+              },
+        ),
+      )
+    },
+    [active],
+  )
   const run = async () => {
     const errors = validateNetwork(scenarios[active])
     if (errors.length) {
@@ -128,6 +152,7 @@ export function useWorkspace() {
     setSelection,
     setMessage,
     update,
+    moveNodes,
     run,
     demo,
     selectScenario: (i: number) => {
