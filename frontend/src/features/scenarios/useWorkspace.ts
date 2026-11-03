@@ -156,6 +156,8 @@ export function useWorkspace() {
     run,
     demo,
     selectScenario: (i: number) => {
+      if (i === active) return
+      cancel()
       setActive(i)
       setSelection(null)
       setMessage('')
