@@ -4,6 +4,7 @@ import type { StoredResult } from '../../types/results'
 import { referenceScenario } from '../network/referenceScenario'
 import { validateNetwork } from '../network/validation'
 import { optimize } from '../../services/api'
+import { metropolitanDemo } from '../simulation3d/metropolitanDemo'
 export type Selection = { type: 'node' | 'road'; id: string } | null
 export type View = 'main' | 'editor' | 'comparison' | 'simulation' | 'results'
 export function freshScenarios(): Scenario[] {
@@ -64,8 +65,9 @@ export function useWorkspace() {
     },
     [active],
   )
-  const run = async () => {
-    const errors = validateNetwork(scenarios[active])
+  const run = async (replacement?: Scenario) => {
+    const requested = replacement ?? scenarios[active]
+    const errors = validateNetwork(requested)
     if (errors.length) {
       setMessage(errors.join(' '))
       return
@@ -78,7 +80,7 @@ export function useWorkspace() {
     setResults((all) => all.map((r, i) => (i === active ? null : r)))
     const index = active
     try {
-      const data = await optimize(scenarios[index], c.signal)
+      const data = await optimize(requested, c.signal)
       if (!c.signal.aborted) {
         setResults((all) =>
           all.map((r, i) => (i === index ? { data, demo: false } : r)),
@@ -155,6 +157,17 @@ export function useWorkspace() {
     moveNodes,
     run,
     demo,
+    metroDemo: () => {
+      cancel()
+      const fixture = metropolitanDemo()
+      setScenarios(fixture.scenarios)
+      setResults(fixture.results)
+      setActive(0)
+      setSelection(null)
+      setMessage(
+        'DEMOSTRACIÓN METROPOLITANA: 36 nodos y 60 vías. Soluciones estáticas verificadas; no se ha ejecutado el servidor. La demanda y el costo unitario son ilustrativos.',
+      )
+    },
     selectScenario: (i: number) => {
       if (i === active) return
       cancel()

@@ -3,6 +3,8 @@ import { MotionConfig, motion, useReducedMotion } from 'motion/react'
 import { UrbanCanvas } from './features/simulation/UrbanCanvas'
 import { ResultsView } from './features/results/ResultsView'
 import './premium.css'
+import './mega.css'
+import { MegaSimulation } from './features/simulation3d/MegaSimulation'
 import { Header } from './components/Header'
 import { Icon } from './components/Icon'
 import { Inspector } from './components/Inspector'
@@ -78,8 +80,13 @@ export default function App() {
               value={w.active}
               onChange={(e) => w.selectScenario(Number(e.target.value))}
             >
-              <option value={0}>Escenario base</option>
-              <option value={1}>Cierre de vía</option>
+              {w.scenarios.map((scenario, i) => (
+                <option key={i} value={i}>
+                  {scenario.scenario_name === 'Base'
+                    ? 'Escenario base'
+                    : scenario.scenario_name}
+                </option>
+              ))}
             </select>
           </label>
           <span className="session-indicator">
@@ -117,23 +124,19 @@ export default function App() {
           <ResultsView w={w} />
         ) : w.view === 'comparison' ? (
           <Comparison w={w} />
+        ) : w.view === 'simulation' ? (
+          <MegaSimulation w={w} />
         ) : (
           <>
-            {w.view === 'main' || w.view === 'simulation' ? (
+            {w.view === 'main' ? (
               <>
                 <div className="experience-heading">
                   <div>
-                    <p className="eyebrow">
-                      SMARTFLOW /{' '}
-                      {w.view === 'simulation'
-                        ? 'CIUDAD VIRTUAL'
-                        : 'LABORATORIO'}
-                    </p>
+                    <p className="eyebrow">SMARTFLOW / LABORATORIO</p>
                     <h1>Laboratorio de optimización de flujo vial</h1>
                     <p className="experience-description">
-                      {w.view === 'simulation'
-                        ? 'Una ciudad, las mismas decisiones. Explora el flujo de tu red.'
-                        : 'Cada conexión cuenta. Explora tu red desde una nueva perspectiva.'}
+                      Cada conexión cuenta. Explora tu red desde una nueva
+                      perspectiva.
                     </p>
                   </div>
                   <div
@@ -151,10 +154,7 @@ export default function App() {
                       <Icon name="network" size={16} />
                       Vista matemática
                     </button>
-                    <button
-                      aria-pressed={w.view === 'simulation' || urban}
-                      onClick={() => setUrban(true)}
-                    >
+                    <button aria-pressed={urban} onClick={() => setUrban(true)}>
                       <Icon name="city" size={17} />
                       Vista urbana
                     </button>
@@ -233,12 +233,7 @@ export default function App() {
                 </button>
               </section>
             )}
-            <div
-              className={
-                'main-grid ' +
-                (w.view === 'simulation' ? 'city-experience' : '')
-              }
-            >
+            <div className={'main-grid ' + ''}>
               <div className="map-column">
                 <section className="map-panel panel">
                   {w.view === 'editor' && (
@@ -273,7 +268,7 @@ export default function App() {
                       </button>
                     </div>
                   )}
-                  {w.view === 'simulation' || (w.view === 'main' && urban) ? (
+                  {w.view === 'main' && urban ? (
                     <UrbanCanvas
                       key={w.active}
                       scenario={w.scenario}
@@ -384,7 +379,7 @@ export default function App() {
                 onDelete={() => setDeleting(true)}
               />
             </div>
-            {(w.view === 'main' || w.view === 'simulation') && (
+            {w.view === 'main' && (
               <Analysis scenario={w.scenario} result={w.results[w.active]} />
             )}
           </>
