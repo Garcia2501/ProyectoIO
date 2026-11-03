@@ -15,10 +15,34 @@ export async function optimize(
     },
   )
   if (!response.ok) {
-    if (response.status === 422)
-      throw new Error(
-        'El servidor rechazó el escenario (422). Revisa balances, identificadores y propiedades.',
-      )
+    if (response.status === 422) {
+      let explanation = 'Revisa balances, identificadores y propiedades.'
+      try {
+        const body: unknown = await response.json()
+        const detail =
+          body && typeof body === 'object' && 'detail' in body
+            ? body.detail
+            : undefined
+        const messages =
+          typeof detail === 'string'
+            ? [detail]
+            : Array.isArray(detail)
+              ? detail.flatMap((entry: unknown) =>
+                  entry &&
+                  typeof entry === 'object' &&
+                  'msg' in entry &&
+                  typeof entry.msg === 'string'
+                    ? [entry.msg.replace(/^Value error, /, '')]
+                    : [],
+                )
+              : []
+        if (messages.length)
+          explanation = [...new Set(messages)].slice(0, 3).join(' ')
+      } catch {
+        /* A non-JSON error response still has a useful fallback. */
+      }
+      throw new Error('El servidor rechazó el escenario (422). ' + explanation)
+    }
     throw new Error(
       'No se pudo optimizar la red (HTTP ' + response.status + ').',
     )

@@ -104,6 +104,32 @@ test('maneja 422 y 500 sin fabricar resultados', async () => {
     await expect(optimize(referenceScenario)).rejects.toThrow(String(status))
   }
 })
+
+test.each([
+  {
+    detail: 'Reduce el tamaño de la red',
+    expected: 'Reduce el tamaño de la red',
+  },
+  {
+    detail: [{ msg: 'Value error, vía R: reduce el costo para esta red' }],
+    expected: 'vía R: reduce el costo para esta red',
+  },
+])(
+  'muestra la explicación útil de validación del backend %#',
+  async ({ detail, expected }) => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValue({
+          ok: false,
+          status: 422,
+          json: async () => ({ detail }),
+        }),
+    )
+    await expect(optimize(referenceScenario)).rejects.toThrow(expected)
+  },
+)
 test('rechaza costo inconsistente y porcentajes inválidos', async () => {
   for (const data of [
     { ...response, total_cost: 350 },

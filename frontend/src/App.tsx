@@ -24,6 +24,9 @@ export default function App() {
     [deleting, setDeleting] = useState(false)
   const [validationShown, setValidationShown] = useState(false)
   const errors = validateNetwork(w.scenario)
+  const hasDemoResults = (
+    w.view === 'comparison' ? w.results : [w.results[w.active]]
+  ).some((result) => result?.demo)
   const addNode = () => {
     let id = 'N' + (w.scenario.nodes.length + 1)
     while (w.scenario.nodes.some((n) => n.id === id)) id += 'n'
@@ -114,10 +117,11 @@ export default function App() {
             </button>
           </div>
         )}
-        {w.results.some((r) => r?.demo) && (
+        {hasDemoResults && (
           <div className="demo-banner">
-            DEMOSTRACIÓN · Resultados estáticos etiquetados. No se ha ejecutado
-            el optimizador del servidor.
+            DEMOSTRACIÓN · Esta vista incluye resultados estáticos de ejemplo.
+            Las etiquetas distinguen los datos DEMO y los resultados del
+            servidor.
           </div>
         )}
         {w.view === 'results' ? (
