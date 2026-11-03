@@ -41,6 +41,17 @@ export function Inspector({
   const save = (event: FormEvent) => {
     event.preventDefault()
     if (draftRoad) {
+      if (
+        !Number.isSafeInteger(draftRoad.capacity) ||
+        draftRoad.capacity < 0 ||
+        !Number.isSafeInteger(draftRoad.unit_cost) ||
+        draftRoad.unit_cost < 0
+      ) {
+        setError(
+          'Capacidad y costo deben ser enteros no negativos representables exactamente.',
+        )
+        return
+      }
       if (draftRoad.source === draftRoad.target) {
         setError('Elige dos nodos diferentes.')
         return
@@ -59,13 +70,20 @@ export function Inspector({
           : [...scenario.roads, draftRoad],
       })
       w.setSelection({ type: 'road', id: draftRoad.id })
-    } else if (draftNode)
+    } else if (draftNode) {
+      if (!draftNode.label.trim() || !Number.isSafeInteger(draftNode.balance)) {
+        setError(
+          'Indica un nombre y un balance entero representable exactamente.',
+        )
+        return
+      }
       w.update({
         ...scenario,
         nodes: scenario.nodes.map((n) =>
           n.id === draftNode.id ? { ...draftNode, x: n.x, y: n.y } : n,
         ),
       })
+    }
     setError('')
     w.setMessage(
       'Propiedades guardadas en memoria. Los resultados anteriores se han descartado.',

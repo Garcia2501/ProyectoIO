@@ -1,8 +1,16 @@
 import type { Scenario } from '../../types/network'
 export function validateNetwork(s: Scenario): string[] {
   const errors: string[] = []
-  if (!s.nodes.length) errors.push('Agrega al menos un nodo.')
-  if (!s.roads.length) errors.push('Agrega al menos una vía.')
+  if (!s.scenario_name.trim()) errors.push('El escenario debe tener nombre.')
+  if (s.nodes.length < 2) errors.push('Agrega al menos dos nodos.')
+  if (
+    !Number.isSafeInteger(
+      s.nodes.reduce((sum, n) => sum + Math.max(0, n.balance), 0),
+    )
+  )
+    errors.push(
+      'La oferta total supera la precisión entera soportada por el navegador.',
+    )
   if (s.nodes.reduce((sum, n) => sum + n.balance, 0) !== 0)
     errors.push('La suma de balances debe ser cero.')
   if (
@@ -14,7 +22,7 @@ export function validateNetwork(s: Scenario): string[] {
     if (
       !n.id.trim() ||
       !n.label.trim() ||
-      !Number.isInteger(n.balance) ||
+      !Number.isSafeInteger(n.balance) ||
       !Number.isFinite(n.x) ||
       !Number.isFinite(n.y)
     )
@@ -27,13 +35,15 @@ export function validateNetwork(s: Scenario): string[] {
     )
       errors.push('Vía ' + r.id + ': referencias inválidas.')
     if (
-      !Number.isInteger(r.capacity) ||
+      !Number.isSafeInteger(r.capacity) ||
       r.capacity < 0 ||
-      !Number.isInteger(r.unit_cost) ||
+      !Number.isSafeInteger(r.unit_cost) ||
       r.unit_cost < 0
     )
       errors.push(
-        'Vía ' + r.id + ': capacidad y costo deben ser enteros no negativos.',
+        'Vía ' +
+          r.id +
+          ': capacidad y costo deben ser enteros no negativos representables exactamente.',
       )
   }
   return errors
