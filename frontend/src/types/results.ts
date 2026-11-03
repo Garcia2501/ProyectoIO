@@ -10,7 +10,7 @@ export interface OptimizationResult {
   total_cost: number | null
   total_supply: number
   roads: RoadResult[]
-  message?: string
+  message?: string | null
 }
 export interface StoredResult {
   data: OptimizationResult
