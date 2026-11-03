@@ -43,7 +43,7 @@ El backend acordado estará en `http://localhost:8000/api/v1`, con `GET /health`
 
 Este README se actualizará conforme avance el proyecto.
 
-## Estado actual: rediseño de las tres vistas
+## Estado actual: laboratorio y experiencia urbana
 
 - Interfaz en español con cabecera horizontal, sin menú lateral, y distribución adaptable.
 - Escenario de referencia tipado: nodos A, B y C; vías R1, R2 y R3.
@@ -54,7 +54,14 @@ Este README se actualizará conforme avance el proyecto.
 - Eliminación con confirmación; eliminar un nodo elimina también sus conexiones. Restablecer requiere confirmación.
 - Dos escenarios independientes: base y cierre de R1. Selector superior y vista de comparación.
 - Gráficos Recharts de flujo, utilización, costo y capacidad efectiva; nunca se inventan series de tiempo.
-- Resultados invalidados al modificar el escenario. Al recargar se pierde la sesión; no se simula persistencia.
+- Resultados invalidados al modificar el modelo. Mover nodos solo cambia coordenadas visuales y conserva el resultado. Al recargar se pierde la sesión; no se simula persistencia.
+- Navegación superior con cinco destinos funcionales: Laboratorio, Comparar, Editar red, Simulación y Resultados. Las flechas y Home/End permiten recorrer los accesos.
+- Estilo compartido en `premium.css`: vidrio claro, acentos menta/azul y paneles flotantes. Motion anima la entrada de vistas, el indicador de navegación y la expansión del inspector.
+- Vista matemática y vista urbana comparten escenario, selección y resultado. La ciudad usa SVG y no crea otro modelo de optimización.
+- Vehículos animados según el flujo positivo devuelto por la API o la demostración identificada; cero vehículos si no existe resultado óptimo o la vía está cerrada. Cada tramo usa una muestra de hasta 12 símbolos, proporcional al flujo respecto al tramo de mayor flujo; no son vehículos físicos individuales.
+- Reproducción, pausa, velocidades 0,5×/1×/2×, zoom, centrado, desplazamiento y selección por teclado en la ciudad. Velocidad de reproducción no equivale a velocidad vial.
+- Movimiento reducido: vehículos estáticos y reproducción automática deshabilitada; se reducen las transiciones y se desactiva el resaltado animado de vías.
+- Resultados muestra detalle por tramo y permite exportar escenario, resultado y origen (API/demo) en un archivo JSON local.
 
 Los datos del contrato están en `frontend/src/features/network/referenceScenario.ts`. El lienzo transforma coordenadas únicamente para dar espacio a las etiquetas e invierte esa transformación al guardar posiciones. El fondo vectorial es decorativo y no tiene escala geográfica.
 
@@ -77,6 +84,8 @@ Los porcentajes de costo se muestran solo entre resultados óptimos del mismo or
 - `features/scenarios/useWorkspace`: escenarios, selección, invalidación y llamadas cancelables.
 - `features/scenarios/Comparison` y `features/results/Analysis`: comparación y gráficos.
 - `services/api`: contrato REST; `types/results`: tipos de respuestas sin cambiar el contrato de red.
+- `features/simulation/urbanGeometry` y `UrbanCanvas`: proyección SVG, ciudad decorativa y vehículos. Las animaciones se gestionan con CSS/Web Animations, sin renderizar React en cada cuadro.
+- `features/results/ResultsView`: detalle de resultados y exportación JSON.
 
 ### Verificación manual
 
@@ -88,7 +97,7 @@ Los porcentajes de costo se muestran solo entre resultados óptimos del mismo or
 
 ### Dependencias
 
-React Flow y Recharts están instalados. No se añadió una librería de estado ni de peticiones. El cálculo real y la persistencia definitiva dependen del backend. La API mínima no proporciona historia temporal ni convergencia, por lo que no se representan como datos calculados.
+React Flow, Recharts y Motion para React están instalados. No se añadió una librería de estado ni de peticiones. El cálculo real y la persistencia definitiva dependen del backend. La API mínima no proporciona historia temporal ni convergencia, por lo que no se representan como datos calculados.
 
 La auditoría inicial deja avisos moderados en la cadena de ESLint (herramientas de desarrollo); `npm audit --omit=dev` no detectó vulnerabilidades. Revisar las actualizaciones compatibles antes de integrar; no ejecutar `npm audit fix --force` sin revisar los cambios.
 
