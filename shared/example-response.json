@@ -1,0 +1,11 @@
+{
+  "status": "optimal",
+  "scenario_name": "Base",
+  "total_cost": 500,
+  "total_supply": 100,
+  "roads": [
+    {"id": "R1", "flow": 100, "capacity": 100, "utilization_pct": 100.0},
+    {"id": "R2", "flow": 100, "capacity": 100, "utilization_pct": 100.0},
+    {"id": "R3", "flow": 0, "capacity": 50, "utilization_pct": 0.0}
+  ]
+}
