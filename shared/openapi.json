@@ -102,6 +102,8 @@
           },
           "balance": {
             "type": "integer",
+            "maximum": 9007199254740991.0,
+            "minimum": -9007199254740991.0,
             "title": "Balance"
           }
         },
@@ -217,11 +219,13 @@
           },
           "capacity": {
             "type": "integer",
+            "maximum": 9007199254740991.0,
             "minimum": 0.0,
             "title": "Capacity"
           },
           "unit_cost": {
             "type": "integer",
+            "maximum": 9007199254740991.0,
             "minimum": 0.0,
             "title": "Unit Cost"
           },

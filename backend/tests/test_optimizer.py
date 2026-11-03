@@ -1,6 +1,10 @@
 """Pruebas unitarias del motor de flujo de costo mínimo y la conservación."""
 
-from app.optimizer.min_cost_flow import InfeasibleError, solve_min_cost_flow
+from app.optimizer.min_cost_flow import (
+    InfeasibleError,
+    SolverError,
+    solve_min_cost_flow,
+)
 
 
 def test_reference_via_engine():
@@ -50,3 +54,18 @@ def test_multiple_sources_and_sinks():
 
     # Costo mínimo: 0->2 (50*1=50) + 1->3 (50*3=150) = 200.
     assert cost == 200
+
+
+def test_solver_cost_overflow_raises():
+    """Si el solver desbordara el costo, se lanza SolverError (no 200 falso).
+
+    Elude la validación de esquemas para forzar el desbordamiento de los
+    enteros de 64 bits de OR-Tools: flow 10^10 * unit_cost 10^10 = 10^20.
+    """
+    arcs = [(0, 1, 10**10, 10**10)]
+    supplies = [10**10, -(10**10)]
+    try:
+        solve_min_cost_flow(2, arcs, supplies)
+    except SolverError:
+        return
+    raise AssertionError("se esperaba SolverError por costo inconsistente")

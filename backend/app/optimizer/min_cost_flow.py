@@ -48,7 +48,18 @@ def solve_min_cost_flow(
 
     if status == solver.OPTIMAL:
         flows = [int(solver.flow(i)) for i in range(len(arcs))]
-        return flows, int(solver.optimal_cost())
+        reported_cost = int(solver.optimal_cost())
+        # Comprobación defensiva: el costo reportado debe coincidir con la
+        # suma exacta de flujo * unit_cost. Evita publicar un "optimal" con
+        # costo inconsistente si el solver desbordara sus enteros de 64 bits.
+        computed_cost = sum(
+            flow * unit_cost for flow, unit_cost in zip(flows, unit_costs)
+        )
+        if reported_cost != computed_cost:
+            raise SolverError(
+                "el costo del solver no coincide con los flujos obtenidos"
+            )
+        return flows, reported_cost
 
     if status == solver.INFEASIBLE:
         raise InfeasibleError()
