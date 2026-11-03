@@ -1,0 +1,50 @@
+name: SmartFlow verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - name: Install dependencies
+        run: |
+          npm ci --prefix frontend
+          python -m pip install -r backend/requirements.txt
+      - name: Backend tests
+        run: python -m pytest -q backend/tests
+      - name: Frontend checks
+        working-directory: frontend
+        run: |
+          npm run lint
+          npm test
+          npm run build
+      - name: Real REST integration
+        shell: bash
+        run: |
+          python -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000 > /tmp/smartflow-api.log 2>&1 &
+          backend_pid=$!
+          trap 'kill "$backend_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail http://127.0.0.1:8000/api/v1/health > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:integration --prefix frontend
