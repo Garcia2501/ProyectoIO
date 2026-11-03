@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useReducedMotion } from 'motion/react'
 import {
   Bar,
   BarChart,
@@ -22,6 +23,7 @@ export function Analysis({
   result: StoredResult | null
 }) {
   const [tab, setTab] = useState<'flow' | 'utilization' | 'cost'>('flow')
+  const reduced = useReducedMotion()
   const optimal = result?.data.status === 'optimal'
   const data = scenario.roads.map((r) => {
     const rr = result?.data.roads.find((a) => a.id === r.id)
@@ -91,6 +93,7 @@ export function Analysis({
                   <YAxis />
                   <Tooltip />
                   <Bar
+                    isAnimationActive={!reduced}
                     dataKey="value"
                     name={
                       tab === 'flow'
@@ -137,6 +140,7 @@ export function Analysis({
                   >
                     <PieChart>
                       <Pie
+                        isAnimationActive={!reduced}
                         data={[{ value: avg }, { value: 100 - avg }]}
                         dataKey="value"
                         innerRadius="72%"

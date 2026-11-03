@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { expect, test } from 'vitest'
 import App from '../App'
 import userEvent from '@testing-library/user-event'
 
-test('identifica el laboratorio al abrir la aplicación', () => {
+test('identifica el laboratorio al abrir la aplicación', async () => {
   render(<App />)
   expect(
     screen.getByRole('heading', {
@@ -11,9 +11,11 @@ test('identifica el laboratorio al abrir la aplicación', () => {
       level: 1,
     }),
   ).toBeInTheDocument()
-  expect(
-    screen.getByText(/Aún no se ha ejecutado ninguna optimización/),
-  ).toBeVisible()
+  await waitFor(() =>
+    expect(
+      screen.getByText(/Aún no se ha ejecutado ninguna optimización/),
+    ).toBeVisible(),
+  )
 })
 
 test('permite inspeccionar las tres vías sin confundir costo y capacidad', async () => {

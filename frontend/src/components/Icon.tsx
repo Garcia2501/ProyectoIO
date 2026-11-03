@@ -1,5 +1,11 @@
 import type { CSSProperties } from 'react'
 const paths: Record<string, string> = {
+  city: 'M3 21V8h6v13M9 21V3h7v18M16 21V11h5v10M5 11h1m-1 4h1m6-8h1m-1 4h1m-1 4h1m6 0h1M1 21h22',
+  pause: 'M8 4v16M16 4v16',
+  target:
+    'M12 2v4m0 12v4M2 12h4m12 0h4M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+  sparkles: 'm12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z',
+  download: 'M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4',
   network: 'M12 3v6M5 19l7-10 7 10M5 19h.01M19 19h.01',
   road: 'M6 3 2 21M18 3l4 18M12 3v4m0 4v4m0 4v2',
   layers: 'm12 3 10 5-10 5L2 8l10-5Zm-10 10 10 5 10-5M2 18l10 5 10-5',

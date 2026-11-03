@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { MotionConfig, motion, useReducedMotion } from 'motion/react'
+import { UrbanCanvas } from './features/simulation/UrbanCanvas'
+import { ResultsView } from './features/results/ResultsView'
+import './premium.css'
 import { Header } from './components/Header'
 import { Icon } from './components/Icon'
 import { Inspector } from './components/Inspector'
@@ -10,6 +14,9 @@ import { Comparison } from './features/scenarios/Comparison'
 import { useWorkspace } from './features/scenarios/useWorkspace'
 export default function App() {
   const w = useWorkspace()
+  const reduced = useReducedMotion()
+  const [urban, setUrban] = useState(false)
+  const [playback, setPlayback] = useState({ playing: true, speed: 1 })
   const [snap, setSnap] = useState(true),
     [grid, setGrid] = useState(false),
     [deleting, setDeleting] = useState(false)
@@ -52,9 +59,45 @@ export default function App() {
     setDeleting(false)
   }
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Header w={w} />
-      <main id="main" className="workspace">
+      <motion.main
+        id="main"
+        className={'workspace view-' + w.view}
+        key={w.view}
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.22 }}
+      >
+        <section className="workspace-bar" aria-label="Controles del escenario">
+          <label className="workspace-scenario">
+            <Icon name="layers" size={18} />
+            <span>Escenario</span>
+            <select
+              aria-label="Escenario"
+              value={w.active}
+              onChange={(e) => w.selectScenario(Number(e.target.value))}
+            >
+              <option value={0}>Escenario base</option>
+              <option value={1}>Cierre de vía</option>
+            </select>
+          </label>
+          <span className="session-indicator">
+            <i className="dot green" />
+            Sesión en memoria
+          </span>
+          <button className="quiet-button" onClick={w.demo}>
+            <Icon name="play" size={15} />
+            Cargar demostración
+          </button>
+          <button
+            className="quiet-button"
+            onClick={() => w.setMessage('CONFIRM_RESET')}
+          >
+            <Icon name="reset" size={16} />
+            Restablecer
+          </button>
+        </section>
         {w.message && w.message !== 'CONFIRM_RESET' && (
           <div className="notice" role="status">
             <Icon name="info" />
@@ -70,15 +113,53 @@ export default function App() {
             el optimizador del servidor.
           </div>
         )}
-        {w.view === 'comparison' ? (
+        {w.view === 'results' ? (
+          <ResultsView w={w} />
+        ) : w.view === 'comparison' ? (
           <Comparison w={w} />
         ) : (
           <>
-            {w.view === 'main' ? (
+            {w.view === 'main' || w.view === 'simulation' ? (
               <>
-                <h1 className="sr-only">
-                  Laboratorio de optimización de flujo vial
-                </h1>
+                <div className="experience-heading">
+                  <div>
+                    <p className="eyebrow">
+                      SMARTFLOW /{' '}
+                      {w.view === 'simulation'
+                        ? 'CIUDAD VIRTUAL'
+                        : 'LABORATORIO'}
+                    </p>
+                    <h1>Laboratorio de optimización de flujo vial</h1>
+                    <p className="experience-description">
+                      {w.view === 'simulation'
+                        ? 'Una ciudad, las mismas decisiones. Explora el flujo de tu red.'
+                        : 'Cada conexión cuenta. Explora tu red desde una nueva perspectiva.'}
+                    </p>
+                  </div>
+                  <div
+                    className="representation-switch"
+                    role="group"
+                    aria-label="Representación de la red"
+                  >
+                    <button
+                      aria-pressed={w.view === 'main' && !urban}
+                      onClick={() => {
+                        setUrban(false)
+                        w.setView('main')
+                      }}
+                    >
+                      <Icon name="network" size={16} />
+                      Vista matemática
+                    </button>
+                    <button
+                      aria-pressed={w.view === 'simulation' || urban}
+                      onClick={() => setUrban(true)}
+                    >
+                      <Icon name="city" size={17} />
+                      Vista urbana
+                    </button>
+                  </div>
+                </div>
                 <Metrics scenario={w.scenario} result={w.results[w.active]} />
               </>
             ) : (
@@ -152,7 +233,12 @@ export default function App() {
                 </button>
               </section>
             )}
-            <div className="main-grid">
+            <div
+              className={
+                'main-grid ' +
+                (w.view === 'simulation' ? 'city-experience' : '')
+              }
+            >
               <div className="map-column">
                 <section className="map-panel panel">
                   {w.view === 'editor' && (
@@ -187,18 +273,30 @@ export default function App() {
                       </button>
                     </div>
                   )}
-                  <NetworkCanvas
-                    key={w.active + '-' + w.view}
-                    scenario={w.scenario}
-                    selection={w.selection}
-                    onSelect={w.setSelection}
-                    onChange={w.update}
-                    onPositionsChange={w.moveNodes}
-                    editing={w.view === 'editor'}
-                    grid={grid}
-                    snap={w.view === 'editor' && snap}
-                    result={w.results[w.active]}
-                  />
+                  {w.view === 'simulation' || (w.view === 'main' && urban) ? (
+                    <UrbanCanvas
+                      key={w.active}
+                      scenario={w.scenario}
+                      result={w.results[w.active]}
+                      selection={w.selection}
+                      onSelect={w.setSelection}
+                      playback={playback}
+                      setPlayback={setPlayback}
+                    />
+                  ) : (
+                    <NetworkCanvas
+                      key={w.active + '-' + w.view}
+                      scenario={w.scenario}
+                      selection={w.selection}
+                      onSelect={w.setSelection}
+                      onChange={w.update}
+                      onPositionsChange={w.moveNodes}
+                      editing={w.view === 'editor'}
+                      grid={grid}
+                      snap={w.view === 'editor' && snap}
+                      result={w.results[w.active]}
+                    />
+                  )}
                 </section>
                 {w.view === 'editor' && (
                   <section className="editor-bottom">
@@ -286,7 +384,7 @@ export default function App() {
                 onDelete={() => setDeleting(true)}
               />
             </div>
-            {w.view === 'main' && (
+            {(w.view === 'main' || w.view === 'simulation') && (
               <Analysis scenario={w.scenario} result={w.results[w.active]} />
             )}
           </>
@@ -297,7 +395,7 @@ export default function App() {
             Modelo ilustrativo · vehículos por intervalo · costos abstractos
           </span>
         </footer>
-      </main>
+      </motion.main>
       {(deleting || w.message === 'CONFIRM_RESET') && (
         <div className="modal-backdrop">
           <section
@@ -359,6 +457,6 @@ export default function App() {
           </section>
         </div>
       )}
-    </>
+    </MotionConfig>
   )
 }

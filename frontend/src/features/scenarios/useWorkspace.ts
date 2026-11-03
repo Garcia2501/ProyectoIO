@@ -5,7 +5,7 @@ import { referenceScenario } from '../network/referenceScenario'
 import { validateNetwork } from '../network/validation'
 import { optimize } from '../../services/api'
 export type Selection = { type: 'node' | 'road'; id: string } | null
-export type View = 'main' | 'editor' | 'comparison'
+export type View = 'main' | 'editor' | 'comparison' | 'simulation' | 'results'
 export function freshScenarios(): Scenario[] {
   const base = structuredClone(referenceScenario)
   return [

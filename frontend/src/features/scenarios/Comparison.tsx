@@ -1,4 +1,5 @@
 import type { Workspace } from './useWorkspace'
+import { useReducedMotion } from 'motion/react'
 import { NetworkCanvas } from '../network/NetworkCanvas'
 import { Icon } from '../../components/Icon'
 import {
@@ -12,6 +13,7 @@ import {
   YAxis,
 } from 'recharts'
 export function Comparison({ w }: { w: Workspace }) {
+  const reduced = useReducedMotion()
   const [a, b] = w.results
   const comparable =
     !!a &&
@@ -179,8 +181,14 @@ export function Comparison({ w }: { w: Workspace }) {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="Base" fill="#65c94e" radius={[5, 5, 0, 0]} />
                 <Bar
+                  isAnimationActive={!reduced}
+                  dataKey="Base"
+                  fill="#65c94e"
+                  radius={[5, 5, 0, 0]}
+                />
+                <Bar
+                  isAnimationActive={!reduced}
                   dataKey="Alternativo"
                   fill="#56b0f4"
                   radius={[5, 5, 0, 0]}
@@ -212,8 +220,16 @@ export function Comparison({ w }: { w: Workspace }) {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="Base" fill="#65c94e" />
-                  <Bar dataKey="Alternativo" fill="#56b0f4" />
+                  <Bar
+                    isAnimationActive={!reduced}
+                    dataKey="Base"
+                    fill="#65c94e"
+                  />
+                  <Bar
+                    isAnimationActive={!reduced}
+                    dataKey="Alternativo"
+                    fill="#56b0f4"
+                  />
                 </BarChart>
               </ResponsiveContainer>
             </div>

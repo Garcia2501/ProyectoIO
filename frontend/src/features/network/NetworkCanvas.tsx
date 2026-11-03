@@ -218,6 +218,10 @@ export function NetworkCanvas({
               (flow !== undefined ? ' · f:' + flow : '')
             : r.id + ' · CERRADA',
           selected,
+          className:
+            flow !== undefined && flow > 0 && r.enabled
+              ? 'has-flow'
+              : undefined,
           style: {
             stroke: color,
             strokeWidth: selected ? 4 : 3,

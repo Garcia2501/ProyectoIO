@@ -1,76 +1,111 @@
-import type { Workspace } from '../features/scenarios/useWorkspace'
+import { LayoutGroup, motion, useReducedMotion } from 'motion/react'
+import type { Workspace, View } from '../features/scenarios/useWorkspace'
 import { Icon } from './Icon'
+const sections: { view: View; label: string; name: string; icon: string }[] = [
+  {
+    view: 'main',
+    label: 'Laboratorio',
+    name: 'Red y análisis',
+    icon: 'network',
+  },
+  {
+    view: 'comparison',
+    label: 'Comparar',
+    name: 'Comparar escenarios',
+    icon: 'layers',
+  },
+  { view: 'editor', label: 'Editar red', name: 'Editar red', icon: 'edit' },
+  { view: 'simulation', label: 'Simulación', name: 'Simulación', icon: 'city' },
+  { view: 'results', label: 'Resultados', name: 'Resultados', icon: 'chart' },
+]
 export function Header({ w }: { w: Workspace }) {
+  const reduced = useReducedMotion()
   return (
-    <>
-      <header className="app-header">
-        <a href="#main" className="brand" onClick={() => w.setView('main')}>
-          <span className="brand-mark">↗</span>SmartFlow
-        </a>
-        <div className="brand-description">
-          Laboratorio de optimización de flujo vial
-          <small>SIMULACIÓN · ANÁLISIS · OPTIMIZACIÓN</small>
-        </div>
-        <label className="scenario-select">
-          Escenario
-          <select
-            value={w.active}
-            onChange={(e) => w.selectScenario(Number(e.target.value))}
-          >
-            <option value={0}>▱ Escenario base</option>
-            <option value={1}>▱ Cierre de vía</option>
-          </select>
-        </label>
-        <button
-          className="primary"
-          onClick={() => void w.run()}
-          disabled={w.loading}
+    <header className="premium-header">
+      <a
+        href="#main"
+        className="brand"
+        onClick={() => w.setView('main')}
+        aria-label="SmartFlow · Laboratorio"
+      >
+        <span className="brand-symbol">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path
+              d="M3 26C12 8 22 31 36 11M3 17C16 0 23 22 36 3"
+              stroke="currentColor"
+              strokeWidth="7"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+        <span>
+          SmartFlow<small>Laboratorio de optimización urbana</small>
+        </span>
+      </a>
+      <LayoutGroup id="navigation">
+        <nav
+          className="premium-nav"
+          aria-label="Vistas de SmartFlow"
+          onKeyDown={(e) => {
+            if (
+              e.ctrlKey ||
+              e.metaKey ||
+              e.altKey ||
+              !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)
+            )
+              return
+            e.preventDefault()
+            const buttons = Array.from(
+              e.currentTarget.querySelectorAll<HTMLButtonElement>('button'),
+            )
+            const index = buttons.indexOf(
+              document.activeElement as HTMLButtonElement,
+            )
+            const next =
+              e.key === 'Home'
+                ? 0
+                : e.key === 'End'
+                  ? buttons.length - 1
+                  : (index +
+                      (e.key === 'ArrowRight' ? 1 : -1) +
+                      buttons.length) %
+                    buttons.length
+            buttons[next]?.focus()
+          }}
         >
-          <Icon name="play" size={16} />
-          {w.loading ? 'Optimizando…' : 'Optimizar red'}
-        </button>
-        <button
-          className={w.view === 'editor' ? 'active' : ''}
-          onClick={() => w.setView(w.view === 'editor' ? 'main' : 'editor')}
-        >
-          <Icon name="network" />{' '}
-          {w.view === 'editor' ? 'Volver al análisis' : 'Editar red'}
-        </button>
-        <button onClick={() => w.setMessage('CONFIRM_RESET')}>
-          <Icon name="reset" />
-          Restablecer
-        </button>
-        <div className="skyline" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-      </header>
-      <nav className="view-nav" aria-label="Vistas de SmartFlow">
-        {(
-          [
-            ['main', 'Red y análisis'],
-            ['comparison', 'Comparar escenarios'],
-            ['editor', 'Editor de red'],
-          ] as const
-        ).map(([view, label]) => (
-          <button
-            key={view}
-            className={w.view === view ? 'selected' : ''}
-            onClick={() => w.setView(view)}
-          >
-            {label}
-          </button>
-        ))}
-        <span>Sesión local · cambios en memoria</span>
-        <button className="demo-link" onClick={w.demo}>
-          Cargar demostración
-        </button>
-      </nav>
-    </>
+          {sections.map((s) => (
+            <button
+              key={s.view}
+              aria-label={s.name}
+              aria-current={w.view === s.view ? 'page' : undefined}
+              onClick={() => w.setView(s.view)}
+              className={w.view === s.view ? 'selected' : ''}
+            >
+              {w.view === s.view && (
+                <motion.span
+                  className="nav-indicator"
+                  layoutId="active-section"
+                  transition={
+                    reduced
+                      ? { duration: 0 }
+                      : { type: 'spring', stiffness: 400, damping: 35 }
+                  }
+                />
+              )}
+              <Icon name={s.icon} size={18} />
+              <span>{s.label}</span>
+            </button>
+          ))}
+        </nav>
+      </LayoutGroup>
+      <button
+        className={'primary optimize-button ' + (w.loading ? 'is-loading' : '')}
+        onClick={() => void w.run()}
+        disabled={w.loading}
+      >
+        <Icon name={w.loading ? 'activity' : 'sparkles'} size={18} />
+        {w.loading ? 'Optimizando…' : 'Optimizar red'}
+      </button>
+    </header>
   )
 }
