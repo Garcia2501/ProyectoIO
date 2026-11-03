@@ -4,9 +4,20 @@ Aplicación académica para modelar redes viales dirigidas y visualizar flujos d
 
 ## Requisitos y ejecución
 
-Node.js 22 LTS y npm. Con nvm instalado: `nvm install 22` y `nvm use 22`.
+Node.js 22 LTS, npm y Python 3.12. Con nvm instalado: `nvm install 22` y `nvm use 22`.
 
-Desde la raíz:
+Desde la raíz, abrir **dos terminales**. En la primera, instalar y arrancar el backend:
+
+```powershell
+cd backend
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+No hace falta activar el entorno virtual ni cambiar la política de ejecución de PowerShell. En macOS/Linux: `python3.12 -m venv .venv` y usar `.venv/bin/python` en lugar de `.venv\Scripts\python.exe`.
+
+En la segunda terminal, arrancar el frontend:
 
 ```powershell
 cd frontend
@@ -16,6 +27,10 @@ npm run dev
 
 Abrir la dirección que indique Vite (normalmente http://localhost:5173).
 
+Para mostrar la versión de producción: `npm run build` y `npm run preview -- --host 127.0.0.1 --port 4173` desde `frontend/`, conservando el backend en ejecución. El botón **Optimizar red** consume la API real. La demostración es opcional y permanece identificada como DEMO hasta sustituir cada resultado por una respuesta del servidor.
+
+Comprobar el servicio en http://127.0.0.1:8000/api/v1/health y explorar la API en http://127.0.0.1:8000/docs. En ejecuciones posteriores basta con arrancar los dos servicios; no recrear el entorno ni reinstalar dependencias si no cambiaron.
+
 Comprueba `node --version` antes de instalar: debe comenzar con `v22.`. El archivo `frontend/.nvmrc` registra la versión mayor acordada. Instalar dependencias con otra versión puede producir un aviso `EBADENGINE`.
 
 ## Comprobaciones
@@ -24,14 +39,20 @@ Desde `frontend/`: `npm run build` genera `dist/`; `npm run lint` revisa el cód
 
 `npm test` ejecuta las pruebas de componentes con Vitest y React Testing Library. `npm run test:watch` mantiene las pruebas en modo interactivo.
 
+Desde la raíz, las pruebas del backend se ejecutan con `backend\.venv\Scripts\python.exe -m pytest -q backend/tests`. La versión integrada dispone de 48 pruebas de backend y 51 de frontend. El entorno virtual, las dependencias y los archivos compilados no se incluyen en Git.
+
+Con el backend arrancado, `npm run test:integration` desde `frontend/` verifica la API real utilizando el mismo cliente REST de la interfaz: referencia, cierres, dos redes metropolitanas, errores 422, CORS y coincidencia de OpenAPI. Opcionalmente configurar `SMARTFLOW_API_URL` si el servicio está en otra URL.
+
+GitHub Actions ejecuta las dos suites, lint, compilación e integración REST en cada PR hacia `main` y después del merge. La revisión del compañero se apoya en estas comprobaciones automáticas.
+
 ## Organización y colaboración
 
 - `frontend/`: React 19, TypeScript 5, Vite y Tailwind CSS 4; responsabilidad de Persona 1.
-- `backend/`: responsabilidad de Persona 2; todavía no está presente en esta rama.
+- `backend/`: FastAPI, Pydantic y OR-Tools; integrado desde el PR de Persona 2.
 - `shared/`: contrato y ejemplos coordinados entre ambas personas; no modificar unilateralmente.
 - Rama de trabajo: `feature/frontend`. Integración mediante PR a `main`.
 
-El backend acordado estará en `http://localhost:8000/api/v1`, con `GET /health` y `POST /optimize`. La documentación estará en `/docs`. El frontend no implementa el optimizador ni fabrica resultados.
+El backend está en `http://localhost:8000/api/v1`, con `GET /health` y `POST /optimize`. La documentación está en `/docs`. OR-Tools ejecuta el optimizador; el frontend valida y representa su respuesta.
 
 ## Plan de cinco días
 
@@ -67,13 +88,13 @@ Los datos del contrato están en `frontend/src/features/network/referenceScenari
 
 ### Backend y demostración
 
-La validación local exige dos nodos y admite una lista de vías vacía, dejando que el backend determine su factibilidad. Balance, capacidad y costo se aceptan solo como enteros representables exactamente por JavaScript; todavía deben respetar los límites definitivos que establezca el backend. No se fijan aquí límites arbitrarios del solver.
+La validación local exige dos nodos y admite una lista de vías vacía, dejando que el backend determine su factibilidad. Balance, capacidad y costo se aceptan solo como enteros representables exactamente por JavaScript. El backend comprueba además la oferta total, la cota de costo y un límite de costo unitario dependiente del tamaño de la red para proteger el escalado y los potenciales internos del solver; los rechazos 422 muestran la explicación en la interfaz. Los límites exactos están documentados en `backend/README.md` y en OpenAPI.
 
 El cliente rechaza resultados con enteros fuera de precisión, capacidad distinta de la efectiva, vías fuera del orden solicitado, cuerpos JSON inválidos o una respuesta infactible con vías. Comprueba costo y conservación con aritmética entera exacta (`BigInt`) sin implementar otro optimizador. Cambiar de escenario cancela la petición pendiente y descarta su resultado tardío.
 
 El botón **Optimizar red** llama a `POST /api/v1/optimize` con fetch nativo. La URL predeterminada es `http://localhost:8000/api/v1`. Para cambiarla, copiar `frontend/.env.example` a `frontend/.env.local` y ajustar `VITE_API_URL`. Reiniciar Vite después de cambiar el entorno.
 
-El backend debe permitir CORS desde el origen del frontend (normalmente `http://localhost:5173` o `http://127.0.0.1:5173`). No se han modificado el backend ni los contratos compartidos.
+El backend permite CORS para `localhost` y `127.0.0.1` en los puertos 5173 y 4173 (desarrollo y preview). El esquema conserva los mismos campos y endpoints; OpenAPI documenta las restricciones de entrada.
 
 Se manejan resultados óptimos, infactibles, HTTP 422/500, errores de conexión y respuestas inconsistentes. La validación local de estructura no garantiza que exista un flujo factible.
 
@@ -99,11 +120,11 @@ Los porcentajes de costo se muestran solo entre resultados óptimos del mismo or
 4. Probar zoom, ajuste de vista y navegación con teclado por los botones.
 5. Revisar la distribución en una ventana estrecha.
 
-Antes de integrar el frontend a main: ejecutar build, lint y pruebas; repetir contra el backend corregido los casos base, cierre factible, cierre infactible, capacidad cero, errores 422 y límites numéricos. La revisión inicial de la API detectó correcciones pendientes en el PR del backend; no se considera aprobada la integración final hasta verificarlas.
+La integración se verifica con build, lint y ambas suites, además de solicitudes reales para el escenario base (costo 500), cierre factible (400), cierre infactible, capacidad cero, rechazos 422 y las dos redes metropolitanas (1200). La validación local de estructura y el color de las vías no sustituyen la respuesta del optimizador.
 
 ### Dependencias
 
-React Flow, Recharts y Motion para React están instalados, junto con Three.js 0.180, React Three Fiber 9 y Drei 10 (compatibles con React 19). No se añadió una librería de estado ni de peticiones. El cálculo real y la persistencia definitiva dependen del backend. La API mínima no proporciona historia temporal ni convergencia, por lo que no se representan como datos calculados.
+React Flow, Recharts y Motion para React están instalados, junto con Three.js 0.180, React Three Fiber 9 y Drei 10 (compatibles con React 19). No se añadió una librería de estado ni de peticiones. El backend proporciona el cálculo real. La API no proporciona historia temporal ni convergencia, por lo que no se representan como datos calculados.
 
 La auditoría inicial deja avisos moderados en la cadena de ESLint (herramientas de desarrollo); `npm audit --omit=dev` no detectó vulnerabilidades. Revisar las actualizaciones compatibles antes de integrar; no ejecutar `npm audit fix --force` sin revisar los cambios.
 
@@ -140,7 +161,7 @@ Son límites; la reserva de espacio vial y el reparto por tramos pueden reducir 
 
 El panel registra FPS, llamadas de dibujo y cantidades efectivas durante la sesión, una vez por segundo. No se garantiza un rendimiento universal: depende de GPU, resolución, navegador y red. La comparación utiliza calidad baja en ambas ciudades para limitar el costo de dos contextos gráficos. El paquete 3D es mayor que los componentes de interfaz y se descarga solo al abrir una ciudad.
 
-### Componentes 3D e integración pendiente
+### Componentes 3D e integración
 
 - `simulation3d/cityModel`: adaptador visual de Scenario/StoredResult, trayectorias, reserva vial y presupuestos.
 - `CityScene`, `CityInfrastructure`, `RoadNetwork` y `CityVehicles`: escena, ciudad, selección e instancias.
@@ -149,4 +170,4 @@ El panel registra FPS, llamadas de dibujo y cantidades efectivas durante la sesi
 - `metropolitanDemo`: ejemplos docentes aislados del cliente y del optimizador.
 - `mega.css`: identidad visual y adaptación de las nuevas experiencias.
 
-La API actual proporciona una solución estática por solicitud. No aporta historia temporal, tiempos de viaje, emisiones, ciclos semafóricos, geometría geográfica ni simulación física de tráfico; esas métricas y acciones no se muestran como resultados. La persistencia definitiva y la ejecución auténtica de OR-Tools siguen dependiendo del backend. No se han modificado sus archivos ni los contratos compartidos.
+La API integrada proporciona una solución estática por solicitud. No aporta historia temporal, tiempos de viaje, emisiones, ciclos semafóricos, geometría geográfica ni simulación física de tráfico; esas métricas y acciones no se muestran como resultados. El MVP guarda las redes en memoria y permite exportar sus resultados a JSON. La persistencia en SQLite es una ampliación opcional del plan, fuera de los endpoints del MVP; al recargar se pierde la sesión.
