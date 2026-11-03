@@ -25,8 +25,7 @@ from typing import List
 
 from pydantic import BaseModel, Field, StrictInt, field_validator, model_validator
 
-# Entero seguro máximo de JavaScript (2^53 - 1).
-MAX_SAFE_INT = 2**53 - 1
+from app.optimizer.limits import MAX_SAFE_INT, unit_cost_limit
 
 
 class Node(BaseModel):
@@ -66,7 +65,12 @@ class Road(BaseModel):
 
 
 class OptimizeRequest(BaseModel):
-    """Solicitud de optimización de un escenario."""
+    """Solicitud de optimización de un escenario.
+
+    La oferta total y sum(capacidad efectiva * costo) deben ser <= 2^53-1.
+    Con N nodos, las vías con capacidad efectiva positiva requieren costo
+    <= min(2^53-1, floor((2^63-2)/(2*(N+3)^2))). Las demás no llevan flujo.
+    """
 
     scenario_name: str
     nodes: List[Node]
@@ -122,6 +126,15 @@ class OptimizeRequest(BaseModel):
                 f"la oferta total {total_supply} excede el límite soportado "
                 f"({MAX_SAFE_INT})"
             )
+
+        supported_cost = unit_cost_limit(len(self.nodes))
+        for road in self.roads:
+            if road.enabled and road.capacity > 0 and road.unit_cost > supported_cost:
+                raise ValueError(
+                    f"vía {road.id}: el costo unitario {road.unit_cost} supera "
+                    f"el máximo soportado para {len(self.nodes)} nodos "
+                    f"({supported_cost}); reduce el costo o el tamaño de la red"
+                )
 
         cost_bound = sum(
             (road.capacity if road.enabled else 0) * road.unit_cost

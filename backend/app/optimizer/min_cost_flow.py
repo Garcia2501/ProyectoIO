@@ -21,6 +21,10 @@ class SolverError(Exception):
     """El solver devolvió un estado distinto de óptimo/infactible."""
 
 
+class SolverDomainError(SolverError):
+    """El modelo excede el dominio numérico soportado por el solver."""
+
+
 def solve_min_cost_flow(
     num_nodes: int,
     arcs: Sequence[Arc],
@@ -37,7 +41,10 @@ def solve_min_cost_flow(
     tails = [arc[0] for arc in arcs]
     heads = [arc[1] for arc in arcs]
     capacities = [arc[2] for arc in arcs]
-    unit_costs = [arc[3] for arc in arcs]
+    # Zero-capacity arcs cannot contribute to the objective. Normalizing only
+    # their internal costs avoids spurious cost-range failures on closed roads.
+    # The request and the order/capacity of response roads stay unchanged.
+    unit_costs = [arc[3] if arc[2] > 0 else 0 for arc in arcs]
     solver.add_arcs_with_capacity_and_unit_cost(
         tails, heads, capacities, unit_costs
     )
@@ -63,5 +70,11 @@ def solve_min_cost_flow(
 
     if status == solver.INFEASIBLE:
         raise InfeasibleError()
+
+    if status in (solver.BAD_COST_RANGE, solver.BAD_CAPACITY_RANGE):
+        raise SolverDomainError(
+            "la combinación de costos, capacidades y tamaño de red excede "
+            "el rango numérico soportado; reduce estas magnitudes"
+        )
 
     raise SolverError(f"el solver devolvió el estado {status}")

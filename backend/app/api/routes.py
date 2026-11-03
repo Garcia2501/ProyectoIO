@@ -6,7 +6,7 @@
 
 from fastapi import APIRouter, HTTPException
 
-from app.optimizer.min_cost_flow import SolverError
+from app.optimizer.min_cost_flow import SolverDomainError, SolverError
 from app.schemas.network import OptimizeRequest, OptimizeResponse
 from app.services.optimizer_service import optimize
 
@@ -29,6 +29,8 @@ def optimize_endpoint(request: OptimizeRequest) -> OptimizeResponse:
     """
     try:
         return optimize(request)
+    except SolverDomainError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except SolverError as exc:
         raise HTTPException(
             status_code=500,

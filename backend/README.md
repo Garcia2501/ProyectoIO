@@ -47,8 +47,30 @@ seguros de JavaScript** (`2^53 - 1` = `9007199254740991`).
   OR-Tools no coincide con la suma exacta de `flow × unit_cost`, devuelve
   HTTP 500 en lugar de publicar un resultado `optimal` inconsistente.
 
-Estos límites garantizan que OR-Tools no desborde sus enteros de 64 bits y que
-el frontend represente exactamente todos los números del contrato.
+Además, para N nodos se aplica a cada vía con capacidad efectiva positiva:
+
+```text
+unit_cost <= min(2^53-1, floor((2^63-2) / (2*(N+3)^2)))
+```
+
+Es un dominio conservador basado en la cota documentada por OR-Tools para
+evitar desbordamientos de costos escalados y potenciales. Incluye los dos
+nodos auxiliares de SimpleMinCostFlow y un margen adicional. Se rechaza con
+422 antes de resolver si se supera. No se redondean ni reescalan los costos.
+Las vías cerradas o con capacidad 0 conservan sus propiedades; solo su costo
+interno en el solver se normaliza a 0, porque no pueden transportar flujo.
+Si aun así el solver informa BAD_COST_RANGE o BAD_CAPACITY_RANGE, la API
+devuelve 422; los fallos inesperados siguen devolviendo 500.
+
+Referencia: https://github.com/google/or-tools/blob/v9.15/ortools/graph/min_cost_flow.h
+
+Los enteros de respuesta se mantienen dentro de la precisión exacta del
+frontend mediante los límites individuales, de oferta y de costo total.
+
+## Integración local
+
+Se permiten CORS explícitamente desde `localhost` y `127.0.0.1` en los
+puertos 5173 (Vite dev) y 4173 (Vite preview). No se permite cualquier origen.
 
 ## Endpoints
 

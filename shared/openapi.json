@@ -146,7 +146,7 @@
           "roads"
         ],
         "title": "OptimizeRequest",
-        "description": "Solicitud de optimización de un escenario."
+        "description": "Solicitud de optimización de un escenario.\n\nLa oferta total y sum(capacidad efectiva * costo) deben ser <= 2^53-1.\nCon N nodos, las vías con capacidad efectiva positiva requieren costo\n<= min(2^53-1, floor((2^63-2)/(2*(N+3)^2))). Las demás no llevan flujo."
       },
       "OptimizeResponse": {
         "properties": {
