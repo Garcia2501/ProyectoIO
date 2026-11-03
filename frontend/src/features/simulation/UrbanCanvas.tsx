@@ -6,6 +6,9 @@ import type { StoredResult } from '../../types/results'
 import type { Selection } from '../scenarios/useWorkspace'
 import { cityPoint, urbanRoads, vehicleCount } from './urbanGeometry'
 import { Icon } from '../../components/Icon'
+import type { VisualClock } from '../simulation3d/visualClock'
+import { utilizationColor } from '../simulation3d/visualClock'
+import type { Thresholds } from '../simulation3d/visualClock'
 
 const CityBlocks = memo(function CityBlocks() {
   return (
@@ -59,6 +62,9 @@ interface Props {
   onSelect: (s: Selection) => void
   playback: Playback
   setPlayback: (p: Playback) => void
+  clock?: VisualClock
+  utilization?: boolean
+  thresholds?: Thresholds
 }
 export function UrbanCanvas({
   scenario,
@@ -67,10 +73,28 @@ export function UrbanCanvas({
   onSelect,
   playback,
   setPlayback,
+  clock,
+  utilization,
+  thresholds,
 }: Props) {
   const reduced = useReducedMotion()
   const svg = useRef<SVGSVGElement>(null)
-  const roads = useMemo(() => urbanRoads(scenario, result), [scenario, result])
+  const roads = useMemo(
+    () =>
+      urbanRoads(scenario, result).map((road) =>
+        utilization === undefined
+          ? road
+          : {
+              ...road,
+              color: utilization
+                ? utilizationColor(road.utilization, road.enabled, thresholds)
+                : road.enabled
+                  ? '#38d1b0'
+                  : '#87939d',
+            },
+      ),
+    [scenario, result, utilization, thresholds],
+  )
   const maxFlow = Math.max(0, ...roads.map((r) => r.flow))
   const points = scenario.nodes.map(cityPoint)
   const xMin = Math.min(120, ...points.map((p) => p.x)) - 140,
@@ -98,12 +122,27 @@ export function UrbanCanvas({
     const animations = Array.from(
       svg.current?.querySelectorAll('[data-vehicle]') ?? [],
     ).flatMap((el) => el.getAnimations?.() ?? [])
-    for (const animation of animations) {
-      animation.updatePlaybackRate(playback.speed)
-      if (playback.playing && !reduced) animation.play()
-      else animation.pause()
+    const synchronize = () => {
+      const current = clock?.snapshot()
+      for (const animation of animations) {
+        if (current) animation.currentTime = current.time * 1000
+        animation.updatePlaybackRate(playback.speed)
+        if ((current?.playing ?? playback.playing) && !reduced) animation.play()
+        else animation.pause()
+      }
     }
-  }, [playback.speed, playback.playing, reduced, roads])
+    synchronize()
+    const unsubscribe = clock?.subscribe(synchronize)
+    const timer = clock
+      ? setInterval(() => {
+          if (clock.time() >= clock.duration) synchronize()
+        }, 250)
+      : undefined
+    return () => {
+      unsubscribe?.()
+      if (timer) clearInterval(timer)
+    }
+  }, [playback.speed, playback.playing, reduced, roads, clock])
   const pointerDown = (e: PointerEvent<SVGSVGElement>) => {
     if (e.button !== 0 || (e.target as Element).closest('[data-interactive]'))
       return
@@ -485,6 +524,7 @@ export function UrbanCanvas({
             <option value={0.5}>0,5×</option>
             <option value={1}>1×</option>
             <option value={2}>2×</option>
+            <option value={4}>4×</option>
           </select>
         </label>
       </div>
