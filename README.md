@@ -67,6 +67,10 @@ Los datos del contrato están en `frontend/src/features/network/referenceScenari
 
 ### Backend y demostración
 
+La validación local exige dos nodos y admite una lista de vías vacía, dejando que el backend determine su factibilidad. Balance, capacidad y costo se aceptan solo como enteros representables exactamente por JavaScript; todavía deben respetar los límites definitivos que establezca el backend. No se fijan aquí límites arbitrarios del solver.
+
+El cliente rechaza resultados con enteros fuera de precisión, capacidad distinta de la efectiva, vías fuera del orden solicitado, cuerpos JSON inválidos o una respuesta infactible con vías. Comprueba costo y conservación con aritmética entera exacta (`BigInt`) sin implementar otro optimizador. Cambiar de escenario cancela la petición pendiente y descarta su resultado tardío.
+
 El botón **Optimizar red** llama a `POST /api/v1/optimize` con fetch nativo. La URL predeterminada es `http://localhost:8000/api/v1`. Para cambiarla, copiar `frontend/.env.example` a `frontend/.env.local` y ajustar `VITE_API_URL`. Reiniciar Vite después de cambiar el entorno.
 
 El backend debe permitir CORS desde el origen del frontend (normalmente `http://localhost:5173` o `http://127.0.0.1:5173`). No se han modificado el backend ni los contratos compartidos.
@@ -94,6 +98,8 @@ Los porcentajes de costo se muestran solo entre resultados óptimos del mismo or
 3. Arrastrar un nodo y comprobar que sus conexiones lo siguen.
 4. Probar zoom, ajuste de vista y navegación con teclado por los botones.
 5. Revisar la distribución en una ventana estrecha.
+
+Antes de integrar el frontend a main: ejecutar build, lint y pruebas; repetir contra el backend corregido los casos base, cierre factible, cierre infactible, capacidad cero, errores 422 y límites numéricos. La revisión inicial de la API detectó correcciones pendientes en el PR del backend; no se considera aprobada la integración final hasta verificarlas.
 
 ### Dependencias
 
