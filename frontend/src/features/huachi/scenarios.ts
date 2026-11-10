@@ -169,6 +169,32 @@ export function baseScenario(network: GeoNetwork, seed: ScenarioSeed): Scenario 
   }
 }
 
+/**
+ * Marcador SOLO para dibujar la geometría cuando aún no existe la semilla
+ * experimental: capacidad y costo en cero NO son datos del estudio.
+ */
+export function geometryScenario(network: GeoNetwork): Scenario {
+  const positions = canvasPositions(network)
+  return {
+    scenario_name: 'Geometría sin semilla',
+    nodes: network.nodes.map((n) => ({
+      id: n.id,
+      label: n.label,
+      x: positions.get(n.id)!.x,
+      y: positions.get(n.id)!.y,
+      balance: 0,
+    })),
+    roads: network.roads.map((r) => ({
+      id: r.id,
+      source: r.source,
+      target: r.target,
+      capacity: 0,
+      unit_cost: 0,
+      enabled: true,
+    })),
+  }
+}
+
 /** Base, cierre de vía y caso límite. Todos comparten nodos y balances. */
 export function huachiScenarios(
   network: GeoNetwork,

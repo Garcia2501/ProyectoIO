@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 const paths: Record<string, string> = {
   city: 'M3 21V8h6v13M9 21V3h7v18M16 21V11h5v10M5 11h1m-1 4h1m6-8h1m-1 4h1m-1 4h1m6 0h1M1 21h22',
+  map: 'M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2ZM9 4v14m6-12v14',
   pause: 'M8 4v16M16 4v16',
   target:
     'M12 2v4m0 12v4M2 12h4m12 0h4M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
