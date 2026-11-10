@@ -333,3 +333,6 @@
     transition: none !important;
   }
 }
+.huachi-leaflet path.leaflet-interactive:focus {
+  outline: none;
+}

@@ -113,7 +113,7 @@ const RoadLines = memo(function RoadLines({
               />
             )}
             <Polyline
-              key={s.geo.id + s.cls}
+              key={s.geo.id + s.cls + (selected ? '-sel' : '')}
               positions={positions}
               bubblingMouseEvents={false}
               // className debe pasarse como opción de creación; setStyle no lo aplica.
