@@ -129,7 +129,23 @@ React Flow, Recharts y Motion para React están instalados, junto con Three.js 0
 La auditoría inicial deja avisos moderados en la cadena de ESLint (herramientas de desarrollo); `npm audit --omit=dev` no detectó vulnerabilidades. Revisar las actualizaciones compatibles antes de integrar; no ejecutar `npm audit fix --force` sin revisar los cambios.
 
 
-## Centro de simulación 3D
+## Mapa real de Huachi (rama `feature/frontend-huachi`)
+
+La vista principal pasa a ser **Mapa Huachi**: un mapa 2D (Leaflet + React-Leaflet) con las calles reales alrededor del campus. La ciudad 3D y la «Vista urbana» ficticias ya no aparecen en la navegación; sus archivos siguen en `frontend/src/features/simulation*` hasta decidir con el equipo si se reutilizan o se elimina Three.js.
+
+**Datos.** El frontend lee `data/geography/` (la entrega el equipo GIS; el frontend no la escribe):
+
+- `huachi_nodes.geojson` y `huachi_roads.geojson` (obligatorios, RFC 7946, `[lon, lat]`). Se rechazan IDs duplicados, arcos huérfanos y coordenadas inválidas; la línea se orienta de `source` a `target` y se advierte si venía invertida. Un sentido `unknown` se muestra como no confirmado.
+- `huachi_scenario_seed.json` (opcional): supuestos experimentales de balances, capacidad y costo. Forma que espera el adaptador `features/huachi/scenarios.ts` (propuesta pendiente de acuerdo): `balances`, `roads` con `capacity`/`unit_cost`, `closure_road_ids` y `limit_capacity_factor`. Los balances deben sumar 0.
+- `provenance.json` (opcional): origen, fecha y licencia.
+
+Si los archivos no existen se muestra «Datos cartográficos pendientes» y el laboratorio arranca con la red de referencia; no se dibuja geometría inventada. Sin semilla se muestra solo la geografía.
+
+**Qué incluye.** Capas de calles, nodos, etiquetas, cierres, mapa base OSM y vehículos; leyenda por utilización (flujo/capacidad) con umbrales editables; inspector con nombre, IDs, extremos, longitud geodésica, parámetros, flujo y calidad de la fuente; cierre de vía con reoptimización; tres escenarios (base, cierre de vía, caso límite) y comparación con dos mapas sincronizados. Los símbolos animados son una escala visual del flujo del modelo, no vehículos medidos, y respetan `prefers-reduced-motion`. Si un escenario es infactible no se muestran flujos.
+
+**Atribución.** Calles y mapa base: © OpenStreetMap contributors (ODbL), visible en el mapa. Las teselas se piden bajo demanda, sin descarga masiva; la capa «Mapa base OSM» puede apagarse para trabajar sin ellas.
+
+## Centro de simulación 3D (heredado, fuera de la navegación)
 
 Abrir **Simulación** en la navegación superior. Requiere un navegador con WebGL 2; si no se puede crear o se pierde el contexto gráfico, se conserva una representación SVG interactiva claramente identificada. La escena se carga de forma diferida: Three.js y sus componentes gráficos no se necesitan para abrir el laboratorio matemático.
 
