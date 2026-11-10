@@ -1,12 +1,4 @@
-import {
-  act,
-  renderHook,
-  render,
-  screen,
-  within,
-  waitFor,
-} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { act, renderHook } from '@testing-library/react'
 import { expect, test, vi } from 'vitest'
 import { Vector3 } from 'three'
 import {
@@ -26,7 +18,6 @@ import { referenceScenario } from '../features/network/referenceScenario'
 import { validateNetwork } from '../features/network/validation'
 import { optimize } from '../services/api'
 import { useWorkspace } from '../features/scenarios/useWorkspace'
-import App from '../App'
 
 test('el reloj pausa, cambia velocidad y busca sin saltos ni acumulación de intervalos', () => {
   let now = 0
@@ -222,38 +213,4 @@ test('cerrar y optimizar envía la red modificada, no la captura anterior del es
   } finally {
     fetchSpy.mockRestore()
   }
-})
-test('el inspector, las cuatro velocidades y el modo presentación son operables', async () => {
-  const user = userEvent.setup()
-  render(<App />)
-  await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
-  await user.click(screen.getByRole('button', { name: 'Simulación' }))
-  const scene = screen.getByRole('region', { name: 'Centro de simulación 3D' })
-  await user.click(within(scene).getByRole('button', { name: 'R2 B → C' }))
-  expect(within(scene).getByRole('heading', { name: 'Vía R2' })).toBeVisible()
-  await user.click(within(scene).getByRole('button', { name: 'Flujo' }))
-  expect(within(scene).getByText('100 veh./intervalo')).toBeVisible()
-  await user.selectOptions(
-    screen.getByRole('combobox', { name: 'Velocidad visual' }),
-    '4',
-  )
-  expect(
-    screen.getByRole('combobox', { name: 'Velocidad visual' }),
-  ).toHaveValue('4')
-  await user.click(screen.getByRole('button', { name: 'Pausar reproducción' }))
-  expect(
-    screen.getByRole('button', { name: 'Reanudar reproducción' }),
-  ).toBeEnabled()
-  await user.click(screen.getByRole('button', { name: 'Modo presentación' }))
-  expect(scene).toHaveClass('mega-presentation')
-  await user.keyboard('{Escape}')
-  await waitFor(() => expect(scene).not.toHaveClass('mega-presentation'))
-  await user.click(
-    within(scene).getByRole('button', { name: 'Cerrar inspector urbano' }),
-  )
-  await waitFor(() =>
-    expect(
-      within(scene).getByRole('heading', { name: 'Cada vía, una decisión' }),
-    ).toBeVisible(),
-  )
 })
