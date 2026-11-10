@@ -1,13 +1,5 @@
-import type { Workspace } from './useWorkspace'
 import { useEffect, useState } from 'react'
-import { CityViewport } from '../simulation3d/CityViewport'
-import { VisualClock, CAMERA_LABELS } from '../simulation3d/visualClock'
-import type { CameraPreset } from '../simulation3d/visualClock'
-import { CameraBus } from '../simulation3d/CameraBus'
-import { PlaybackControls } from '../simulation3d/PlaybackControls'
 import { useReducedMotion } from 'motion/react'
-import { NetworkCanvas } from '../network/NetworkCanvas'
-import { Icon } from '../../components/Icon'
 import {
   Bar,
   BarChart,
@@ -18,116 +10,181 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-export function Comparison({ w }: { w: Workspace }) {
-  const reduced = useReducedMotion()
-  const [clock] = useState(() => new VisualClock()),
-    [bus] = useState(() => new CameraBus())
-  const [city, setCity] = useState(true),
-    [camera, setCamera] = useState<CameraPreset>('isometric')
+import { Icon } from '../../components/Icon'
+import type { Scenario } from '../../types/network'
+import type { StoredResult } from '../../types/results'
+import type { HuachiData } from '../huachi/data'
+import { HuachiMap } from '../huachi/HuachiMap'
+import { DEFAULT_LAYERS } from '../huachi/layers'
+import { MapSync } from '../huachi/mapSync'
+import { NetworkCanvas } from '../network/NetworkCanvas'
+import { PlaybackControls } from '../simulation3d/PlaybackControls'
+import { VisualClock } from '../simulation3d/visualClock'
+import type { Workspace } from './useWorkspace'
+
+const COLORS = ['#65c94e', '#56b0f4', '#e8a13f', '#a78bfa']
+const label = (s: Scenario) =>
+  s.scenario_name === 'Base' ? 'Escenario base' : s.scenario_name
+const sameBalances = (a: Scenario, b: Scenario) =>
+  JSON.stringify(a.nodes.map((n) => [n.id, n.balance]).sort()) ===
+  JSON.stringify(b.nodes.map((n) => [n.id, n.balance]).sort())
+
+export function Comparison({
+  w,
+  data,
+}: {
+  w: Workspace
+  data?: HuachiData
+}) {
+  const reduced = !!useReducedMotion()
+  const [clock] = useState(() => new VisualClock())
+  const [sync] = useState(() => new MapSync())
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(Math.min(1, w.scenarios.length - 1))
   useEffect(() => {
     if (reduced) clock.pause()
   }, [clock, reduced])
-  const [a, b] = w.results
-  const comparable =
-    !!a &&
-    !!b &&
-    a.demo === b.demo &&
-    a.data.status === 'optimal' &&
-    b.data.status === 'optimal' &&
-    JSON.stringify(
-      w.scenarios[0].nodes.map((n) => [n.id, n.balance]).sort(),
-    ) ===
-      JSON.stringify(w.scenarios[1].nodes.map((n) => [n.id, n.balance]).sort())
-  const costDiff =
-    comparable && a.data.total_cost !== null && a.data.total_cost !== 0
-      ? ((b.data.total_cost! - a.data.total_cost) / a.data.total_cost) * 100
-      : null
-  const roadIds = [
-    ...new Set(w.scenarios.flatMap((s) => s.roads.map((r) => r.id))),
-  ]
-  const chart = roadIds.map((id) => ({
-    id,
-    Base:
-      a?.data.status === 'optimal'
-        ? a.data.roads.find((x) => x.id === id)?.flow
-        : undefined,
-    Alternativo:
-      b?.data.status === 'optimal'
-        ? b.data.roads.find((x) => x.id === id)?.flow
-        : undefined,
-  }))
-  const rows = [
-    [
-      'Costo total',
-      a?.data.total_cost ?? '—',
-      b?.data.total_cost ?? '—',
-      comparable
-        ? String(b.data.total_cost! - a.data.total_cost!) +
-          ' u.' +
-          (costDiff !== null
-            ? ' (' + (costDiff > 0 ? '+' : '') + costDiff.toFixed(1) + ' %)'
-            : '')
-        : '—',
-    ],
-    [
-      'Oferta (veh./intervalo)',
-      w.scenarios[0].nodes.reduce((s, n) => s + Math.max(n.balance, 0), 0),
-      w.scenarios[1].nodes.reduce((s, n) => s + Math.max(n.balance, 0), 0),
-      '—',
-    ],
-    [
-      'Vías habilitadas',
-      w.scenarios[0].roads.filter((r) => r.enabled).length,
-      w.scenarios[1].roads.filter((r) => r.enabled).length,
-      '—',
-    ],
-    [
-      'Factibilidad',
-      a
-        ? a.data.status === 'optimal'
-          ? 'Factible'
-          : 'Infactible'
-        : 'Pendiente',
-      b
-        ? b.data.status === 'optimal'
-          ? 'Factible'
-          : 'Infactible'
-        : 'Pendiente',
-      '—',
-    ],
-  ]
-  const utilization = (index: number) => {
-    const r = w.results[index]
+  const network = data?.status === 'ready' && w.external ? data.network : null
+  const results = w.results
+  const base = results[0]
+  const comparable = (i: number) => {
+    const r = results[i]
+    return (
+      i > 0 &&
+      !!base &&
+      !!r &&
+      base.demo === r.demo &&
+      base.data.status === 'optimal' &&
+      r.data.status === 'optimal' &&
+      sameBalances(w.scenarios[0], w.scenarios[i])
+    )
+  }
+  const cost = (r: StoredResult | null) => r?.data.total_cost ?? null
+  const diff = (i: number) => {
+    if (!comparable(i)) return ''
+    const a = cost(base),
+      b = cost(results[i])
+    if (a === null || b === null) return ''
+    const abs = b - a
+    const pct = a !== 0 ? ` (${abs > 0 ? '+' : ''}${((abs / a) * 100).toFixed(1)} %)` : ''
+    return ` · Δ ${abs > 0 ? '+' : ''}${abs} u.${pct}`
+  }
+  const state = (r: StoredResult | null) =>
+    r ? (r.data.status === 'optimal' ? 'Factible' : 'Infactible') : 'Pendiente'
+  const meanUtilization = (r: StoredResult | null) => {
     if (r?.data.status !== 'optimal') return null
     const usable = r.data.roads.filter((x) => x.utilization_pct !== null)
     return usable.length
-      ? usable.reduce((s, r) => s + r.utilization_pct!, 0) / usable.length
+      ? usable.reduce((s, x) => s + x.utilization_pct!, 0) / usable.length
       : null
   }
-  const saturated = (index: number) =>
-    w.results[index]?.data.status === 'optimal'
-      ? w.results[index]!.data.roads.filter(
-          (r) => (r.utilization_pct ?? 0) >= 100,
-        ).length
+  const atLimit = (r: StoredResult | null) =>
+    r?.data.status === 'optimal'
+      ? r.data.roads.filter((x) => (x.utilization_pct ?? 0) >= 100).length
       : null
-  const meanA = utilization(0),
-    meanB = utilization(1),
-    satA = saturated(0),
-    satB = saturated(1)
-  rows.push([
-    'Utilización media',
-    meanA === null ? '—' : meanA.toFixed(1) + ' %',
-    meanB === null ? '—' : meanB.toFixed(1) + ' %',
-    comparable && meanA !== null && meanB !== null
-      ? (meanB - meanA).toFixed(1) + ' p.p.'
-      : '—',
-  ])
-  rows.push([
-    'Vías saturadas (100 %)',
-    satA ?? '—',
-    satB ?? '—',
-    comparable && satA !== null && satB !== null ? String(satB - satA) : '—',
-  ])
+  const rows: [string, (string | number)[]][] = [
+    [
+      'Costo total',
+      w.scenarios.map((_, i) => {
+        const c = cost(results[i])
+        return c === null ? '—' : `${c}${diff(i)}`
+      }),
+    ],
+    [
+      'Oferta (veh./intervalo)',
+      w.scenarios.map((s) =>
+        s.nodes.reduce((sum, n) => sum + Math.max(n.balance, 0), 0),
+      ),
+    ],
+    [
+      'Vías habilitadas',
+      w.scenarios.map((s) => s.roads.filter((r) => r.enabled).length),
+    ],
+    ['Factibilidad', results.map(state)],
+    [
+      'Utilización media',
+      results.map((r) => {
+        const m = meanUtilization(r)
+        return m === null ? '—' : m.toFixed(1) + ' %'
+      }),
+    ],
+    [
+      'Vías saturadas (100 %)',
+      results.map((r) => atLimit(r) ?? '—'),
+    ],
+  ]
+  const roadIds = [
+    ...new Set(w.scenarios.flatMap((s) => s.roads.map((r) => r.id))),
+  ]
+  const flowOf = (i: number, id: string) => {
+    const r = results[i]
+    return r?.data.status === 'optimal'
+      ? r.data.roads.find((x) => x.id === id)
+      : undefined
+  }
+  const capacityChart = roadIds.map((id) => ({
+    id,
+    ...Object.fromEntries(
+      w.scenarios.map((s) => {
+        const road = s.roads.find((x) => x.id === id)
+        return [label(s), road?.enabled ? road.capacity : 0]
+      }),
+    ),
+  }))
+  const flowChart = roadIds.map((id) => ({
+    id,
+    ...Object.fromEntries(
+      w.scenarios.map((s, i) => [label(s), flowOf(i, id)?.flow]),
+    ),
+  }))
+  const anyOptimal = results.some((r) => r?.data.status === 'optimal')
+  const infeasible = w.scenarios.filter(
+    (_, i) => results[i]?.data.status === 'infeasible',
+  )
+  const closedRoads = (s: Scenario) =>
+    s.roads
+      .filter((r) => !r.enabled)
+      .map((r) => r.id)
+      .join(', ') || 'ninguna'
+  const pane = (index: number, side: 'left' | 'right') => {
+    const s = w.scenarios[index]
+    return (
+      <section className="panel comparison-map" key={side}>
+        <h2 className={side === 'right' ? 'blue-heading' : ''}>
+          <Icon name="layers" />
+          {label(s)}
+          <span className="badge">
+            {results[index]?.demo ? 'Demo' : index ? 'Alternativo' : 'Base'}
+          </span>
+        </h2>
+        {network ? (
+          <HuachiMap
+            network={network}
+            scenario={s}
+            result={results[index]}
+            selection={w.selection}
+            onSelect={w.setSelection}
+            layers={DEFAULT_LAYERS}
+            clock={clock}
+            reduced={reduced}
+            sync={sync}
+            label={`Mapa de Huachi: ${label(s)}`}
+          />
+        ) : (
+          <NetworkCanvas scenario={s} compact result={results[index]} />
+        )}
+        <button
+          className="map-edit-link"
+          onClick={() => {
+            w.selectScenario(index)
+            w.setView('editor')
+          }}
+        >
+          Editar este escenario <Icon name="arrow" size={15} />
+        </button>
+      </section>
+    )
+  }
   return (
     <>
       <section className="panel comparison-heading">
@@ -139,121 +196,100 @@ export function Comparison({ w }: { w: Workspace }) {
           <p>Evalúa el impacto de diferentes condiciones en la red vial.</p>
         </div>
         <div className="versus">
-          <span className="scenario-chip">
-            ● {w.scenarios[0].scenario_name}
-          </span>
-          <b>vs</b>
-          <span className="scenario-chip blue-chip">
-            ● {w.scenarios[1].scenario_name}
-          </span>
+          {w.scenarios.map((s, i) => (
+            <span
+              key={s.scenario_name}
+              className={'scenario-chip ' + (i === 1 ? 'blue-chip' : '')}
+            >
+              ● {s.scenario_name}
+            </span>
+          ))}
         </div>
       </section>
-      <div className="comparison-controls">
-        <label>
-          <input
-            type="checkbox"
-            checked={city}
-            onChange={(e) => setCity(e.target.checked)}
-          />
-          Ciudades 3D · cámara y reproducción sincronizadas
-        </label>
-        {city && (
-          <select
-            aria-label="Cámara de comparación"
-            value={camera}
-            onChange={(e) => setCamera(e.target.value as CameraPreset)}
-          >
-            {Object.entries(CAMERA_LABELS).map(([k, v]) => (
-              <option key={k} value={k}>
-                {v}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-      <div className="comparison-top">
-        {w.scenarios.map((s, i) => (
-          <section className="panel comparison-map" key={s.scenario_name}>
-            <h2 className={i ? 'blue-heading' : ''}>
-              <Icon name="layers" />
-              {s.scenario_name === 'Base' ? 'Escenario base' : s.scenario_name}
-              <span className="badge">
-                {w.results[i]?.demo ? 'Demo' : i ? 'Alternativo' : 'Base'}
-              </span>
-            </h2>
-            {city ? (
-              <div className="comparison-city">
-                <CityViewport
-                  scenario={s}
-                  result={w.results[i]}
-                  selection={w.active === i ? w.selection : null}
-                  onSelect={(selection) => {
-                    w.selectScenario(i)
-                    w.setSelection(selection)
-                  }}
-                  clock={clock}
-                  quality="low"
-                  camera={camera}
-                  focusTick={0}
-                  dusk={false}
-                  utilization
-                  thresholds={[60, 80, 95]}
-                  reduced={!!reduced}
-                  bus={bus}
-                />
-              </div>
-            ) : (
-              <NetworkCanvas scenario={s} compact result={w.results[i]} />
-            )}
-            <button
-              className="map-edit-link"
-              onClick={() => {
-                w.selectScenario(i)
-                w.setView('editor')
-              }}
+      {w.scenarios.length > 2 && (
+        <div className="comparison-pick">
+          <label>
+            Mapa izquierdo{' '}
+            <select
+              aria-label="Escenario del mapa izquierdo"
+              value={left}
+              onChange={(e) => setLeft(Number(e.target.value))}
             >
-              Editar este escenario <Icon name="arrow" size={15} />
-            </button>
-          </section>
-        ))}
-        <section className="panel comparison-table">
-          <h2>
-            <Icon name="chart" />
-            Métricas comparativas
-          </h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Métrica</th>
-                  <th>Base</th>
-                  <th>Alternativo</th>
-                  <th>Diferencia</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row[0]}>
-                    {row.map((v, i) =>
-                      i === 0 ? <th key={i}>{v}</th> : <td key={i}>{v}</td>,
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="help">
-            Costo en unidades abstractas. Diferencia relativa al escenario base;
-            solo se calcula entre resultados óptimos con los mismos balances y
-            el mismo origen de datos.
-          </p>
-        </section>
-      </div>
-      {city && (
-        <div className="comparison-playback">
-          <PlaybackControls clock={clock} />
+              {w.scenarios.map((s, i) => (
+                <option key={s.scenario_name} value={i}>
+                  {label(s)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Mapa derecho{' '}
+            <select
+              aria-label="Escenario del mapa derecho"
+              value={right}
+              onChange={(e) => setRight(Number(e.target.value))}
+            >
+              {w.scenarios.map((s, i) => (
+                <option key={s.scenario_name} value={i}>
+                  {label(s)}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
       )}
+      <div className={network ? 'comparison-huachi' : 'comparison-top'}>
+        {network ? (
+          <>
+            {pane(left, 'left')}
+            {pane(right, 'right')}
+          </>
+        ) : (
+          w.scenarios.map((_, i) => pane(i, i ? 'right' : 'left'))
+        )}
+      </div>
+      {network && (
+        <div className="comparison-playback">
+          <PlaybackControls clock={clock} />
+          <p className="help">
+            Los mapas comparten encuadre y reloj visual. Los símbolos son una
+            escala del flujo calculado, no vehículos medidos.
+          </p>
+        </div>
+      )}
+      <section className="panel comparison-table">
+        <h2>
+          <Icon name="chart" />
+          Métricas comparativas
+        </h2>
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Métrica</th>
+                {w.scenarios.map((s) => (
+                  <th key={s.scenario_name}>{label(s)}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([name, cells]) => (
+                <tr key={name}>
+                  <th>{name}</th>
+                  {cells.map((value, i) => (
+                    <td key={i}>{value}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="help">
+          Costo en unidades abstractas. La diferencia se calcula respecto al
+          escenario base y solo entre resultados óptimos con los mismos
+          balances y el mismo origen de datos.
+        </p>
+      </section>
       <details className="panel comparison-rows">
         <summary>
           Resultados por carretera · {roadIds.length} vías{' '}
@@ -264,54 +300,29 @@ export function Comparison({ w }: { w: Workspace }) {
             <thead>
               <tr>
                 <th>Vía</th>
-                <th>Base: flujo / utilización</th>
-                <th>Alternativo: flujo / utilización</th>
-                <th>Δ flujo</th>
-                <th>Δ utilización</th>
+                {w.scenarios.map((s) => (
+                  <th key={s.scenario_name}>
+                    {label(s)}: flujo / utilización
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {roadIds.map((id) => {
-                const x =
-                    a?.data.status === 'optimal'
-                      ? a.data.roads.find((r) => r.id === id)
-                      : null,
-                  y =
-                    b?.data.status === 'optimal'
-                      ? b.data.roads.find((r) => r.id === id)
-                      : null
-                const r = w.scenarios[0].roads.find((r) => r.id === id),
-                  s = w.scenarios[1].roads.find((r) => r.id === id)
-                const match =
-                  r && s && r.source === s.source && r.target === s.target
-                return (
-                  <tr key={id}>
-                    <th>{id}</th>
-                    <td>
-                      {x
-                        ? `${x.flow} / ${x.utilization_pct === null ? 'No aplica' : x.utilization_pct + ' %'}`
-                        : '—'}
-                    </td>
-                    <td>
-                      {y
-                        ? `${y.flow} / ${y.utilization_pct === null ? 'No aplica' : y.utilization_pct + ' %'}`
-                        : '—'}
-                    </td>
-                    <td>
-                      {comparable && match && x && y ? y.flow - x.flow : '—'}
-                    </td>
-                    <td>
-                      {comparable &&
-                      match &&
-                      x?.utilization_pct != null &&
-                      y?.utilization_pct != null
-                        ? (y.utilization_pct - x.utilization_pct).toFixed(1) +
-                          ' p.p.'
-                        : '—'}
-                    </td>
-                  </tr>
-                )
-              })}
+              {roadIds.map((id) => (
+                <tr key={id}>
+                  <th>{id}</th>
+                  {w.scenarios.map((s, i) => {
+                    const r = flowOf(i, id)
+                    return (
+                      <td key={s.scenario_name}>
+                        {r
+                          ? `${r.flow} / ${r.utilization_pct === null ? 'No aplica' : r.utilization_pct + ' %'}`
+                          : '—'}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -334,36 +345,21 @@ export function Comparison({ w }: { w: Workspace }) {
               minWidth={1}
               minHeight={1}
             >
-              <BarChart
-                data={roadIds.map((id) => ({
-                  id,
-                  Base: (() => {
-                    const r = w.scenarios[0].roads.find((x) => x.id === id)
-                    return r?.enabled ? r.capacity : 0
-                  })(),
-                  Alternativo: (() => {
-                    const t = w.scenarios[1].roads.find((x) => x.id === id)
-                    return t?.enabled ? t.capacity : 0
-                  })(),
-                }))}
-              >
+              <BarChart data={capacityChart}>
                 <CartesianGrid vertical={false} stroke="#e1e9ee" />
                 <XAxis dataKey="id" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar
-                  isAnimationActive={!reduced}
-                  dataKey="Base"
-                  fill="#65c94e"
-                  radius={[5, 5, 0, 0]}
-                />
-                <Bar
-                  isAnimationActive={!reduced}
-                  dataKey="Alternativo"
-                  fill="#56b0f4"
-                  radius={[5, 5, 0, 0]}
-                />
+                {w.scenarios.map((s, i) => (
+                  <Bar
+                    key={s.scenario_name}
+                    isAnimationActive={!reduced}
+                    dataKey={label(s)}
+                    fill={COLORS[i % COLORS.length]}
+                    radius={[5, 5, 0, 0]}
+                  />
+                ))}
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -377,7 +373,7 @@ export function Comparison({ w }: { w: Workspace }) {
             <Icon name="chart" />
             Flujo por tramo
           </h2>
-          {a?.data.status === 'optimal' || b?.data.status === 'optimal' ? (
+          {anyOptimal ? (
             <div className="chart comparison-chart">
               <ResponsiveContainer
                 width="100%"
@@ -385,29 +381,27 @@ export function Comparison({ w }: { w: Workspace }) {
                 minWidth={1}
                 minHeight={1}
               >
-                <BarChart data={chart}>
+                <BarChart data={flowChart}>
                   <CartesianGrid vertical={false} stroke="#e1e9ee" />
                   <XAxis dataKey="id" />
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar
-                    isAnimationActive={!reduced}
-                    dataKey="Base"
-                    fill="#65c94e"
-                  />
-                  <Bar
-                    isAnimationActive={!reduced}
-                    dataKey="Alternativo"
-                    fill="#56b0f4"
-                  />
+                  {w.scenarios.map((s, i) => (
+                    <Bar
+                      key={s.scenario_name}
+                      isAnimationActive={!reduced}
+                      dataKey={label(s)}
+                      fill={COLORS[i % COLORS.length]}
+                    />
+                  ))}
                 </BarChart>
               </ResponsiveContainer>
             </div>
           ) : (
             <div className="chart-empty">
               <Icon name="activity" size={36} />
-              <span>Optimiza ambos escenarios para comparar flujos.</span>
+              <span>Optimiza los escenarios para comparar flujos.</span>
             </div>
           )}
           <p className="help">
@@ -421,25 +415,24 @@ export function Comparison({ w }: { w: Workspace }) {
             <div>
               <h2>Conclusiones con fundamento</h2>
               <p>
-                {b?.data.status === 'infeasible'
-                  ? 'El escenario alternativo no satisface la demanda con las capacidades actuales. No corresponde calcular un porcentaje de mejora.'
-                  : comparable
-                    ? 'Ambos resultados tienen balances comparables. La tabla muestra su diferencia de costo, sin inferir tiempos de viaje ni congestión.'
+                {infeasible.length
+                  ? `${infeasible.map((s) => s.scenario_name).join(' y ')} no satisface${infeasible.length > 1 ? 'n' : ''} la demanda con las capacidades actuales. No corresponde calcular un porcentaje de mejora.`
+                  : w.scenarios.some((_, i) => comparable(i))
+                    ? 'Los resultados tienen balances comparables. La tabla muestra su diferencia de costo, sin inferir tiempos de viaje ni congestión.'
                     : 'No hay suficientes resultados comparables para recomendar un escenario.'}
               </p>
             </div>
           </div>
           <h3>¿Qué estamos comparando?</h3>
           <p>
-            Vías cerradas en el escenario alternativo:{' '}
-            {w.scenarios[1].roads
-              .filter((r) => !r.enabled)
-              .map((r) => r.id)
-              .join(', ') || 'ninguna'}
+            Vías cerradas por escenario:{' '}
+            {w.scenarios
+              .map((s) => `${s.scenario_name}: ${closedRoads(s)}`)
+              .join(' · ')}
             . Las modificaciones permanecen independientes en cada escenario.
           </p>
           <p>
-            {a?.demo || b?.demo
+            {results.some((r) => r?.demo)
               ? 'DEMOSTRACIÓN: soluciones estáticas identificadas. Consulta las capacidades y los balances antes de interpretar los resultados; no son respuestas del servidor.'
               : 'Ejecuta cada escenario desde el selector superior. Los resultados se descartan si modificas su red.'}
           </p>
