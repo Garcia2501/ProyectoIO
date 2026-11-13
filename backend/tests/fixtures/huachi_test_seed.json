@@ -1,0 +1,10 @@
+{
+  "balances": { "test-A": 100, "test-C": -100 },
+  "roads": {
+    "test-R1": { "capacity": 100, "unit_cost": 2, "enabled": true },
+    "test-R2": { "capacity": 100, "unit_cost": 3, "enabled": true },
+    "test-R3": { "capacity": 50, "unit_cost": 8, "enabled": true }
+  },
+  "closure_road_ids": ["test-R3"],
+  "limit_capacity_factor": 0.5
+}

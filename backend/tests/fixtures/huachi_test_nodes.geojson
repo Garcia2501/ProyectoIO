@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-78.620, -1.270] },
+      "properties": { "node_id": "test-A", "label": "Test Origen", "node_kind": "intersection" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-78.622, -1.270] },
+      "properties": { "node_id": "test-B", "label": "Test Intermedio", "node_kind": "intersection" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-78.624, -1.270] },
+      "properties": { "node_id": "test-C", "label": "Test Destino", "node_kind": "intersection" }
+    }
+  ]
+}

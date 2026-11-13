@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-78.620, -1.270], [-78.622, -1.270]] },
+      "properties": {
+        "road_id": "test-R1", "source": "test-A", "target": "test-B",
+        "osm_way_ids": ["1"], "oneway": true, "source_quality": "TEST",
+        "verified": false, "length_m": 200, "name": "Test R1"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-78.622, -1.270], [-78.624, -1.270]] },
+      "properties": {
+        "road_id": "test-R2", "source": "test-B", "target": "test-C",
+        "osm_way_ids": ["2"], "oneway": true, "source_quality": "TEST",
+        "verified": false, "length_m": 200, "name": "Test R2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[-78.620, -1.270], [-78.624, -1.270]] },
+      "properties": {
+        "road_id": "test-R3", "source": "test-A", "target": "test-C",
+        "osm_way_ids": ["3"], "oneway": true, "source_quality": "TEST",
+        "verified": false, "length_m": 400, "name": "Test R3"
+      }
+    }
+  ]
+}
