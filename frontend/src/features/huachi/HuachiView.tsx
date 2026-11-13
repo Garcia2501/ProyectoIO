@@ -15,6 +15,7 @@ import {
   DEFAULT_LAYERS,
   DEFAULT_THRESHOLDS,
   roadStatuses,
+  topologyIssues,
 } from './layers'
 import type { LayerState } from './layers'
 import { Legend, LayerPanel } from './MapControls'
@@ -43,7 +44,13 @@ function HuachiReady({
   const modelReady = w.external && data.scenarios !== null
   const placeholder = useMemo(() => geometryScenario(network), [network])
   const scenario = modelReady ? w.scenario : placeholder
-  const stored = modelReady ? w.results[w.active] : null
+  const issues = useMemo(
+    () => (modelReady ? topologyIssues(network, scenario) : []),
+    [modelReady, network, scenario],
+  )
+  const compatible = issues.length === 0
+  // Con una topología incompatible no se asigna flujo por ID a la geometría.
+  const stored = modelReady && compatible ? w.results[w.active] : null
   const result = stored?.data
   const statuses = useMemo(
     () => roadStatuses(network, scenario, stored, thresholds),
@@ -100,7 +107,19 @@ function HuachiReady({
             </span>
           </div>
         )}
-        {modelReady && !result && (
+        {issues.length > 0 && (
+          <div className="huachi-state glass" role="alert">
+            <Icon name="info" />
+            <span>
+              <strong>El escenario ya no coincide con el mapa.</strong>{' '}
+              {issues.slice(0, 3).join(' ')}
+              {issues.length > 3 ? ` (+${issues.length - 3} más)` : ''} No se
+              muestra la solución ni se permite optimizar desde aquí;
+              restablece el escenario.
+            </span>
+          </div>
+        )}
+        {modelReady && compatible && !result && (
           <div className="huachi-state glass" role="status">
             <Icon name="activity" />
             <span>Optimiza el escenario para colorear las calles y mover los símbolos.</span>
@@ -141,7 +160,7 @@ function HuachiReady({
               <div className="quick-actions">
                 <button
                   className="primary"
-                  disabled={w.loading}
+                  disabled={w.loading || !compatible}
                   onClick={() => void w.run()}
                 >
                   <Icon name="sparkles" size={18} />
@@ -155,7 +174,7 @@ function HuachiReady({
             </>
           ) : (
             <p className="help" role="status">
-              Escenario experimental pendiente: falta{' '}
+              Optimización deshabilitada: falta{' '}
               <code>huachi_scenario_seed.json</code>
               {data.seedErrors.length > 0
                 ? ' válido (' + data.seedErrors[0] + ')'
@@ -240,7 +259,7 @@ function HuachiReady({
           <LayerPanel layers={layers} onChange={setLayers} />
           <Legend thresholds={thresholds} onChange={setThresholds} />
         </section>
-        {(data.warnings.length > 0 || data.provenance) && (
+        {(data.warnings.length > 0 || data.provenance || data.optionalErrors.length > 0) && (
           <section className="huachi-card glass">
             <h2>Origen de los datos</h2>
             {data.provenance && (
@@ -253,6 +272,13 @@ function HuachiReady({
                   .filter(Boolean)
                   .join(' · ')}
               </p>
+            )}
+            {data.optionalErrors.length > 0 && (
+              <ul className="huachi-errors" role="alert">
+                {data.optionalErrors.map((e) => (
+                  <li key={e}>{e}</li>
+                ))}
+              </ul>
             )}
             <ul className="huachi-warnings">
               {[...(data.provenance?.notes ?? []), ...data.warnings]

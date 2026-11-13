@@ -168,7 +168,7 @@ test('sin semilla muestra solo la geografía y no permite optimizar', () => {
   const files = fixtureFiles()
   delete (files as Record<string, string>)['huachi_scenario_seed.json']
   render(<App data={loadHuachiData(files)} />)
-  expect(screen.getByText(/Escenario experimental pendiente/)).toBeInTheDocument()
+  expect(screen.getByText(/Optimización deshabilitada/)).toBeInTheDocument()
   expect(screen.queryByRole('combobox', { name: 'Escenario del mapa' })).toBeNull()
 })
 

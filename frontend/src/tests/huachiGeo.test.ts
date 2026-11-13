@@ -8,6 +8,7 @@ import {
 } from '../features/huachi/geo'
 import { loadHuachiData } from '../features/huachi/data'
 import { huachiScenarios, parseSeed } from '../features/huachi/scenarios'
+import { topologyIssues } from '../features/huachi/layers'
 import {
   fixtureFiles,
   fixtureNodes,
@@ -165,5 +166,43 @@ describe('carga de data/geography', () => {
     delete (files as Record<string, string>)['huachi_scenario_seed.json']
     const withoutSeed = loadHuachiData(files)
     expect(withoutSeed.status === 'ready' && withoutSeed.scenarios).toBeNull()
+  })
+})
+
+describe('revisión del PR: consistencia y tolerancia', () => {
+  it('rechaza una geometría lejos de ambos nodos (tolerancia en metros)', () => {
+    const roads = clone(fixtureRoads)
+    roads.features[2].geometry.coordinates = [
+      [10.01, 20.01],
+      [10.02, 20.02],
+    ]
+    const { network, errors } = parseGeoNetwork(fixtureNodes, roads)
+    expect(network).toBeNull()
+    expect(errors.join(' ')).toMatch(/V3.*m de su nodo/)
+    // Con una tolerancia enorme ya se acepta: el umbral es explícito.
+    expect(parseGeoNetwork(fixtureNodes, roads, 5_000_000).network).not.toBeNull()
+  })
+  it('mantiene la cartografía si el seed o provenance.json son JSON inválido', () => {
+    const files = { ...fixtureFiles(), 'huachi_scenario_seed.json': '{', 'provenance.json': 'x' }
+    const data = loadHuachiData(files)
+    expect(data.status).toBe('ready')
+    if (data.status !== 'ready') return
+    expect(data.scenarios).toBeNull()
+    expect(data.optionalErrors.join(' ')).toMatch(/huachi_scenario_seed\.json/)
+    expect(data.optionalErrors.join(' ')).toMatch(/provenance\.json/)
+  })
+  it('detecta vías nuevas, extremos cambiados y vías eliminadas', () => {
+    const network = parseGeoNetwork(fixtureNodes, fixtureRoads).network!
+    const { seed } = parseSeed(fixtureSeed, network)
+    const base = huachiScenarios(network, seed!)[0]
+    expect(topologyIssues(network, base)).toEqual([])
+    const edited = clone(base)
+    edited.roads[0].target = 'N3'
+    edited.roads.push({ id: 'X9', source: 'N1', target: 'N2', capacity: 5, unit_cost: 1, enabled: true })
+    edited.roads.splice(1, 1)
+    const text = topologyIssues(network, edited).join(' ')
+    expect(text).toMatch(/V1 va de N1 a N3/)
+    expect(text).toMatch(/X9 no tiene geometría/)
+    expect(text).toMatch(/V2 del mapa ya no está/)
   })
 })

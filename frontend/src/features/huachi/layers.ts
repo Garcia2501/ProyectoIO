@@ -150,3 +150,34 @@ export function legendItems(limits: Thresholds) {
             ),
   }))
 }
+
+/**
+ * Comprueba que el escenario (que el editor puede haber modificado) siga
+ * coincidiendo con la cartografía: mismas vías y mismos extremos. Devuelve la
+ * lista de incompatibilidades; vacía si es seguro asignar flujo por ID.
+ */
+export function topologyIssues(
+  network: GeoNetwork,
+  scenario: Scenario,
+): string[] {
+  const issues: string[] = []
+  const geo = new Map(network.roads.map((r) => [r.id, r]))
+  const nodeIds = new Set(scenario.nodes.map((n) => n.id))
+  for (const road of scenario.roads) {
+    const g = geo.get(road.id)
+    if (!g)
+      issues.push(`La vía ${road.id} no tiene geometría en el mapa.`)
+    else if (g.source !== road.source || g.target !== road.target)
+      issues.push(
+        `La vía ${road.id} va de ${road.source} a ${road.target}, pero el mapa la dibuja de ${g.source} a ${g.target}.`,
+      )
+  }
+  const inScenario = new Set(scenario.roads.map((r) => r.id))
+  for (const g of network.roads)
+    if (!inScenario.has(g.id))
+      issues.push(`La vía ${g.id} del mapa ya no está en el escenario.`)
+  for (const n of network.nodes)
+    if (!nodeIds.has(n.id))
+      issues.push(`El nodo ${n.id} del mapa ya no está en el escenario.`)
+  return issues
+}

@@ -38,6 +38,8 @@ export type HuachiData =
       seedErrors: string[]
       scenarios: Scenario[] | null
       provenance: Provenance | null
+      /** Archivos opcionales ilegibles; no impiden mostrar la cartografía. */
+      optionalErrors: string[]
     }
 
 const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v : undefined)
@@ -81,11 +83,27 @@ export function loadHuachiData(files: Record<string, string>): HuachiData {
     if (!network) return { status: 'invalid', errors }
     let seed: ScenarioSeed | null = null
     let seedErrors: string[] = []
-    if ('huachi_scenario_seed.json' in files) {
-      const result = parseSeed(parse('huachi_scenario_seed.json'), network)
-      seed = result.seed
-      seedErrors = result.errors
-    }
+    let provenance: Provenance | null = null
+    const optionalErrors: string[] = []
+    if ('huachi_scenario_seed.json' in files)
+      try {
+        const result = parseSeed(parse('huachi_scenario_seed.json'), network)
+        seed = result.seed
+        seedErrors = result.errors
+      } catch (error) {
+        seedErrors = [(error as Error).message]
+      }
+    if ('provenance.json' in files)
+      try {
+        provenance = parseProvenance(parse('provenance.json'))
+      } catch (error) {
+        optionalErrors.push((error as Error).message)
+      }
+    optionalErrors.push(
+      ...seedErrors.map((e) =>
+        e.startsWith('huachi_scenario_seed.json') ? e : `huachi_scenario_seed.json: ${e}`,
+      ),
+    )
     return {
       status: 'ready',
       network,
@@ -93,10 +111,8 @@ export function loadHuachiData(files: Record<string, string>): HuachiData {
       seed,
       seedErrors,
       scenarios: seed ? huachiScenarios(network, seed) : null,
-      provenance:
-        'provenance.json' in files
-          ? parseProvenance(parse('provenance.json'))
-          : null,
+      provenance,
+      optionalErrors,
     }
   } catch (error) {
     return { status: 'invalid', errors: [(error as Error).message] }

@@ -9,6 +9,13 @@
 
 export type LonLat = [number, number]
 
+/**
+ * Distancia máxima (m) entre un extremo de la línea y su nodo. Valor
+ * provisional a acordar con el equipo GIS; las líneas que lo superen se
+ * rechazan en lugar de dibujarse lejos de sus nodos.
+ */
+export const ENDPOINT_TOLERANCE_M = 25
+
 export interface GeoNode {
   id: string
   label: string
@@ -175,6 +182,7 @@ export function parseRoads(
   nodes: GeoNode[],
   errors: string[],
   warnings: string[],
+  tolerance = ENDPOINT_TOLERANCE_M,
 ): GeoRoad[] {
   const byId = new Map(nodes.map((n) => [n.id, n]))
   const roads: GeoRoad[] = []
@@ -215,6 +223,12 @@ export function parseRoads(
     const forward = haversine(start, here(from)) + haversine(end, here(to))
     const backward = haversine(start, here(to)) + haversine(end, here(from))
     const reversed = backward < forward
+    const startGap = haversine(start, here(reversed ? to : from))
+    const endGap = haversine(end, here(reversed ? from : to))
+    if (startGap > tolerance || endGap > tolerance)
+      return void errors.push(
+        `${where} (${id}): un extremo de la línea queda a ${Math.round(Math.max(startGap, endGap))} m de su nodo (tolerancia ${tolerance} m).`,
+      )
     if (reversed) {
       coordinates = [...coordinates].reverse()
       warnings.push(
@@ -244,11 +258,12 @@ export function parseRoads(
 export function parseGeoNetwork(
   nodesJson: unknown,
   roadsJson: unknown,
+  tolerance = ENDPOINT_TOLERANCE_M,
 ): GeoParseResult {
   const errors: string[] = [],
     warnings: string[] = []
   const nodes = parseNodes(nodesJson, errors)
-  const roads = parseRoads(roadsJson, nodes, errors, warnings)
+  const roads = parseRoads(roadsJson, nodes, errors, warnings, tolerance)
   if (!errors.length && !nodes.length) errors.push('No hay nodos en el dataset.')
   if (!errors.length && !roads.length) errors.push('No hay vías en el dataset.')
   return {
