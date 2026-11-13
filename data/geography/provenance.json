@@ -303,6 +303,96 @@
       ]
     }
   ],
+  "review_candidates": [
+    {
+      "osm_way_id": "188553491",
+      "name": "Avenida los Chasquis",
+      "highway": "tertiary",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "896918264",
+      "name": "Avenida los Chasquis",
+      "highway": "tertiary",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "248048826",
+      "name": "Río Payamino",
+      "highway": "residential",
+      "osm_oneway": "no",
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "535046114",
+      "name": "Río Payamino",
+      "highway": "residential",
+      "osm_oneway": "no",
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "188554514",
+      "name": "Rio Guayllabamba",
+      "highway": "residential",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "371960678",
+      "name": "Rio Guayllabamba",
+      "highway": "residential",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "392008846",
+      "name": null,
+      "highway": "service",
+      "osm_oneway": "yes",
+      "shares_campus_perimeter_node": true,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "345129392",
+      "name": "El Cosmopolitan",
+      "highway": "residential",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "188553492",
+      "name": "Río Cutuchi",
+      "highway": "residential",
+      "osm_oneway": null,
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "188553186",
+      "name": "Avenida los Atis",
+      "highway": "tertiary",
+      "osm_oneway": "yes",
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    },
+    {
+      "osm_way_id": "188554480",
+      "name": "Machangara",
+      "highway": "tertiary",
+      "osm_oneway": "yes",
+      "shares_campus_perimeter_node": false,
+      "status": "OSM consultado; comprobación independiente pendiente"
+    }
+  ],
   "notes": [
     "Recorte propuesto pendiente de aprobación del equipo.",
     "Se conservan tramos entre nodos OSM consecutivos dentro del rectángulo; no se crean cruces por intersección visual.",

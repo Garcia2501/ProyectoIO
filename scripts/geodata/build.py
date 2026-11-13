@@ -14,6 +14,11 @@ from extract import BBOX, CAMPUS_WAY, URL, validate_extract
 MOTOR = set("primary secondary tertiary unclassified residential living_street service primary_link secondary_link tertiary_link".split())
 RESTRICTED = {"no", "private", "destination", "customers", "delivery", "agricultural", "forestry"}
 ASSUMPTION = "OSM no confirma el sentido; ambos arcos son un supuesto experimental pendiente de revisión."
+REVIEW_WAYS = (
+    "188553491", "896918264", "248048826", "535046114", "188554514",
+    "371960678", "392008846", "345129392", "188553492", "188553186",
+    "188554480",
+)
 
 
 def tags(element):
@@ -180,6 +185,23 @@ def build(cache, output, extracted_at):
          "members": [member.attrib for member in rel.findall("member")]}
         for rel in root.findall("relation") if tags(rel).get("type") == "restriction"
     ]
+    reviewed = []
+    for way_id in REVIEW_WAYS:
+        way = root.find(f"way[@id='{way_id}']")
+        if way is None:
+            continue
+        attributes = tags(way)
+        refs = [node.attrib["ref"] for node in way.findall("nd")]
+        reviewed.append({
+            "osm_way_id": way_id,
+            "name": attributes.get("name"),
+            "highway": attributes.get("highway"),
+            "osm_oneway": attributes.get("oneway"),
+            "shares_campus_perimeter_node": bool(
+                set(refs) & {node.attrib["ref"] for node in campus.findall("nd")}
+            ),
+            "status": "OSM consultado; comprobación independiente pendiente",
+        })
     west, south, east, north = BBOX
     polygon = [[[west, south], [east, south], [east, north], [west, north], [west, south]]]
     output.mkdir(parents=True, exist_ok=True)
@@ -194,6 +216,7 @@ def build(cache, output, extracted_at):
         "extractor_version": 1, "boundary": polygon, "boundary_status": "proposed",
         "campus": {"osm_way_id": CAMPUS_WAY, "coordinates": footprint},
         "turn_restrictions_not_modeled": restrictions,
+        "review_candidates": reviewed,
         "notes": [
             "Recorte propuesto pendiente de aprobación del equipo.",
             "Se conservan tramos entre nodos OSM consecutivos dentro del rectángulo; no se crean cruces por intersección visual.",
