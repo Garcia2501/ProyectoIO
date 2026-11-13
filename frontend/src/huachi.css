@@ -1,0 +1,338 @@
+/* Mapa real de Huachi (Leaflet). Estilos propios; reutiliza .glass y .panel. */
+
+.huachi-experience {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 370px;
+  gap: 16px;
+  align-items: start;
+  color: #172b38;
+}
+.huachi-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.huachi-title {
+  position: absolute;
+  z-index: 500;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 10px 12px;
+  max-width: calc(100% - 90px);
+  pointer-events: none;
+}
+.huachi-title h1 {
+  font-size: 18px;
+  margin: 2px 0;
+}
+.huachi-title small {
+  font-size: 10px;
+}
+.huachi-map {
+  position: relative;
+  height: calc(100vh - 250px);
+  min-height: 460px;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid #fff;
+  box-shadow: 0 16px 45px #32505d18;
+  background: #dfe8e6;
+  isolation: isolate;
+}
+.huachi-leaflet {
+  background: #dfe8e6;
+  font: inherit;
+}
+.huachi-attribution {
+  position: absolute;
+  z-index: 800;
+  right: 8px;
+  bottom: 6px;
+  margin: 0;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #ffffffd9;
+  font-size: 10px;
+  color: #3b4d5e;
+}
+.huachi-attribution a {
+  color: #1b6b86;
+  text-decoration: underline;
+}
+.huachi-road {
+  transition: stroke 0.25s;
+}
+.huachi-arrow span {
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 1px 2px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 11px solid #16324f;
+  filter: drop-shadow(0 0 1.5px #fff);
+}
+.huachi-closure {
+  display: grid;
+  place-items: center;
+}
+.huachi-closure span {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  color: #b0384c;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 0 0 2px #b0384c;
+}
+.huachi-label.leaflet-tooltip {
+  background: #ffffffd9;
+  border: 0;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #243a4b;
+  box-shadow: none;
+  padding: 2px 6px;
+}
+.huachi-state {
+  position: absolute;
+  z-index: 600;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 330px;
+  padding: 10px 14px;
+  font-size: 11px;
+}
+.huachi-playback {
+  display: flex;
+}
+.huachi-playback .mega-playback {
+  position: static;
+  width: 100%;
+  transform: none;
+}
+.huachi-footnote {
+  margin: 0 4px;
+  font-size: 10px;
+  color: #6d8091;
+}
+.huachi-side {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.huachi-card,
+.huachi-inspector {
+  padding: 14px 16px;
+}
+.huachi-card h2,
+.huachi-inspector h2 {
+  font-size: 15px;
+  margin: 2px 0 8px;
+}
+.huachi-card select {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.huachi-inspector dl {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0;
+}
+.huachi-inspector dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+}
+.huachi-inspector dt {
+  color: #6d8091;
+}
+.huachi-inspector dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+.huachi-inspector-sub {
+  margin: 0 0 6px;
+  font-size: 11px;
+}
+.huachi-road-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.huachi-road-list button {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 6px 9px;
+  font-size: 11px;
+  text-align: left;
+}
+.huachi-road-list button[aria-pressed='true'] {
+  outline: 2px solid #12a37a;
+  background: #e5f8f0;
+}
+.huachi-road-list i,
+.huachi-legend i {
+  flex: none;
+  width: 14px;
+  height: 6px;
+  border-radius: 3px;
+}
+.huachi-road-list span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.huachi-layers {
+  border: 0;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  font-size: 11px;
+}
+.huachi-layers legend {
+  font-weight: 650;
+  margin-bottom: 6px;
+  padding: 0;
+}
+.huachi-legend h3 {
+  font-size: 11px;
+  margin: 4px 0 6px;
+}
+.huachi-legend ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+}
+.huachi-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.huachi-legend li span {
+  margin-left: auto;
+  color: #6d8091;
+}
+.huachi-thresholds {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 10px;
+}
+.huachi-warnings {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 10px;
+  color: #5b6f80;
+}
+.huachi-pending {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 26px 28px;
+}
+.huachi-pending h1 {
+  font-size: 22px;
+  margin: 2px 0 10px;
+}
+.huachi-pending p,
+.huachi-pending li {
+  font-size: 12px;
+  line-height: 1.55;
+}
+.huachi-pending code {
+  background: #e9f1f5;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+.huachi-errors {
+  color: #9b3a4a;
+}
+.comparison-huachi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.comparison-huachi .huachi-map {
+  height: 420px;
+  min-height: 320px;
+}
+.comparison-pick {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px;
+}
+@media (max-width: 1100px) {
+  .huachi-experience {
+    grid-template-columns: 1fr;
+  }
+  .huachi-side {
+    max-height: none;
+  }
+  .comparison-huachi {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .huachi-map {
+    height: 62vh;
+    min-height: 360px;
+  }
+  .huachi-title {
+    position: static;
+    max-width: none;
+    pointer-events: auto;
+  }
+  .huachi-state {
+    position: static;
+    max-width: none;
+  }
+  .huachi-pending {
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .huachi-road {
+    transition: none;
+  }
+  .leaflet-fade-anim .leaflet-tile,
+  .leaflet-zoom-anim .leaflet-zoom-animated {
+    transition: none !important;
+  }
+}
+.huachi-leaflet path.leaflet-interactive:focus {
+  outline: none;
+}
