@@ -1,0 +1,2236 @@
+{
+  "balances": {
+    "osm-n3514976653": 60,
+    "osm-n1991854613": -60
+  },
+  "roads": {
+    "osm-w188553186-bf4cc33677e7-f": {
+      "capacity": 60,
+      "unit_cost": 226,
+      "enabled": true
+    },
+    "osm-w188553466-81c36f83685a-f": {
+      "capacity": 60,
+      "unit_cost": 115,
+      "enabled": true
+    },
+    "osm-w188553466-81c36f83685a-r": {
+      "capacity": 60,
+      "unit_cost": 115,
+      "enabled": true
+    },
+    "osm-w188553468-772a53889106-f": {
+      "capacity": 60,
+      "unit_cost": 10,
+      "enabled": true
+    },
+    "osm-w188553468-772a53889106-r": {
+      "capacity": 60,
+      "unit_cost": 10,
+      "enabled": true
+    },
+    "osm-w188553468-5359ae69d33b-f": {
+      "capacity": 60,
+      "unit_cost": 102,
+      "enabled": true
+    },
+    "osm-w188553468-5359ae69d33b-r": {
+      "capacity": 60,
+      "unit_cost": 102,
+      "enabled": true
+    },
+    "osm-w188553468-1a6f2e4b84f6-f": {
+      "capacity": 60,
+      "unit_cost": 118,
+      "enabled": true
+    },
+    "osm-w188553468-1a6f2e4b84f6-r": {
+      "capacity": 60,
+      "unit_cost": 118,
+      "enabled": true
+    },
+    "osm-w188553473-2b332d482980-f": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188553473-2b332d482980-r": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188553473-5d128b5172a0-f": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w188553473-5d128b5172a0-r": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w188553473-9a98d02a553b-f": {
+      "capacity": 60,
+      "unit_cost": 169,
+      "enabled": true
+    },
+    "osm-w188553473-9a98d02a553b-r": {
+      "capacity": 60,
+      "unit_cost": 169,
+      "enabled": true
+    },
+    "osm-w188553473-024a25bdbee7-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553473-024a25bdbee7-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553473-733386a00142-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188553473-733386a00142-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188553476-584ec7dc9b58-f": {
+      "capacity": 60,
+      "unit_cost": 65,
+      "enabled": true
+    },
+    "osm-w188553476-584ec7dc9b58-r": {
+      "capacity": 60,
+      "unit_cost": 65,
+      "enabled": true
+    },
+    "osm-w188553484-c0eb663b5d66-f": {
+      "capacity": 60,
+      "unit_cost": 118,
+      "enabled": true
+    },
+    "osm-w188553484-c0eb663b5d66-r": {
+      "capacity": 60,
+      "unit_cost": 118,
+      "enabled": true
+    },
+    "osm-w188553488-c057624a0c6c-f": {
+      "capacity": 60,
+      "unit_cost": 100,
+      "enabled": true
+    },
+    "osm-w188553488-c057624a0c6c-r": {
+      "capacity": 60,
+      "unit_cost": 100,
+      "enabled": true
+    },
+    "osm-w188553488-79285dd0eb62-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553488-79285dd0eb62-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553488-4f335034ab7e-f": {
+      "capacity": 60,
+      "unit_cost": 57,
+      "enabled": true
+    },
+    "osm-w188553488-4f335034ab7e-r": {
+      "capacity": 60,
+      "unit_cost": 57,
+      "enabled": true
+    },
+    "osm-w188553488-3a02094817cb-f": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188553488-3a02094817cb-r": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188553488-7e99a9181c61-f": {
+      "capacity": 60,
+      "unit_cost": 70,
+      "enabled": true
+    },
+    "osm-w188553488-7e99a9181c61-r": {
+      "capacity": 60,
+      "unit_cost": 70,
+      "enabled": true
+    },
+    "osm-w188553491-03b72853b6c0-f": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w188553491-03b72853b6c0-r": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w188553491-770f979483eb-f": {
+      "capacity": 60,
+      "unit_cost": 102,
+      "enabled": true
+    },
+    "osm-w188553491-770f979483eb-r": {
+      "capacity": 60,
+      "unit_cost": 102,
+      "enabled": true
+    },
+    "osm-w188553491-362f9048a3d2-f": {
+      "capacity": 60,
+      "unit_cost": 27,
+      "enabled": true
+    },
+    "osm-w188553491-362f9048a3d2-r": {
+      "capacity": 60,
+      "unit_cost": 27,
+      "enabled": true
+    },
+    "osm-w188553491-ad4c89faab8c-f": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188553491-ad4c89faab8c-r": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188553491-21fed63f9b14-f": {
+      "capacity": 60,
+      "unit_cost": 111,
+      "enabled": true
+    },
+    "osm-w188553491-21fed63f9b14-r": {
+      "capacity": 60,
+      "unit_cost": 111,
+      "enabled": true
+    },
+    "osm-w188553491-30eb45fd1523-f": {
+      "capacity": 60,
+      "unit_cost": 77,
+      "enabled": true
+    },
+    "osm-w188553491-30eb45fd1523-r": {
+      "capacity": 60,
+      "unit_cost": 77,
+      "enabled": true
+    },
+    "osm-w188553491-c866cdda7e33-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w188553491-c866cdda7e33-r": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w188553491-68984880609f-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553491-68984880609f-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188553491-b3ccc7e811f9-f": {
+      "capacity": 60,
+      "unit_cost": 69,
+      "enabled": true
+    },
+    "osm-w188553491-b3ccc7e811f9-r": {
+      "capacity": 60,
+      "unit_cost": 69,
+      "enabled": true
+    },
+    "osm-w188553491-c0b9a033533f-f": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w188553491-c0b9a033533f-r": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w188553491-7e0a15d8cfc0-f": {
+      "capacity": 60,
+      "unit_cost": 72,
+      "enabled": true
+    },
+    "osm-w188553491-7e0a15d8cfc0-r": {
+      "capacity": 60,
+      "unit_cost": 72,
+      "enabled": true
+    },
+    "osm-w188553491-37690b647e9e-f": {
+      "capacity": 60,
+      "unit_cost": 82,
+      "enabled": true
+    },
+    "osm-w188553491-37690b647e9e-r": {
+      "capacity": 60,
+      "unit_cost": 82,
+      "enabled": true
+    },
+    "osm-w188553492-7a34e2902344-f": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188553492-7a34e2902344-r": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188553492-0c49963d0903-f": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188553492-0c49963d0903-r": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188553492-cebf17aa5b10-f": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188553492-cebf17aa5b10-r": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188553492-2075064e59de-f": {
+      "capacity": 60,
+      "unit_cost": 44,
+      "enabled": true
+    },
+    "osm-w188553492-2075064e59de-r": {
+      "capacity": 60,
+      "unit_cost": 44,
+      "enabled": true
+    },
+    "osm-w188553492-81baf679d02f-f": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w188553492-81baf679d02f-r": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w188553492-ad2c4827c7a2-f": {
+      "capacity": 60,
+      "unit_cost": 23,
+      "enabled": true
+    },
+    "osm-w188553492-ad2c4827c7a2-r": {
+      "capacity": 60,
+      "unit_cost": 23,
+      "enabled": true
+    },
+    "osm-w188553494-4944872a4e68-f": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188553494-4944872a4e68-r": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188553502-7d996d1e14e0-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188553502-7d996d1e14e0-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188553502-8bdee63d81c2-f": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188553502-8bdee63d81c2-r": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188553505-f0d1d4b7b59b-f": {
+      "capacity": 60,
+      "unit_cost": 112,
+      "enabled": true
+    },
+    "osm-w188553505-f0d1d4b7b59b-r": {
+      "capacity": 60,
+      "unit_cost": 112,
+      "enabled": true
+    },
+    "osm-w188553505-82696d4a2874-f": {
+      "capacity": 60,
+      "unit_cost": 98,
+      "enabled": true
+    },
+    "osm-w188553505-82696d4a2874-r": {
+      "capacity": 60,
+      "unit_cost": 98,
+      "enabled": true
+    },
+    "osm-w188553508-730db833427a-f": {
+      "capacity": 60,
+      "unit_cost": 116,
+      "enabled": true
+    },
+    "osm-w188553508-730db833427a-r": {
+      "capacity": 60,
+      "unit_cost": 116,
+      "enabled": true
+    },
+    "osm-w188553508-6f6548957776-f": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188553508-6f6548957776-r": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188553508-b480b69d79c1-f": {
+      "capacity": 60,
+      "unit_cost": 32,
+      "enabled": true
+    },
+    "osm-w188553508-b480b69d79c1-r": {
+      "capacity": 60,
+      "unit_cost": 32,
+      "enabled": true
+    },
+    "osm-w188553508-84ff75915d7c-f": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w188553508-84ff75915d7c-r": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w188553508-1d1948320516-f": {
+      "capacity": 60,
+      "unit_cost": 142,
+      "enabled": true
+    },
+    "osm-w188553508-1d1948320516-r": {
+      "capacity": 60,
+      "unit_cost": 142,
+      "enabled": true
+    },
+    "osm-w188553508-fc0519ed5af0-f": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188553508-fc0519ed5af0-r": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188554256-bd5bf5039ac8-f": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188554256-bd5bf5039ac8-r": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188554258-d6c4e7869e93-f": {
+      "capacity": 60,
+      "unit_cost": 178,
+      "enabled": true
+    },
+    "osm-w188554258-d6c4e7869e93-r": {
+      "capacity": 60,
+      "unit_cost": 178,
+      "enabled": true
+    },
+    "osm-w188554280-35de12ca4d47-f": {
+      "capacity": 60,
+      "unit_cost": 116,
+      "enabled": true
+    },
+    "osm-w188554280-35de12ca4d47-r": {
+      "capacity": 60,
+      "unit_cost": 116,
+      "enabled": true
+    },
+    "osm-w188554292-6561c9300884-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554292-6561c9300884-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554472-807708bd5564-f": {
+      "capacity": 60,
+      "unit_cost": 67,
+      "enabled": true
+    },
+    "osm-w188554472-807708bd5564-r": {
+      "capacity": 60,
+      "unit_cost": 67,
+      "enabled": true
+    },
+    "osm-w188554472-a80c27007657-f": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188554472-a80c27007657-r": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188554472-7fdc151c112a-f": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188554472-7fdc151c112a-r": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188554472-e9b783b678b7-f": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188554472-e9b783b678b7-r": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188554474-b605099e0387-f": {
+      "capacity": 60,
+      "unit_cost": 50,
+      "enabled": true
+    },
+    "osm-w188554474-b605099e0387-r": {
+      "capacity": 60,
+      "unit_cost": 50,
+      "enabled": true
+    },
+    "osm-w188554475-453dc508d7b7-f": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188554475-453dc508d7b7-r": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188554475-b95e643e35cd-f": {
+      "capacity": 60,
+      "unit_cost": 124,
+      "enabled": true
+    },
+    "osm-w188554475-b95e643e35cd-r": {
+      "capacity": 60,
+      "unit_cost": 124,
+      "enabled": true
+    },
+    "osm-w188554480-f21fd74056e7-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w188554480-ba55e81c49b8-f": {
+      "capacity": 60,
+      "unit_cost": 170,
+      "enabled": true
+    },
+    "osm-w188554508-8024916c906f-f": {
+      "capacity": 60,
+      "unit_cost": 104,
+      "enabled": true
+    },
+    "osm-w188554508-8024916c906f-r": {
+      "capacity": 60,
+      "unit_cost": 104,
+      "enabled": true
+    },
+    "osm-w188554511-61e80b7190c3-f": {
+      "capacity": 60,
+      "unit_cost": 62,
+      "enabled": true
+    },
+    "osm-w188554511-1068877211de-f": {
+      "capacity": 60,
+      "unit_cost": 127,
+      "enabled": true
+    },
+    "osm-w188554514-12321b066b5f-f": {
+      "capacity": 60,
+      "unit_cost": 62,
+      "enabled": true
+    },
+    "osm-w188554514-12321b066b5f-r": {
+      "capacity": 60,
+      "unit_cost": 62,
+      "enabled": true
+    },
+    "osm-w188554514-15542a97cea2-f": {
+      "capacity": 60,
+      "unit_cost": 208,
+      "enabled": true
+    },
+    "osm-w188554514-15542a97cea2-r": {
+      "capacity": 60,
+      "unit_cost": 208,
+      "enabled": true
+    },
+    "osm-w188554528-d141617148f3-f": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w188554528-d141617148f3-r": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w188554528-9e51d9a6d430-f": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188554528-9e51d9a6d430-r": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w188554528-de380ca07453-f": {
+      "capacity": 60,
+      "unit_cost": 66,
+      "enabled": true
+    },
+    "osm-w188554528-de380ca07453-r": {
+      "capacity": 60,
+      "unit_cost": 66,
+      "enabled": true
+    },
+    "osm-w188554528-0c333dedcc79-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554528-0c333dedcc79-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554528-9cc38caf9a60-f": {
+      "capacity": 60,
+      "unit_cost": 113,
+      "enabled": true
+    },
+    "osm-w188554528-9cc38caf9a60-r": {
+      "capacity": 60,
+      "unit_cost": 113,
+      "enabled": true
+    },
+    "osm-w188554528-01a1bb8a3cd5-f": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188554528-01a1bb8a3cd5-r": {
+      "capacity": 60,
+      "unit_cost": 109,
+      "enabled": true
+    },
+    "osm-w188554528-dc0ea67bde68-f": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w188554528-dc0ea67bde68-r": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w188554529-6c8915f3c6d2-f": {
+      "capacity": 60,
+      "unit_cost": 66,
+      "enabled": true
+    },
+    "osm-w188554529-6c8915f3c6d2-r": {
+      "capacity": 60,
+      "unit_cost": 66,
+      "enabled": true
+    },
+    "osm-w188554529-f190cb4d8666-f": {
+      "capacity": 60,
+      "unit_cost": 155,
+      "enabled": true
+    },
+    "osm-w188554529-f190cb4d8666-r": {
+      "capacity": 60,
+      "unit_cost": 155,
+      "enabled": true
+    },
+    "osm-w188554581-4c3666b9794d-f": {
+      "capacity": 60,
+      "unit_cost": 88,
+      "enabled": true
+    },
+    "osm-w188554583-fb9db9309b95-f": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w188554583-fb9db9309b95-r": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w188554583-0a8219d17412-f": {
+      "capacity": 60,
+      "unit_cost": 114,
+      "enabled": true
+    },
+    "osm-w188554583-0a8219d17412-r": {
+      "capacity": 60,
+      "unit_cost": 114,
+      "enabled": true
+    },
+    "osm-w188554583-0b13b2add2cc-f": {
+      "capacity": 60,
+      "unit_cost": 88,
+      "enabled": true
+    },
+    "osm-w188554583-0b13b2add2cc-r": {
+      "capacity": 60,
+      "unit_cost": 88,
+      "enabled": true
+    },
+    "osm-w188554593-ba74d0d01adb-f": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188554593-ba74d0d01adb-r": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w188554593-d066968e73b2-f": {
+      "capacity": 60,
+      "unit_cost": 45,
+      "enabled": true
+    },
+    "osm-w188554593-d066968e73b2-r": {
+      "capacity": 60,
+      "unit_cost": 45,
+      "enabled": true
+    },
+    "osm-w188554593-7dea1b7d167f-f": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188554593-7dea1b7d167f-r": {
+      "capacity": 60,
+      "unit_cost": 53,
+      "enabled": true
+    },
+    "osm-w188554597-0b6830bdc9df-f": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w188554597-0b6830bdc9df-r": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w188554597-3d226544979b-f": {
+      "capacity": 60,
+      "unit_cost": 115,
+      "enabled": true
+    },
+    "osm-w188554597-3d226544979b-r": {
+      "capacity": 60,
+      "unit_cost": 115,
+      "enabled": true
+    },
+    "osm-w188554602-f15c4e996436-f": {
+      "capacity": 60,
+      "unit_cost": 167,
+      "enabled": true
+    },
+    "osm-w188554602-f15c4e996436-r": {
+      "capacity": 60,
+      "unit_cost": 167,
+      "enabled": true
+    },
+    "osm-w188554605-5aeb6ddc946a-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554605-5aeb6ddc946a-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w188554605-4bf57f92a624-f": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188554605-4bf57f92a624-r": {
+      "capacity": 60,
+      "unit_cost": 42,
+      "enabled": true
+    },
+    "osm-w188554605-31e03b6d51d3-f": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188554605-31e03b6d51d3-r": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w188554613-b7b3557df50d-f": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w188554613-b7b3557df50d-r": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w188554613-e5e3dfc02e2a-f": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w188554613-e5e3dfc02e2a-r": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w188555886-aea02807aed4-f": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w188555886-aea02807aed4-r": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w188555909-c492dab3bf02-f": {
+      "capacity": 60,
+      "unit_cost": 100,
+      "enabled": true
+    },
+    "osm-w188555909-c492dab3bf02-r": {
+      "capacity": 60,
+      "unit_cost": 100,
+      "enabled": true
+    },
+    "osm-w188555909-7c202364ebb5-f": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188555909-7c202364ebb5-r": {
+      "capacity": 60,
+      "unit_cost": 59,
+      "enabled": true
+    },
+    "osm-w188555934-b2952a739982-f": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w188555934-b2952a739982-r": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w188555934-3ae3535b3545-f": {
+      "capacity": 60,
+      "unit_cost": 97,
+      "enabled": true
+    },
+    "osm-w188555934-3ae3535b3545-r": {
+      "capacity": 60,
+      "unit_cost": 97,
+      "enabled": true
+    },
+    "osm-w188555940-2b22f641c1ba-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188555940-2b22f641c1ba-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w188555940-5fa470c54d45-f": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w188555940-5fa470c54d45-r": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w188676362-06c0e182a45d-f": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w188676362-3c7762eed8f1-f": {
+      "capacity": 60,
+      "unit_cost": 151,
+      "enabled": true
+    },
+    "osm-w245183999-8268531d4744-f": {
+      "capacity": 60,
+      "unit_cost": 103,
+      "enabled": true
+    },
+    "osm-w245191046-88baac9de7d1-f": {
+      "capacity": 60,
+      "unit_cost": 81,
+      "enabled": true
+    },
+    "osm-w245191049-9e13d9da428d-f": {
+      "capacity": 60,
+      "unit_cost": 117,
+      "enabled": true
+    },
+    "osm-w245191051-29cc5965e16e-f": {
+      "capacity": 60,
+      "unit_cost": 97,
+      "enabled": true
+    },
+    "osm-w245191051-c0c3d82bcca4-f": {
+      "capacity": 60,
+      "unit_cost": 105,
+      "enabled": true
+    },
+    "osm-w245191051-bfe9173cd9c7-f": {
+      "capacity": 60,
+      "unit_cost": 107,
+      "enabled": true
+    },
+    "osm-w245191051-e75f656faaa2-f": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w245191056-2682b132ca61-f": {
+      "capacity": 60,
+      "unit_cost": 12,
+      "enabled": true
+    },
+    "osm-w245191056-224db1bdc251-f": {
+      "capacity": 60,
+      "unit_cost": 2,
+      "enabled": true
+    },
+    "osm-w245191056-d5e2b2910151-f": {
+      "capacity": 60,
+      "unit_cost": 21,
+      "enabled": true
+    },
+    "osm-w245191056-1192c5a55f9a-f": {
+      "capacity": 60,
+      "unit_cost": 2,
+      "enabled": true
+    },
+    "osm-w247763028-03fc63f9c428-f": {
+      "capacity": 60,
+      "unit_cost": 68,
+      "enabled": true
+    },
+    "osm-w247763028-03fc63f9c428-r": {
+      "capacity": 60,
+      "unit_cost": 68,
+      "enabled": true
+    },
+    "osm-w247763029-8920fd6ffcc5-f": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w247763029-8920fd6ffcc5-r": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w247763030-2ae6e127e47c-f": {
+      "capacity": 60,
+      "unit_cost": 83,
+      "enabled": true
+    },
+    "osm-w247763030-2ae6e127e47c-r": {
+      "capacity": 60,
+      "unit_cost": 83,
+      "enabled": true
+    },
+    "osm-w247763031-12adbd74c6a2-f": {
+      "capacity": 60,
+      "unit_cost": 46,
+      "enabled": true
+    },
+    "osm-w247763031-12adbd74c6a2-r": {
+      "capacity": 60,
+      "unit_cost": 46,
+      "enabled": true
+    },
+    "osm-w248048826-281bf6570dd9-f": {
+      "capacity": 60,
+      "unit_cost": 121,
+      "enabled": true
+    },
+    "osm-w248048826-281bf6570dd9-r": {
+      "capacity": 60,
+      "unit_cost": 121,
+      "enabled": true
+    },
+    "osm-w248048826-b2a8c8c63c94-f": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w248048826-b2a8c8c63c94-r": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w248048826-e5c29d0e41e3-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w248048826-e5c29d0e41e3-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w248048826-2cd8ebb0a1f4-f": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w248048826-2cd8ebb0a1f4-r": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w248048826-024d6b682033-f": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w248048826-024d6b682033-r": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w248048826-f5b28419c71c-f": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w248048826-f5b28419c71c-r": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w261755649-2bb9785573fd-f": {
+      "capacity": 60,
+      "unit_cost": 122,
+      "enabled": true
+    },
+    "osm-w261755649-2bb9785573fd-r": {
+      "capacity": 60,
+      "unit_cost": 122,
+      "enabled": true
+    },
+    "osm-w261755649-252efa4a5452-f": {
+      "capacity": 60,
+      "unit_cost": 73,
+      "enabled": true
+    },
+    "osm-w261755649-252efa4a5452-r": {
+      "capacity": 60,
+      "unit_cost": 73,
+      "enabled": true
+    },
+    "osm-w285189429-2dbd04da61ca-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w285189429-2dbd04da61ca-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w293203594-09d8cef6177b-f": {
+      "capacity": 60,
+      "unit_cost": 24,
+      "enabled": true
+    },
+    "osm-w320114322-bd46d7d1006b-f": {
+      "capacity": 60,
+      "unit_cost": 155,
+      "enabled": true
+    },
+    "osm-w344755954-ba5690174d94-f": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w344755954-ba5690174d94-r": {
+      "capacity": 60,
+      "unit_cost": 55,
+      "enabled": true
+    },
+    "osm-w344755954-0eb87f1d1c8d-f": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w344755954-0eb87f1d1c8d-r": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w344755954-bfd4fbf339a1-f": {
+      "capacity": 60,
+      "unit_cost": 27,
+      "enabled": true
+    },
+    "osm-w344755954-bfd4fbf339a1-r": {
+      "capacity": 60,
+      "unit_cost": 27,
+      "enabled": true
+    },
+    "osm-w344756507-793c468c1069-f": {
+      "capacity": 60,
+      "unit_cost": 67,
+      "enabled": true
+    },
+    "osm-w344756507-793c468c1069-r": {
+      "capacity": 60,
+      "unit_cost": 67,
+      "enabled": true
+    },
+    "osm-w344756507-6901527cc315-f": {
+      "capacity": 60,
+      "unit_cost": 91,
+      "enabled": true
+    },
+    "osm-w344756507-6901527cc315-r": {
+      "capacity": 60,
+      "unit_cost": 91,
+      "enabled": true
+    },
+    "osm-w344756892-f7a23cda787a-f": {
+      "capacity": 60,
+      "unit_cost": 37,
+      "enabled": true
+    },
+    "osm-w344756892-f7a23cda787a-r": {
+      "capacity": 60,
+      "unit_cost": 37,
+      "enabled": true
+    },
+    "osm-w344756892-b9dc421f0225-f": {
+      "capacity": 60,
+      "unit_cost": 16,
+      "enabled": true
+    },
+    "osm-w344756892-b9dc421f0225-r": {
+      "capacity": 60,
+      "unit_cost": 16,
+      "enabled": true
+    },
+    "osm-w344756892-431bedd0f654-f": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w344756892-431bedd0f654-r": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w345129392-af3bf03ffc90-f": {
+      "capacity": 60,
+      "unit_cost": 4,
+      "enabled": true
+    },
+    "osm-w345129392-af3bf03ffc90-r": {
+      "capacity": 60,
+      "unit_cost": 4,
+      "enabled": true
+    },
+    "osm-w345130535-83d662f92432-f": {
+      "capacity": 60,
+      "unit_cost": 23,
+      "enabled": true
+    },
+    "osm-w345131574-71f539dcf796-f": {
+      "capacity": 60,
+      "unit_cost": 83,
+      "enabled": true
+    },
+    "osm-w345131574-71f539dcf796-r": {
+      "capacity": 60,
+      "unit_cost": 83,
+      "enabled": true
+    },
+    "osm-w345131574-22bc251c4a1f-f": {
+      "capacity": 60,
+      "unit_cost": 29,
+      "enabled": true
+    },
+    "osm-w345131574-22bc251c4a1f-r": {
+      "capacity": 60,
+      "unit_cost": 29,
+      "enabled": true
+    },
+    "osm-w345131576-8ea40240f6a2-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w345131576-8ea40240f6a2-r": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w345131576-e8e03b55caff-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w345131576-e8e03b55caff-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w345131576-fb43da2f5b54-f": {
+      "capacity": 60,
+      "unit_cost": 103,
+      "enabled": true
+    },
+    "osm-w345131576-fb43da2f5b54-r": {
+      "capacity": 60,
+      "unit_cost": 103,
+      "enabled": true
+    },
+    "osm-w345131576-4ef3d12d516e-f": {
+      "capacity": 60,
+      "unit_cost": 161,
+      "enabled": true
+    },
+    "osm-w345131576-4ef3d12d516e-r": {
+      "capacity": 60,
+      "unit_cost": 161,
+      "enabled": true
+    },
+    "osm-w345131576-d0d629bda10a-f": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w345131576-d0d629bda10a-r": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w345132232-5498813eaa95-f": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w345132232-7f3093ef656e-f": {
+      "capacity": 60,
+      "unit_cost": 35,
+      "enabled": true
+    },
+    "osm-w345132232-8ce8f548bc25-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w345132233-a847e4c7fdbf-f": {
+      "capacity": 60,
+      "unit_cost": 10,
+      "enabled": true
+    },
+    "osm-w345132233-f600f01b60d1-f": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w345132233-c9edd697d6eb-f": {
+      "capacity": 60,
+      "unit_cost": 86,
+      "enabled": true
+    },
+    "osm-w345133087-e9855af3ff65-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w345133087-e9855af3ff65-r": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w345133091-a0a53d1bacd4-f": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w345133091-3068d5fd79bf-f": {
+      "capacity": 60,
+      "unit_cost": 70,
+      "enabled": true
+    },
+    "osm-w345133091-82645ce46c0e-f": {
+      "capacity": 60,
+      "unit_cost": 12,
+      "enabled": true
+    },
+    "osm-w345133091-d0c655952621-f": {
+      "capacity": 60,
+      "unit_cost": 81,
+      "enabled": true
+    },
+    "osm-w345133091-7b6b0da0aaa6-f": {
+      "capacity": 60,
+      "unit_cost": 58,
+      "enabled": true
+    },
+    "osm-w362653512-42d57b6c682d-f": {
+      "capacity": 60,
+      "unit_cost": 146,
+      "enabled": true
+    },
+    "osm-w362653512-42d57b6c682d-r": {
+      "capacity": 60,
+      "unit_cost": 146,
+      "enabled": true
+    },
+    "osm-w371960678-a63f7b96b7bf-f": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w371960678-a63f7b96b7bf-r": {
+      "capacity": 60,
+      "unit_cost": 52,
+      "enabled": true
+    },
+    "osm-w371960678-52ea519a2789-f": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w371960678-52ea519a2789-r": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w392008846-c3ef17e88d70-f": {
+      "capacity": 60,
+      "unit_cost": 64,
+      "enabled": true
+    },
+    "osm-w392008846-10807d0a7dec-f": {
+      "capacity": 60,
+      "unit_cost": 46,
+      "enabled": true
+    },
+    "osm-w392008846-8f34c1acbb15-f": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w392008846-9c7a9e4da56d-f": {
+      "capacity": 60,
+      "unit_cost": 16,
+      "enabled": true
+    },
+    "osm-w406692383-9cd4476d7ffe-f": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w406692383-7fc01d59ba76-f": {
+      "capacity": 60,
+      "unit_cost": 108,
+      "enabled": true
+    },
+    "osm-w406692383-f59aabce6be3-f": {
+      "capacity": 60,
+      "unit_cost": 56,
+      "enabled": true
+    },
+    "osm-w406692383-240763cb87a7-f": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w406692383-2ac653666133-f": {
+      "capacity": 60,
+      "unit_cost": 79,
+      "enabled": true
+    },
+    "osm-w406692383-0f23684ad400-f": {
+      "capacity": 60,
+      "unit_cost": 54,
+      "enabled": true
+    },
+    "osm-w406692383-4b6c35d7a3a6-f": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w406692383-abfd0b49b389-f": {
+      "capacity": 60,
+      "unit_cost": 16,
+      "enabled": true
+    },
+    "osm-w406692383-9537ac3afad1-f": {
+      "capacity": 60,
+      "unit_cost": 33,
+      "enabled": true
+    },
+    "osm-w438038613-6f0c047457ee-f": {
+      "capacity": 60,
+      "unit_cost": 56,
+      "enabled": true
+    },
+    "osm-w438038613-6f0c047457ee-r": {
+      "capacity": 60,
+      "unit_cost": 56,
+      "enabled": true
+    },
+    "osm-w438038614-4df87142c191-f": {
+      "capacity": 60,
+      "unit_cost": 135,
+      "enabled": true
+    },
+    "osm-w438038614-4df87142c191-r": {
+      "capacity": 60,
+      "unit_cost": 135,
+      "enabled": true
+    },
+    "osm-w451291825-c4dec88fb23c-f": {
+      "capacity": 60,
+      "unit_cost": 65,
+      "enabled": true
+    },
+    "osm-w451291825-c4dec88fb23c-r": {
+      "capacity": 60,
+      "unit_cost": 65,
+      "enabled": true
+    },
+    "osm-w451291825-b4b318e2aa0d-f": {
+      "capacity": 60,
+      "unit_cost": 31,
+      "enabled": true
+    },
+    "osm-w451291825-b4b318e2aa0d-r": {
+      "capacity": 60,
+      "unit_cost": 31,
+      "enabled": true
+    },
+    "osm-w451291826-bbe05a92d523-f": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w451291826-bbe05a92d523-r": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w451291826-19ec077d9e8a-f": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w451291826-19ec077d9e8a-r": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w451291826-09d9720b8fac-f": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w451291826-09d9720b8fac-r": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w451291827-64250c21a37d-f": {
+      "capacity": 60,
+      "unit_cost": 125,
+      "enabled": true
+    },
+    "osm-w451291827-64250c21a37d-r": {
+      "capacity": 60,
+      "unit_cost": 125,
+      "enabled": true
+    },
+    "osm-w451291828-0affc0497d0f-f": {
+      "capacity": 60,
+      "unit_cost": 96,
+      "enabled": true
+    },
+    "osm-w451291828-0affc0497d0f-r": {
+      "capacity": 60,
+      "unit_cost": 96,
+      "enabled": true
+    },
+    "osm-w451300255-abe6247792bf-f": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w451300255-abe6247792bf-r": {
+      "capacity": 60,
+      "unit_cost": 51,
+      "enabled": true
+    },
+    "osm-w535046106-c5d71fe4da0c-f": {
+      "capacity": 60,
+      "unit_cost": 113,
+      "enabled": true
+    },
+    "osm-w535046106-c5d71fe4da0c-r": {
+      "capacity": 60,
+      "unit_cost": 113,
+      "enabled": true
+    },
+    "osm-w535046106-a7219d30bf7c-f": {
+      "capacity": 60,
+      "unit_cost": 132,
+      "enabled": true
+    },
+    "osm-w535046106-a7219d30bf7c-r": {
+      "capacity": 60,
+      "unit_cost": 132,
+      "enabled": true
+    },
+    "osm-w535046114-acd538fc1f21-f": {
+      "capacity": 60,
+      "unit_cost": 90,
+      "enabled": true
+    },
+    "osm-w535046114-acd538fc1f21-r": {
+      "capacity": 60,
+      "unit_cost": 90,
+      "enabled": true
+    },
+    "osm-w535046114-ac34f474e555-f": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w535046114-ac34f474e555-r": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w535046127-e1ca5f741cf2-f": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w535046127-e1ca5f741cf2-r": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w535046127-ebc41da40e3d-f": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w535046127-ebc41da40e3d-r": {
+      "capacity": 60,
+      "unit_cost": 92,
+      "enabled": true
+    },
+    "osm-w535046127-1105949c82fc-f": {
+      "capacity": 60,
+      "unit_cost": 31,
+      "enabled": true
+    },
+    "osm-w535046127-1105949c82fc-r": {
+      "capacity": 60,
+      "unit_cost": 31,
+      "enabled": true
+    },
+    "osm-w536472243-cf834fa3fc23-f": {
+      "capacity": 60,
+      "unit_cost": 4,
+      "enabled": true
+    },
+    "osm-w536472243-cf834fa3fc23-r": {
+      "capacity": 60,
+      "unit_cost": 4,
+      "enabled": true
+    },
+    "osm-w542665959-2d59a907eeee-f": {
+      "capacity": 60,
+      "unit_cost": 250,
+      "enabled": true
+    },
+    "osm-w542665959-2d59a907eeee-r": {
+      "capacity": 60,
+      "unit_cost": 250,
+      "enabled": true
+    },
+    "osm-w544763083-a895ad5a4140-f": {
+      "capacity": 60,
+      "unit_cost": 269,
+      "enabled": true
+    },
+    "osm-w544763083-a895ad5a4140-r": {
+      "capacity": 60,
+      "unit_cost": 269,
+      "enabled": true
+    },
+    "osm-w544763084-08e351cb3781-f": {
+      "capacity": 60,
+      "unit_cost": 44,
+      "enabled": true
+    },
+    "osm-w544763084-08e351cb3781-r": {
+      "capacity": 60,
+      "unit_cost": 44,
+      "enabled": true
+    },
+    "osm-w544763084-5fcbc17f827d-f": {
+      "capacity": 60,
+      "unit_cost": 243,
+      "enabled": true
+    },
+    "osm-w544763084-5fcbc17f827d-r": {
+      "capacity": 60,
+      "unit_cost": 243,
+      "enabled": true
+    },
+    "osm-w544763085-fea68310bbf4-f": {
+      "capacity": 60,
+      "unit_cost": 126,
+      "enabled": true
+    },
+    "osm-w544763085-fea68310bbf4-r": {
+      "capacity": 60,
+      "unit_cost": 126,
+      "enabled": true
+    },
+    "osm-w544763086-9833241b5db6-f": {
+      "capacity": 60,
+      "unit_cost": 16,
+      "enabled": true
+    },
+    "osm-w544763086-c8be5a88c26c-f": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w544763086-9966a5a5e2bc-f": {
+      "capacity": 60,
+      "unit_cost": 33,
+      "enabled": true
+    },
+    "osm-w544763086-b7c39eb693d0-f": {
+      "capacity": 60,
+      "unit_cost": 72,
+      "enabled": true
+    },
+    "osm-w552480967-0b8c30bb1238-f": {
+      "capacity": 60,
+      "unit_cost": 26,
+      "enabled": true
+    },
+    "osm-w552480968-286d767b97dd-f": {
+      "capacity": 60,
+      "unit_cost": 41,
+      "enabled": true
+    },
+    "osm-w552480968-cd71167f8c10-f": {
+      "capacity": 60,
+      "unit_cost": 123,
+      "enabled": true
+    },
+    "osm-w552480968-b39c2ce7f73d-f": {
+      "capacity": 60,
+      "unit_cost": 18,
+      "enabled": true
+    },
+    "osm-w552480968-1bc5a7a7017e-f": {
+      "capacity": 60,
+      "unit_cost": 28,
+      "enabled": true
+    },
+    "osm-w552480969-de881fb2719a-f": {
+      "capacity": 60,
+      "unit_cost": 26,
+      "enabled": true
+    },
+    "osm-w552480970-97bc0977179f-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w756109400-91f5a3e1c3e3-f": {
+      "capacity": 60,
+      "unit_cost": 35,
+      "enabled": true
+    },
+    "osm-w756109400-91f5a3e1c3e3-r": {
+      "capacity": 60,
+      "unit_cost": 35,
+      "enabled": true
+    },
+    "osm-w894947493-382566280284-f": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w894947493-382566280284-r": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w894947496-08bf59c48048-f": {
+      "capacity": 60,
+      "unit_cost": 250,
+      "enabled": true
+    },
+    "osm-w894947496-08bf59c48048-r": {
+      "capacity": 60,
+      "unit_cost": 250,
+      "enabled": true
+    },
+    "osm-w894947496-03607d35f4ce-f": {
+      "capacity": 60,
+      "unit_cost": 79,
+      "enabled": true
+    },
+    "osm-w894947496-03607d35f4ce-r": {
+      "capacity": 60,
+      "unit_cost": 79,
+      "enabled": true
+    },
+    "osm-w894947496-30d3e2a81879-f": {
+      "capacity": 60,
+      "unit_cost": 78,
+      "enabled": true
+    },
+    "osm-w894947496-30d3e2a81879-r": {
+      "capacity": 60,
+      "unit_cost": 78,
+      "enabled": true
+    },
+    "osm-w894947497-b6ebfd56972d-f": {
+      "capacity": 60,
+      "unit_cost": 121,
+      "enabled": true
+    },
+    "osm-w894947497-b6ebfd56972d-r": {
+      "capacity": 60,
+      "unit_cost": 121,
+      "enabled": true
+    },
+    "osm-w894947513-4c8a5d7f1538-f": {
+      "capacity": 60,
+      "unit_cost": 126,
+      "enabled": true
+    },
+    "osm-w894947513-4c8a5d7f1538-r": {
+      "capacity": 60,
+      "unit_cost": 126,
+      "enabled": true
+    },
+    "osm-w896918264-ced32869e8e4-f": {
+      "capacity": 60,
+      "unit_cost": 29,
+      "enabled": true
+    },
+    "osm-w896918264-ced32869e8e4-r": {
+      "capacity": 60,
+      "unit_cost": 29,
+      "enabled": true
+    },
+    "osm-w1182143268-4ce1c653c857-f": {
+      "capacity": 60,
+      "unit_cost": 6,
+      "enabled": true
+    },
+    "osm-w1182143268-4ce1c653c857-r": {
+      "capacity": 60,
+      "unit_cost": 6,
+      "enabled": true
+    },
+    "osm-w1182143268-2d0a427191e5-f": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1182143268-2d0a427191e5-r": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1182143268-f0ec94c27f94-f": {
+      "capacity": 60,
+      "unit_cost": 17,
+      "enabled": true
+    },
+    "osm-w1182143268-f0ec94c27f94-r": {
+      "capacity": 60,
+      "unit_cost": 17,
+      "enabled": true
+    },
+    "osm-w1182143268-447c38bfdad8-f": {
+      "capacity": 60,
+      "unit_cost": 64,
+      "enabled": true
+    },
+    "osm-w1182143268-447c38bfdad8-r": {
+      "capacity": 60,
+      "unit_cost": 64,
+      "enabled": true
+    },
+    "osm-w1182188305-5f4e68126f99-f": {
+      "capacity": 60,
+      "unit_cost": 25,
+      "enabled": true
+    },
+    "osm-w1182188305-5f4e68126f99-r": {
+      "capacity": 60,
+      "unit_cost": 25,
+      "enabled": true
+    },
+    "osm-w1182188309-9195fa99eee9-f": {
+      "capacity": 60,
+      "unit_cost": 73,
+      "enabled": true
+    },
+    "osm-w1182188309-9195fa99eee9-r": {
+      "capacity": 60,
+      "unit_cost": 73,
+      "enabled": true
+    },
+    "osm-w1182188310-1fc4fe807b67-f": {
+      "capacity": 60,
+      "unit_cost": 17,
+      "enabled": true
+    },
+    "osm-w1182188310-1fc4fe807b67-r": {
+      "capacity": 60,
+      "unit_cost": 17,
+      "enabled": true
+    },
+    "osm-w1182188310-1355124bb108-f": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w1182188310-1355124bb108-r": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w1182188310-cede1eaf3a9a-f": {
+      "capacity": 60,
+      "unit_cost": 41,
+      "enabled": true
+    },
+    "osm-w1182188310-cede1eaf3a9a-r": {
+      "capacity": 60,
+      "unit_cost": 41,
+      "enabled": true
+    },
+    "osm-w1182417393-79982e7c64bd-f": {
+      "capacity": 60,
+      "unit_cost": 30,
+      "enabled": true
+    },
+    "osm-w1182417393-79982e7c64bd-r": {
+      "capacity": 60,
+      "unit_cost": 30,
+      "enabled": true
+    },
+    "osm-w1182417394-03f07f4695b6-f": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1182417394-03f07f4695b6-r": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1182417394-1b82c455fc86-f": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w1182417394-1b82c455fc86-r": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w1182417395-63605a6debc7-f": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w1182417395-63605a6debc7-r": {
+      "capacity": 60,
+      "unit_cost": 63,
+      "enabled": true
+    },
+    "osm-w1182417395-451e4a031aa1-f": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w1182417395-451e4a031aa1-r": {
+      "capacity": 60,
+      "unit_cost": 87,
+      "enabled": true
+    },
+    "osm-w1182417395-121b0edf1e7f-f": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w1182417395-121b0edf1e7f-r": {
+      "capacity": 60,
+      "unit_cost": 47,
+      "enabled": true
+    },
+    "osm-w1182417396-2c5737dc8cd9-f": {
+      "capacity": 60,
+      "unit_cost": 122,
+      "enabled": true
+    },
+    "osm-w1182417396-2c5737dc8cd9-r": {
+      "capacity": 60,
+      "unit_cost": 122,
+      "enabled": true
+    },
+    "osm-w1182417396-627ae14c3fe5-f": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w1182417396-627ae14c3fe5-r": {
+      "capacity": 60,
+      "unit_cost": 61,
+      "enabled": true
+    },
+    "osm-w1182417396-f7dc9debf1cc-f": {
+      "capacity": 60,
+      "unit_cost": 13,
+      "enabled": true
+    },
+    "osm-w1182417396-f7dc9debf1cc-r": {
+      "capacity": 60,
+      "unit_cost": 13,
+      "enabled": true
+    },
+    "osm-w1182417396-c174c29e2ca9-f": {
+      "capacity": 60,
+      "unit_cost": 13,
+      "enabled": true
+    },
+    "osm-w1182417396-c174c29e2ca9-r": {
+      "capacity": 60,
+      "unit_cost": 13,
+      "enabled": true
+    },
+    "osm-w1187560097-7a22ceb93ae8-f": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1187560097-7a22ceb93ae8-r": {
+      "capacity": 60,
+      "unit_cost": 14,
+      "enabled": true
+    },
+    "osm-w1187560098-a0212a8f5ffc-f": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w1187560098-a0212a8f5ffc-r": {
+      "capacity": 60,
+      "unit_cost": 7,
+      "enabled": true
+    },
+    "osm-w1187560099-df432a06b688-f": {
+      "capacity": 60,
+      "unit_cost": 43,
+      "enabled": true
+    },
+    "osm-w1187560099-df432a06b688-r": {
+      "capacity": 60,
+      "unit_cost": 43,
+      "enabled": true
+    },
+    "osm-w1187560100-fb78b37c62ee-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w1187560100-fb78b37c62ee-r": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w1187560101-0b40ac5005c6-f": {
+      "capacity": 60,
+      "unit_cost": 103,
+      "enabled": true
+    },
+    "osm-w1187560101-0b40ac5005c6-r": {
+      "capacity": 60,
+      "unit_cost": 103,
+      "enabled": true
+    },
+    "osm-w1187560102-0e196b11a9fa-f": {
+      "capacity": 60,
+      "unit_cost": 46,
+      "enabled": true
+    },
+    "osm-w1187560102-0e196b11a9fa-r": {
+      "capacity": 60,
+      "unit_cost": 46,
+      "enabled": true
+    },
+    "osm-w1193500683-5bbab92d6430-f": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w1193500683-5bbab92d6430-r": {
+      "capacity": 60,
+      "unit_cost": 38,
+      "enabled": true
+    },
+    "osm-w1193500684-e235c3db2114-f": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w1193500684-e235c3db2114-r": {
+      "capacity": 60,
+      "unit_cost": 34,
+      "enabled": true
+    },
+    "osm-w1232765735-07fb8261e920-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w1232765736-e4db7bddbdb6-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w1232765776-1344abf7e462-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w1233408035-38360154ad84-f": {
+      "capacity": 60,
+      "unit_cost": 215,
+      "enabled": true
+    },
+    "osm-w1233408036-bee2381e2ab5-f": {
+      "capacity": 60,
+      "unit_cost": 13,
+      "enabled": true
+    },
+    "osm-w1233408037-62ddc63cbc8d-f": {
+      "capacity": 60,
+      "unit_cost": 17,
+      "enabled": true
+    },
+    "osm-w1233408061-723ae69a964b-f": {
+      "capacity": 60,
+      "unit_cost": 9,
+      "enabled": true
+    },
+    "osm-w1233408061-02c4a278cdbd-f": {
+      "capacity": 60,
+      "unit_cost": 10,
+      "enabled": true
+    },
+    "osm-w1233408062-68f85b03127b-f": {
+      "capacity": 60,
+      "unit_cost": 85,
+      "enabled": true
+    },
+    "osm-w1233408062-018a68558b9c-f": {
+      "capacity": 60,
+      "unit_cost": 133,
+      "enabled": true
+    },
+    "osm-w1233408063-6469c9262edb-f": {
+      "capacity": 60,
+      "unit_cost": 8,
+      "enabled": true
+    },
+    "osm-w1235011564-9961b077b5a6-f": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w1235011564-9961b077b5a6-r": {
+      "capacity": 60,
+      "unit_cost": 94,
+      "enabled": true
+    },
+    "osm-w1235011564-f01758efb774-f": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w1235011564-f01758efb774-r": {
+      "capacity": 60,
+      "unit_cost": 71,
+      "enabled": true
+    },
+    "osm-w1235011564-d9daf49a2e9e-f": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w1235011564-d9daf49a2e9e-r": {
+      "capacity": 60,
+      "unit_cost": 60,
+      "enabled": true
+    },
+    "osm-w1235011568-b0de5551a242-f": {
+      "capacity": 60,
+      "unit_cost": 8,
+      "enabled": true
+    },
+    "osm-w1235382902-696e4bb153b5-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    },
+    "osm-w1235382915-c10dcf193b34-f": {
+      "capacity": 60,
+      "unit_cost": 70,
+      "enabled": true
+    },
+    "osm-w1235382916-8e2e6f9690ff-f": {
+      "capacity": 60,
+      "unit_cost": 19,
+      "enabled": true
+    }
+  },
+  "closure_road_ids": [
+    "osm-w344755954-bfd4fbf339a1-r"
+  ],
+  "limit_capacity_factor": 0.01,
+  "assumptions": "Oferta y capacidad uniformes de 60 vehículos por intervalo experimental; costo entero proporcional a longitud en metros, sin calibración. El factor límite reduce la capacidad entera a cero.",
+  "reference_paths": {
+    "base_feasible_path": [
+      "osm-w344755954-bfd4fbf339a1-r",
+      "osm-w344755954-0eb87f1d1c8d-r",
+      "osm-w344755954-ba5690174d94-r",
+      "osm-w344756892-f7a23cda787a-f",
+      "osm-w344756892-b9dc421f0225-f",
+      "osm-w344756892-431bedd0f654-f",
+      "osm-w544763086-9833241b5db6-f",
+      "osm-w544763086-c8be5a88c26c-f",
+      "osm-w345132233-a847e4c7fdbf-f",
+      "osm-w345132233-f600f01b60d1-f",
+      "osm-w345132233-c9edd697d6eb-f",
+      "osm-w345133091-a0a53d1bacd4-f",
+      "osm-w345133091-3068d5fd79bf-f",
+      "osm-w345133091-82645ce46c0e-f",
+      "osm-w345133087-e9855af3ff65-f"
+    ],
+    "closure_feasible_path": [
+      "osm-w188554514-12321b066b5f-r",
+      "osm-w188553491-362f9048a3d2-f",
+      "osm-w188553491-ad4c89faab8c-f",
+      "osm-w188553491-21fed63f9b14-f",
+      "osm-w188553491-30eb45fd1523-f",
+      "osm-w188553491-c866cdda7e33-f",
+      "osm-w188553491-68984880609f-f",
+      "osm-w188553491-b3ccc7e811f9-f",
+      "osm-w188553491-c0b9a033533f-f",
+      "osm-w248048826-f5b28419c71c-r",
+      "osm-w248048826-024d6b682033-r",
+      "osm-w248048826-2cd8ebb0a1f4-r"
+    ]
+  }
+}
