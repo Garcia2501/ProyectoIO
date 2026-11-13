@@ -1,0 +1,2870 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6215084,
+          -1.2724728
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827091",
+        "label": "OSM 1991827091",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6228294,
+          -1.2666873
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827165",
+        "label": "OSM 1991827165",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6218964,
+          -1.2715841
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827204",
+        "label": "OSM 1991827204",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6218263,
+          -1.2717432
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827237",
+        "label": "OSM 1991827237",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6226488,
+          -1.2676359
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827357",
+        "label": "OSM 1991827357",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6225097,
+          -1.2685664
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827367",
+        "label": "OSM 1991827367",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6215536,
+          -1.2659755
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991827522",
+        "label": "OSM 1991827522",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6262889,
+          -1.269901
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831839",
+        "label": "OSM 1991831839",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6272679,
+          -1.270943
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831840",
+        "label": "OSM 1991831840",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627128,
+          -1.269767
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831843",
+        "label": "OSM 1991831843",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6251788,
+          -1.2654287
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831845",
+        "label": "OSM 1991831845",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6264967,
+          -1.2710676
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831857",
+        "label": "OSM 1991831857",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6258112,
+          -1.2679909
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831873",
+        "label": "OSM 1991831873",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627546,
+          -1.267494
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831885",
+        "label": "OSM 1991831885",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6254284,
+          -1.266565
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831891",
+        "label": "OSM 1991831891",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6220291,
+          -1.2662771
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831899",
+        "label": "OSM 1991831899",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.621747,
+          -1.2654842
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831934",
+        "label": "OSM 1991831934",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627031,
+          -1.272023
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831935",
+        "label": "OSM 1991831935",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6201006,
+          -1.2707538
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831943",
+        "label": "OSM 1991831943",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6271685,
+          -1.2676079
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831952",
+        "label": "OSM 1991831952",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6201323,
+          -1.265178
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831957",
+        "label": "OSM 1991831957",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.626022,
+          -1.266997
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831978",
+        "label": "OSM 1991831978",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6211105,
+          -1.2657119
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991831984",
+        "label": "OSM 1991831984",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627042,
+          -1.269206
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832006",
+        "label": "OSM 1991832006",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6278291,
+          -1.2673138
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832008",
+        "label": "OSM 1991832008",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6262631,
+          -1.2678489
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832013",
+        "label": "OSM 1991832013",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6213126,
+          -1.2670093
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832014",
+        "label": "OSM 1991832014",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6274524,
+          -1.2686693
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832015",
+        "label": "OSM 1991832015",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6265678,
+          -1.2669805
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832027",
+        "label": "OSM 1991832027",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6220622,
+          -1.2656919
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832047",
+        "label": "OSM 1991832047",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627047,
+          -1.266966
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832048",
+        "label": "OSM 1991832048",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6267207,
+          -1.2677252
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832049",
+        "label": "OSM 1991832049",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627078,
+          -1.271747
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832051",
+        "label": "OSM 1991832051",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6274028,
+          -1.2664712
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832062",
+        "label": "OSM 1991832062",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627489,
+          -1.2664502
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832074",
+        "label": "OSM 1991832074",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.625345,
+          -1.2663341
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832079",
+        "label": "OSM 1991832079",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6218697,
+          -1.2673123
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832096",
+        "label": "OSM 1991832096",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.626501,
+          -1.268832
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832099",
+        "label": "OSM 1991832099",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6212261,
+          -1.2688135
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832104",
+        "label": "OSM 1991832104",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.62649,
+          -1.2665192
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832118",
+        "label": "OSM 1991832118",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6264117,
+          -1.2704269
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832119",
+        "label": "OSM 1991832119",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6278867,
+          -1.2671178
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832126",
+        "label": "OSM 1991832126",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6216446,
+          -1.2680999
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832131",
+        "label": "OSM 1991832131",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6217505,
+          -1.2678308
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832132",
+        "label": "OSM 1991832132",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.626147,
+          -1.2692925
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832136",
+        "label": "OSM 1991832136",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6255552,
+          -1.2670299
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832145",
+        "label": "OSM 1991832145",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6265941,
+          -1.2717941
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832146",
+        "label": "OSM 1991832146",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627216,
+          -1.270308
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991832151",
+        "label": "OSM 1991832151",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6203535,
+          -1.2682943
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991841552",
+        "label": "OSM 1991841552",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6208108,
+          -1.2708962
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991841687",
+        "label": "OSM 1991841687",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6208355,
+          -1.2667658
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991842037",
+        "label": "OSM 1991842037",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222466,
+          -1.2680754
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991842357",
+        "label": "OSM 1991842357",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623256,
+          -1.269069
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853727",
+        "label": "OSM 1991853727",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6234133,
+          -1.2717859
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853729",
+        "label": "OSM 1991853729",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623064,
+          -1.268192
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853806",
+        "label": "OSM 1991853806",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6231497,
+          -1.2726006
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853819",
+        "label": "OSM 1991853819",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623492,
+          -1.272242
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853823",
+        "label": "OSM 1991853823",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6275597,
+          -1.2691196
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853892",
+        "label": "OSM 1991853892",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6252638,
+          -1.270613
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853895",
+        "label": "OSM 1991853895",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6241004,
+          -1.2727457
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853906",
+        "label": "OSM 1991853906",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6257835,
+          -1.2705334
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853927",
+        "label": "OSM 1991853927",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627745,
+          -1.270223
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853953",
+        "label": "OSM 1991853953",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6229216,
+          -1.266516
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991853991",
+        "label": "OSM 1991853991",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6244258,
+          -1.2715946
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854016",
+        "label": "OSM 1991854016",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6260091,
+          -1.2719063
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854039",
+        "label": "OSM 1991854039",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622587,
+          -1.271542
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854105",
+        "label": "OSM 1991854105",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623362,
+          -1.27138
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854137",
+        "label": "OSM 1991854137",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6255941,
+          -1.2725712
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854226",
+        "label": "OSM 1991854226",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6244643,
+          -1.2721376
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854256",
+        "label": "OSM 1991854256",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622632,
+          -1.272985
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854365",
+        "label": "OSM 1991854365",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.624372,
+          -1.2712204
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854451",
+        "label": "OSM 1991854451",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6253297,
+          -1.2710855
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854481",
+        "label": "OSM 1991854481",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6232606,
+          -1.2670784
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854591",
+        "label": "OSM 1991854591",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.624306,
+          -1.2707605
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854613",
+        "label": "OSM 1991854613",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622094,
+          -1.272419
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854694",
+        "label": "OSM 1991854694",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6254683,
+          -1.2719832
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854695",
+        "label": "OSM 1991854695",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622005,
+          -1.272864
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854696",
+        "label": "OSM 1991854696",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623193,
+          -1.268677
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854851",
+        "label": "OSM 1991854851",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6233528,
+          -1.2696421
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854875",
+        "label": "OSM 1991854875",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.625388,
+          -1.2714621
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854882",
+        "label": "OSM 1991854882",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623292,
+          -1.270907
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854891",
+        "label": "OSM 1991854891",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6275552,
+          -1.271879
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991854916",
+        "label": "OSM 1991854916",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6277742,
+          -1.2665644
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991871049",
+        "label": "OSM 1991871049",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627811,
+          -1.271094
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n1991871391",
+        "label": "OSM 1991871391",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6277453,
+          -1.2667571
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524026673",
+        "label": "OSM 2524026673",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6226059,
+          -1.2723782
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524218836",
+        "label": "OSM 2524218836",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222991,
+          -1.2694069
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277813",
+        "label": "OSM 2524277813",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222251,
+          -1.2694536
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277824",
+        "label": "OSM 2524277824",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6224319,
+          -1.2694662
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277830",
+        "label": "OSM 2524277830",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6221997,
+          -1.2695285
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277843",
+        "label": "OSM 2524277843",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6224424,
+          -1.2695684
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277850",
+        "label": "OSM 2524277850",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6224337,
+          -1.2695885
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277859",
+        "label": "OSM 2524277859",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222539,
+          -1.2696316
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277860",
+        "label": "OSM 2524277860",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222722,
+          -1.269642
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277872",
+        "label": "OSM 2524277872",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6208587,
+          -1.2709475
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524277995",
+        "label": "OSM 2524277995",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6206554,
+          -1.2709667
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278002",
+        "label": "OSM 2524278002",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6207002,
+          -1.2710226
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278009",
+        "label": "OSM 2524278009",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6222157,
+          -1.2710412
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278016",
+        "label": "OSM 2524278016",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6204606,
+          -1.2710551
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278023",
+        "label": "OSM 2524278023",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6221559,
+          -1.2711872
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278050",
+        "label": "OSM 2524278050",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6219595,
+          -1.2716354
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278072",
+        "label": "OSM 2524278072",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6218899,
+          -1.271795
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278122",
+        "label": "OSM 2524278122",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6214924,
+          -1.27277
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2524278361",
+        "label": "OSM 2524278361",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622924,
+          -1.2652388
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2546269129",
+        "label": "OSM 2546269129",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6261186,
+          -1.2724912
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2673606930",
+        "label": "OSM 2673606930",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6228435,
+          -1.2670173
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668267",
+        "label": "OSM 2888668267",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6226504,
+          -1.2681346
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668268",
+        "label": "OSM 2888668268",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.622582,
+          -1.2686186
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668269",
+        "label": "OSM 2888668269",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6225154,
+          -1.2690343
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668270",
+        "label": "OSM 2888668270",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6225068,
+          -1.2691807
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668271",
+        "label": "OSM 2888668271",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6230699,
+          -1.2692199
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n2888668272",
+        "label": "OSM 2888668272",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6263853,
+          -1.2652095
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3489107416",
+        "label": "OSM 3489107416",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6241952,
+          -1.2672013
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974550",
+        "label": "OSM 3514974550",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6239573,
+          -1.2679873
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974551",
+        "label": "OSM 3514974551",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6238948,
+          -1.2680406
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974552",
+        "label": "OSM 3514974552",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6233487,
+          -1.2679039
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974554",
+        "label": "OSM 3514974554",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623331,
+          -1.268828
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974555",
+        "label": "OSM 3514974555",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6247126,
+          -1.2694356
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514974556",
+        "label": "OSM 3514974556",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6247544,
+          -1.2674138
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514976651",
+        "label": "OSM 3514976651",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6247881,
+          -1.2664057
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514976653",
+        "label": "OSM 3514976653",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6252069,
+          -1.2675859
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514979915",
+        "label": "OSM 3514979915",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6249062,
+          -1.2683065
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3514979916",
+        "label": "OSM 3514979916",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6278035,
+          -1.2665416
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518237525",
+        "label": "OSM 3518237525",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6277759,
+          -1.2665986
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518237526",
+        "label": "OSM 3518237526",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.624656,
+          -1.2694128
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518267169",
+        "label": "OSM 3518267169",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6249114,
+          -1.2686897
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518267170",
+        "label": "OSM 3518267170",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250184,
+          -1.2683946
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518267171",
+        "label": "OSM 3518267171",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250796,
+          -1.2684193
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518267172",
+        "label": "OSM 3518267172",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6249738,
+          -1.2687044
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518267173",
+        "label": "OSM 3518267173",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6242518,
+          -1.270596
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3518276717",
+        "label": "OSM 3518276717",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6259924,
+          -1.2686632
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n3952935310",
+        "label": "OSM 3952935310",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6260127,
+          -1.2687385
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4358057542",
+        "label": "OSM 4358057542",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6227687,
+          -1.267433
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4358060244",
+        "label": "OSM 4358060244",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6232713,
+          -1.2675057
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4358060245",
+        "label": "OSM 4358060245",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6224183,
+          -1.2699584
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4358060246",
+        "label": "OSM 4358060246",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6236334,
+          -1.2698642
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4358060248",
+        "label": "OSM 4358060248",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6217236,
+          -1.271539
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481215786",
+        "label": "OSM 4481215786",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6210756,
+          -1.2709731
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481215787",
+        "label": "OSM 4481215787",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6212754,
+          -1.2711702
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481215788",
+        "label": "OSM 4481215788",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6202227,
+          -1.2722147
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481227089",
+        "label": "OSM 4481227089",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6211652,
+          -1.2728224
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481227092",
+        "label": "OSM 4481227092",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6208195,
+          -1.2716154
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481227093",
+        "label": "OSM 4481227093",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6214568,
+          -1.2721966
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481227094",
+        "label": "OSM 4481227094",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6206888,
+          -1.2654795
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481296837",
+        "label": "OSM 4481296837",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6208578,
+          -1.2650497
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n4481296839",
+        "label": "OSM 4481296839",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6238622,
+          -1.2706449
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n5265741671",
+        "label": "OSM 5265741671",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6253913,
+          -1.2684246
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n5265741676",
+        "label": "OSM 5265741676",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6220559,
+          -1.2714196
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n5334130191",
+        "label": "OSM 5334130191",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6217341,
+          -1.2719546
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n5334130192",
+        "label": "OSM 5334130192",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.627592,
+          -1.2654183
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n5346183854",
+        "label": "OSM 5346183854",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.620114,
+          -1.2721584
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n8318806491",
+        "label": "OSM 8318806491",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6200389,
+          -1.2714203
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n8318806497",
+        "label": "OSM 8318806497",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.62609,
+          -1.2661772
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n8318806627",
+        "label": "OSM 8318806627",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6249434,
+          -1.2694983
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10977967962",
+        "label": "OSM 10977967962",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6247744,
+          -1.2700504
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10977967963",
+        "label": "OSM 10977967963",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6245221,
+          -1.269925
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10977967966",
+        "label": "OSM 10977967966",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6244753,
+          -1.2699032
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10977967967",
+        "label": "OSM 10977967967",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6237484,
+          -1.270841
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403470",
+        "label": "OSM 10978403470",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6246309,
+          -1.2699944
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403473",
+        "label": "OSM 10978403473",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6276976,
+          -1.26758
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403494",
+        "label": "OSM 10978403494",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6277851,
+          -1.2679135
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403499",
+        "label": "OSM 10978403499",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6278656,
+          -1.2682701
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403500",
+        "label": "OSM 10978403500",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6276591,
+          -1.2674335
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10978403501",
+        "label": "OSM 10978403501",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6254676,
+          -1.2685606
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10980229569",
+        "label": "OSM 10980229569",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250989,
+          -1.2687334
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10980229573",
+        "label": "OSM 10980229573",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6248307,
+          -1.2694634
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10980229577",
+        "label": "OSM 10980229577",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250064,
+          -1.2699803
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10980229582",
+        "label": "OSM 10980229582",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6243117,
+          -1.2705152
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10980229591",
+        "label": "OSM 10980229591",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6213939,
+          -1.2704144
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10988363810",
+        "label": "OSM 10988363810",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6205102,
+          -1.2698693
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10988363813",
+        "label": "OSM 10988363813",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6229303,
+          -1.2655436
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n10991438008",
+        "label": "OSM 10991438008",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250485,
+          -1.2683167
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11000953729",
+        "label": "OSM 11000953729",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6251125,
+          -1.2683366
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11000953730",
+        "label": "OSM 11000953730",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6259145,
+          -1.2651672
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423348",
+        "label": "OSM 11027423348",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6258499,
+          -1.2651736
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423349",
+        "label": "OSM 11027423349",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6259276,
+          -1.2652927
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423352",
+        "label": "OSM 11027423352",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.624929,
+          -1.2678946
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423353",
+        "label": "OSM 11027423353",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6250696,
+          -1.2675328
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423354",
+        "label": "OSM 11027423354",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6246731,
+          -1.2666398
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423359",
+        "label": "OSM 11027423359",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6248425,
+          -1.2666404
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423360",
+        "label": "OSM 11027423360",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6252981,
+          -1.2669481
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423361",
+        "label": "OSM 11027423361",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6248988,
+          -1.2669378
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11027423364",
+        "label": "OSM 11027423364",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6240844,
+          -1.268313
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11078290639",
+        "label": "OSM 11078290639",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6242822,
+          -1.2683633
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11078290641",
+        "label": "OSM 11078290641",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6242024,
+          -1.2680697
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11078290642",
+        "label": "OSM 11078290642",
+        "node_kind": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6275721,
+          -1.2651187
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11473209078",
+        "label": "OSM 11473209078",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6212003,
+          -1.2654062
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11476692621",
+        "label": "OSM 11476692621",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6200416,
+          -1.2708283
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11480782466",
+        "label": "OSM 11480782466",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6228579,
+          -1.265905
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11481011217",
+        "label": "OSM 11481011217",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6266238,
+          -1.2720565
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11483155328",
+        "label": "OSM 11483155328",
+        "node_kind": "segment_endpoint"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.6251271,
+          -1.2650898
+        ]
+      },
+      "properties": {
+        "node_id": "osm-n11483155330",
+        "label": "OSM 11483155330",
+        "node_kind": "segment_endpoint"
+      }
+    }
+  ]
+}
