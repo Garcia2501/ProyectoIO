@@ -1,9 +1,10 @@
 """Convert the cached OSM extract into the SmartFlow Huachi draft dataset."""
 
 import argparse
-from collections import Counter, defaultdict, deque
+from collections import Counter, defaultdict
 from datetime import date
 import hashlib
+import heapq
 import json
 import math
 from pathlib import Path
@@ -116,16 +117,21 @@ def graph(root):
 
 
 def route(outgoing, source, target, excluded=frozenset()):
-    queue = deque([(source, [])])
-    visited = {source}
+    queue = [(0, source, [])]
+    best = {source: 0}
     while queue:
-        node, path = queue.popleft()
+        cost, node, path = heapq.heappop(queue)
+        if cost != best[node]:
+            continue
         if node == target:
             return path
         for road in outgoing[node]:
-            if road["road_id"] not in excluded and road["target"] not in visited:
-                visited.add(road["target"])
-                queue.append((road["target"], path + [road["road_id"]]))
+            if road["road_id"] in excluded:
+                continue
+            next_cost = cost + max(1, round(road["length_m"]))
+            if next_cost < best.get(road["target"], math.inf):
+                best[road["target"]] = next_cost
+                heapq.heappush(queue, (next_cost, road["target"], path + [road["road_id"]]))
     return []
 
 
@@ -134,7 +140,11 @@ def seed_for(nodes, roads, center):
     for road in roads:
         p = road["properties"]
         outgoing[p["source"]].append(p)
-    nearby = sorted(nodes, key=lambda n: distance(n["geometry"]["coordinates"], center))[:24]
+    nearby = sorted(
+        (n for n in nodes if any(p.get("name") and p["highway"] != "service"
+                                 for p in outgoing[n["properties"]["node_id"]])),
+        key=lambda n: distance(n["geometry"]["coordinates"], center),
+    )[:24]
     pairs = sorted(((a, b) for a in nearby for b in nearby if a is not b),
                    key=lambda pair: -distance(*(n["geometry"]["coordinates"] for n in pair)))
     for a, b in pairs:
@@ -165,6 +175,11 @@ def build(cache, output, extracted_at):
     center = [sum(p[i] for p in footprint) / len(footprint) for i in range(2)]
     nodes, roads = graph(root)
     seed = seed_for(nodes, roads, center)
+    restrictions = [
+        {"osm_relation_id": rel.attrib["id"], "tags": tags(rel),
+         "members": [member.attrib for member in rel.findall("member")]}
+        for rel in root.findall("relation") if tags(rel).get("type") == "restriction"
+    ]
     west, south, east, north = BBOX
     polygon = [[[west, south], [east, south], [east, north], [west, north], [west, south]]]
     output.mkdir(parents=True, exist_ok=True)
@@ -178,6 +193,7 @@ def build(cache, output, extracted_at):
         "attribution": "© OpenStreetMap contributors", "extract_sha256": hashlib.sha256(payload).hexdigest(),
         "extractor_version": 1, "boundary": polygon, "boundary_status": "proposed",
         "campus": {"osm_way_id": CAMPUS_WAY, "coordinates": footprint},
+        "turn_restrictions_not_modeled": restrictions,
         "notes": [
             "Recorte propuesto pendiente de aprobación del equipo.",
             "Se conservan tramos entre nodos OSM consecutivos dentro del rectángulo; no se crean cruces por intersección visual.",
