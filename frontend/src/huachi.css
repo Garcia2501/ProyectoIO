@@ -60,6 +60,20 @@
   font-size: 10px;
   color: #3b4d5e;
 }
+.huachi-map-warning {
+  position: absolute;
+  z-index: 900;
+  top: 8px;
+  left: 50px;
+  right: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fff4e5f2;
+  border: 1px solid #e8a13f;
+  font-size: 12px;
+  color: #5a3b00;
+}
 .huachi-attribution a {
   color: #1b6b86;
   text-decoration: underline;

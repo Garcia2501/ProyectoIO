@@ -17,7 +17,12 @@ import type { VisualClock } from '../simulation3d/visualClock'
 import type { Thresholds } from '../simulation3d/visualClock'
 import { boundsOf, pathSampler } from './geo'
 import type { GeoNetwork } from './geo'
-import { CLASS_LABELS, DEFAULT_THRESHOLDS, roadStatuses } from './layers'
+import {
+  CLASS_LABELS,
+  DEFAULT_THRESHOLDS,
+  roadStatuses,
+  topologyIssues,
+} from './layers'
 import type { LayerState, RoadStatus } from './layers'
 import type { MapSync } from './mapSync'
 import { VehicleLayer } from './VehicleLayer'
@@ -180,9 +185,17 @@ export const HuachiMap = memo(function HuachiMap({
   label = 'Mapa de las calles de Huachi',
 }: HuachiMapProps) {
   const id = useId()
+  // Protección topológica centralizada: si el escenario ya no coincide con la
+  // cartografía, el flujo (asignado por ID) no se dibuja sobre la geometría.
+  const issues = useMemo(
+    () => topologyIssues(network, scenario),
+    [network, scenario],
+  )
+  const compatible = issues.length === 0
+  const safeResult = compatible ? result : null
   const statuses = useMemo(
-    () => roadStatuses(network, scenario, result, thresholds),
-    [network, scenario, result, thresholds],
+    () => roadStatuses(network, scenario, safeResult, thresholds),
+    [network, scenario, safeResult, thresholds],
   )
   const bounds = useMemo(
     () =>
@@ -251,6 +264,14 @@ export const HuachiMap = memo(function HuachiMap({
         )}
         {sync && <SyncController sync={sync} id={id} />}
       </MapContainer>
+      {!compatible && (
+        <p className="huachi-map-warning" role="alert">
+          <strong>El escenario ya no coincide con el mapa.</strong>{' '}
+          {issues.slice(0, 2).join(' ')}
+          {issues.length > 2 ? ` (+${issues.length - 2} más)` : ''} No se
+          muestran flujos ni vehículos.
+        </p>
+      )}
       <p className="huachi-attribution">
         Calles y mapa base: ©{' '}
         <a

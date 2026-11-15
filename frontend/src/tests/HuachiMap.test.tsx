@@ -2,6 +2,8 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, expect, test, vi } from 'vitest'
 import App from '../App'
+import { Comparison } from '../features/scenarios/Comparison'
+import type { Workspace } from '../features/scenarios/useWorkspace'
 import { loadHuachiData } from '../features/huachi/data'
 import { classify, roadStatuses } from '../features/huachi/layers'
 import {
@@ -229,4 +231,46 @@ test('los símbolos escalan con el flujo y respetan el presupuesto', () => {
   expect(symbolFraction(0, 10, 0, 4)).toBe(0)
   expect(symbolFraction(5, 10, 0, 4)).toBeCloseTo(0.5)
   expect(symbolFraction(10, 10, 1, 4)).toBeCloseTo(0.25)
+})
+
+test('Comparar no dibuja flujos sobre geometría desactualizada (mismo ID, otro destino)', () => {
+  const data = ready()
+  if (data.status !== 'ready' || !data.scenarios) throw new Error('fixture')
+  const scenarios = structuredClone(data.scenarios)
+  // V1 conserva su ID pero ahora termina en N3: el trazado del mapa es N1→N2.
+  scenarios[0].roads[0].target = 'N3'
+  const results = [
+    { demo: false, data: optimal as never },
+    {
+      demo: false,
+      data: {
+        ...optimal,
+        scenario_name: 'Cierre de vía',
+        roads: [{ id: 'V2', flow: 100, capacity: 100, utilization_pct: 100 }],
+      } as never,
+    },
+    null,
+  ]
+  const w = {
+    scenarios,
+    results,
+    external: true,
+    selection: null,
+    setSelection: () => {},
+    selectScenario: () => {},
+    setView: () => {},
+  } as unknown as Workspace
+  const { container } = render(<Comparison w={w} data={data} />)
+  expect(container.querySelectorAll('.leaflet-container')).toHaveLength(2)
+  // Solo el mapa incompatible (izquierdo) avisa.
+  const alerts = screen.getAllByRole('alert')
+  expect(alerts).toHaveLength(1)
+  expect(alerts[0]).toHaveTextContent(/V1 va de N1 a N3/)
+  const left = screen.getByRole('region', { name: 'Mapa de Huachi: Escenario base' })
+  const right = screen.getByRole('region', { name: 'Mapa de Huachi: Cierre de vía' })
+  expect(left.querySelectorAll('.huachi-vehicle')).toHaveLength(0)
+  expect(left.querySelectorAll('.huachi-road-limit')).toHaveLength(0)
+  // El mapa compatible conserva su solución (V2 con flujo 100 → 12 símbolos).
+  expect(right.querySelectorAll('.huachi-vehicle')).toHaveLength(12)
+  expect(right.querySelectorAll('.huachi-road-limit')).toHaveLength(1)
 })
