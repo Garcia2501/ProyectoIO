@@ -161,17 +161,30 @@ def _parse_roads(
         oneway = props.get("oneway")
         if oneway not in (True, False, "unknown"):
             oneway = "unknown"
-        # Coherencia geométrica de extremos (warning, no bloqueante).
+        # Orientación y coherencia geométrica de extremos, alineado con el
+        # frontend: la línea puede venir invertida respecto a source->target.
+        # Tras orientarla, si sigue fuera de tolerancia la vía se excluye de
+        # la optimización con un error que la identifica.
         src_node = nodes_by_id[source]
         tgt_node = nodes_by_id[target]
-        start, end = line[0], line[-1]
-        start_gap = haversine_m(start, [src_node.lon, src_node.lat])
-        end_gap = haversine_m(end, [tgt_node.lon, tgt_node.lat])
-        if max(start_gap, end_gap) > tolerance_m:
+        src_pos = [src_node.lon, src_node.lat]
+        tgt_pos = [tgt_node.lon, tgt_node.lat]
+        forward = haversine_m(line[0], src_pos) + haversine_m(line[-1], tgt_pos)
+        backward = haversine_m(line[0], tgt_pos) + haversine_m(line[-1], src_pos)
+        reversed_ = backward < forward
+        start = line[-1] if reversed_ else line[0]
+        end = line[0] if reversed_ else line[-1]
+        gap = max(haversine_m(start, src_pos), haversine_m(end, tgt_pos))
+        if gap > tolerance_m:
+            errors.append(
+                f"{where} ({road_id}): extremos a {round(gap)} m de sus nodos "
+                f"(tolerancia {tolerance_m} m); la vía queda fuera de la "
+                "optimización."
+            )
+            continue
+        if reversed_:
             warnings.append(
-                f"{road_id}: un extremo queda a "
-                f"{round(max(start_gap, end_gap))} m de su nodo "
-                f"(tolerancia {tolerance_m} m)."
+                f"{road_id}: geometría orientada de {source} a {target}."
             )
         pairs.setdefault((source, target), []).append(road_id)
         roads.append(
@@ -263,23 +276,33 @@ def load_seed(seed_json, network: GeoNetwork) -> ScenarioSeed:
                 continue
             capacity = value.get("capacity")
             unit_cost = value.get("unit_cost")
-            if (
-                not isinstance(capacity, int)
-                or isinstance(capacity, bool)
-                or capacity < 0
-            ):
+            enabled = value.get("enabled", True)
+            capacity_ok = (
+                isinstance(capacity, int)
+                and not isinstance(capacity, bool)
+                and capacity >= 0
+            )
+            unit_cost_ok = (
+                isinstance(unit_cost, int)
+                and not isinstance(unit_cost, bool)
+                and unit_cost >= 0
+            )
+            # `enabled` presente debe ser un booleano JSON; solo se omite
+            # para conservar el valor por defecto (True).
+            enabled_ok = isinstance(enabled, bool)
+            if not capacity_ok:
                 errors.append(f"roads.{road_id}.capacity: entero no negativo.")
-            if (
-                not isinstance(unit_cost, int)
-                or isinstance(unit_cost, bool)
-                or unit_cost < 0
-            ):
+            if not unit_cost_ok:
                 errors.append(f"roads.{road_id}.unit_cost: entero no negativo.")
-            else:
+            if not enabled_ok:
+                errors.append(
+                    f"roads.{road_id}.enabled: booleano JSON (true/false)."
+                )
+            if capacity_ok and unit_cost_ok and enabled_ok:
                 roads[road_id] = SeedRoad(
                     capacity=capacity,
                     unit_cost=unit_cost,
-                    enabled=value.get("enabled", True) is not False,
+                    enabled=enabled,
                 )
         missing = [rid for rid in road_ids if rid not in roads]
         if not errors and missing:

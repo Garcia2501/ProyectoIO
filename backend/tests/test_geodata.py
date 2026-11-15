@@ -139,3 +139,53 @@ def test_boolean_balance_rejected(network):
     seed_json["balances"]["test-A"] = True
     with pytest.raises(GeodataValidationError):
         load_seed(seed_json, network)
+
+
+# --- Validación estricta de `enabled` ---
+
+
+@pytest.mark.parametrize("bad", ["false", "true", 0, 1, None])
+def test_seed_enabled_strict(network, bad):
+    seed_json = _load("huachi_test_seed.json")
+    seed_json["roads"]["test-R1"]["enabled"] = bad
+    with pytest.raises(GeodataValidationError):
+        load_seed(seed_json, network)
+
+
+def test_seed_enabled_omitted_defaults_true(network):
+    seed_json = _load("huachi_test_seed.json")
+    del seed_json["roads"]["test-R1"]["enabled"]
+    seed = load_seed(seed_json, network)
+    assert seed.roads["test-R1"].enabled is True
+
+
+def test_seed_enabled_false_accepted(network):
+    seed_json = _load("huachi_test_seed.json")
+    seed_json["roads"]["test-R1"]["enabled"] = False
+    seed = load_seed(seed_json, network)
+    assert seed.roads["test-R1"].enabled is False
+
+
+# --- Validación geométrica de extremos ---
+
+
+def test_inverted_line_oriented():
+    roads = _load("huachi_test_roads.geojson")
+    # Invertir la geometría de test-R1 respecto a source->target.
+    coords = roads["features"][0]["geometry"]["coordinates"]
+    roads["features"][0]["geometry"]["coordinates"] = list(reversed(coords))
+    net, warnings = load_network(_load("huachi_test_nodes.geojson"), roads)
+    assert "test-R1" in [r.id for r in net.roads]
+    assert any("orientada" in w and "test-R1" in w for w in warnings)
+
+
+def test_out_of_tolerance_rejected():
+    roads = _load("huachi_test_roads.geojson")
+    # Mover la geometría de test-R1 lejos de sus nodos (fuera de tolerancia).
+    roads["features"][0]["geometry"]["coordinates"] = [
+        [-78.600, -1.260],
+        [-78.605, -1.260],
+    ]
+    with pytest.raises(GeodataValidationError) as exc:
+        load_network(_load("huachi_test_nodes.geojson"), roads)
+    assert any("test-R1" in e for e in exc.value.errors)

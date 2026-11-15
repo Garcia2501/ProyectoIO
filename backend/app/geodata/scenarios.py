@@ -23,6 +23,13 @@ ScenarioVariant = Literal["base", "closure", "limit"]
 
 _VARIANTS: Tuple[ScenarioVariant, ...] = ("base", "closure", "limit")
 
+# Nombres legibles de escenario, coherentes con el frontend (huachi/scenarios.ts).
+SCENARIO_NAMES: Dict[ScenarioVariant, str] = {
+    "base": "Base",
+    "closure": "Cierre de vía",
+    "limit": "Caso límite",
+}
+
 
 def canvas_positions(network: GeoNetwork) -> Dict[str, Tuple[float, float]]:
     """Proyección equirectangular local de lon/lat a coordenadas de lienzo.
@@ -92,4 +99,6 @@ def build_scenario(
             }
         )
 
-    return OptimizeRequest(scenario_name=variant, nodes=nodes, roads=roads)
+    return OptimizeRequest(
+        scenario_name=SCENARIO_NAMES[variant], nodes=nodes, roads=roads
+    )
