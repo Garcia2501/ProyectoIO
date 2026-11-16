@@ -72,6 +72,26 @@ frontend mediante los límites individuales, de oferta y de costo total.
 Se permiten CORS explícitamente desde `localhost` y `127.0.0.1` en los
 puertos 5173 (Vite dev) y 4173 (Vite preview). No se permite cualquier origen.
 
+## Geodatos y escenarios (Huachi)
+
+- `app/geodata/`: importador/validador de los GeoJSON de nodos/vías (RFC 7946)
+  y de la semilla experimental, y construcción de los tres escenarios (base,
+  cierre, caso límite). Conserva `POST /api/v1/optimize`.
+- Validación estricta: IDs únicos, arcos sin huérfanos, orientación de líneas
+  invertidas, extremos dentro de tolerancia (25 m; fuera de ella la vía se
+  excluye con un error que la identifica), `sum(balances) == 0` y campos
+  `capacity`/`unit_cost`/`enabled` con tipos estrictos (booleanos solo como
+  booleanos JSON).
+
+## Persistencia SQLite
+
+- `app/database/`: modelos SQLAlchemy 2 + SQLite para redes versionadas, nodos,
+  vías, escenarios, cambios, ejecuciones y resultados de flujo (apartado D).
+- `repository.py` expone `save_network`, `save_scenario`, `record_change`,
+  `save_execution` y sus recuperadores `get_network`, `get_seed`,
+  `get_execution`. No hay tablas de usuarios ni de roles. Los endpoints que
+  expongan esta persistencia se coordinan por separado.
+
 ## Endpoints
 
 | Método | Ruta                 | Descripción |
