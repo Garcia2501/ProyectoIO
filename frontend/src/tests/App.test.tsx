@@ -1,10 +1,16 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { expect, test } from 'vitest'
 import App from '../App'
+import { loadHuachiData } from '../features/huachi/data'
+
 import userEvent from '@testing-library/user-event'
 
+// Red de referencia A-B-C: no depende del dataset real de Huachi, que de
+// estar presente abre la aplicación con sus propios escenarios.
+const noDataset = loadHuachiData({})
+
 test('identifica el laboratorio al abrir la aplicación', async () => {
-  render(<App />)
+  render(<App data={noDataset} />)
   expect(
     screen.getByRole('heading', {
       name: 'Laboratorio de optimización de flujo vial',
@@ -20,7 +26,7 @@ test('identifica el laboratorio al abrir la aplicación', async () => {
 
 test('permite inspeccionar las tres vías sin confundir costo y capacidad', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   for (const road of [
     { id: 'R1', cost: 2 },
     { id: 'R2', cost: 3 },

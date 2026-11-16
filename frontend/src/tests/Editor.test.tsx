@@ -2,10 +2,15 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, test, vi } from 'vitest'
 import App from '../App'
+import { loadHuachiData } from '../features/huachi/data'
+
+// Red de referencia A-B-C: no depende del dataset real de Huachi, que de
+// estar presente abre la aplicación con sus propios escenarios.
+const noDataset = loadHuachiData({})
 
 test('guarda capacidad y cierre en memoria e invalida la demostración', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
   await user.click(screen.getByRole('button', { name: 'Editar red' }))
   await user.click(screen.getByRole('button', { name: /R1.*A/ }))
@@ -22,7 +27,7 @@ test('guarda capacidad y cierre en memoria e invalida la demostración', async (
 
 test('agrega un nodo y requiere confirmación para eliminarlo', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Editar red' }))
   await user.click(screen.getByRole('button', { name: 'Agregar nodo' }))
   expect(screen.getByLabelText('Nombre del nodo')).toHaveValue('Nueva zona')
@@ -41,7 +46,7 @@ test('agrega un nodo y requiere confirmación para eliminarlo', async () => {
 
 test('crea conexiones dirigidas mediante el formulario', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Editar red' }))
   await user.click(screen.getByRole('button', { name: 'Agregar vía' }))
   await user.type(screen.getByLabelText('Nombre de la vía'), 'R4')
@@ -53,7 +58,7 @@ test('crea conexiones dirigidas mediante el formulario', async () => {
 
 test('la comparación no recomienda resultados infactibles ni inventa porcentajes', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
   await user.click(screen.getByRole('button', { name: 'Comparar escenarios' }))
   expect(
@@ -70,7 +75,7 @@ test('un fallo de red muestra el backend pendiente sin resultados ficticios', as
     .spyOn(globalThis, 'fetch')
     .mockRejectedValue(new TypeError('Failed to fetch'))
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Optimizar red' }))
   expect(await screen.findByText(/Backend no disponible/)).toBeVisible()
   expect(screen.getByText('Pendiente')).toBeVisible()
@@ -79,7 +84,7 @@ test('un fallo de red muestra el backend pendiente sin resultados ficticios', as
 
 test('eliminar un nodo elimina todas sus vías conectadas y conserva las restantes', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Editar red' }))
   // React Flow labels remain available even though jsdom does not lay out edges.
   fireEvent.click(
@@ -102,7 +107,7 @@ test('eliminar un nodo elimina todas sus vías conectadas y conserva las restant
 
 test('restablecer requiere confirmación y recupera la capacidad original', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Editar red' }))
   await user.click(screen.getByRole('button', { name: /R1.*A/ }))
   await user.clear(screen.getByLabelText('Capacidad (vehículos)'))

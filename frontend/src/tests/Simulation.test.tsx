@@ -4,6 +4,11 @@ import { expect, test } from 'vitest'
 import { referenceScenario } from '../features/network/referenceScenario'
 import { urbanRoads, vehicleCount } from '../features/simulation/urbanGeometry'
 import App from '../App'
+import { loadHuachiData } from '../features/huachi/data'
+
+// Red de referencia A-B-C: no depende del dataset real de Huachi, que de
+// estar presente abre la aplicación con sus propios escenarios.
+const noDataset = loadHuachiData({})
 
 test('la proyección urbana conserva dirección y propiedades sin alterar el modelo', () => {
   const original = structuredClone(referenceScenario)
@@ -42,7 +47,7 @@ test('una vía cerrada nunca representa vehículos aunque se reciba un flujo', (
 })
 test('las cinco secciones navegan por teclado y Resultados tiene tabla real', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   const nav = screen.getByRole('navigation', { name: 'Vistas de SmartFlow' })
   within(nav).getByRole('button', { name: 'Red y análisis' }).focus()
   await user.keyboard('{ArrowRight}')
