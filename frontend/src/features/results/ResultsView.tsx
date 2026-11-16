@@ -114,9 +114,9 @@ export function ResultsView({ w }: { w: Workspace }) {
           <Icon name="layers" />
           Comparar escenarios
         </button>
-        <button onClick={() => w.setView('simulation')}>
-          <Icon name="city" />
-          Ver en la ciudad
+        <button onClick={() => w.setView('map')}>
+          <Icon name="map" />
+          Ver en el mapa de Huachi
         </button>
       </div>
     </section>

@@ -2,6 +2,11 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, test, vi } from 'vitest'
 import App from '../App'
+import { loadHuachiData } from '../features/huachi/data'
+
+// Red de referencia A-B-C: no depende del dataset real de Huachi, que de
+// estar presente abre la aplicación con sus propios escenarios.
+const noDataset = loadHuachiData({})
 
 test('el resultado real no se anuncia como DEMO aunque el otro escenario sea de ejemplo', async () => {
   const user = userEvent.setup()
@@ -20,7 +25,7 @@ test('el resultado real no se anuncia como DEMO aunque el otro escenario sea de 
     }),
   } as Response)
   try {
-    const { container } = render(<App />)
+    const { container } = render(<App data={noDataset} />)
     await user.click(
       screen.getByRole('button', { name: 'Cargar demostración' }),
     )

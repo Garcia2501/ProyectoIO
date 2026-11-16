@@ -2,6 +2,7 @@ import { LayoutGroup, motion, useReducedMotion } from 'motion/react'
 import type { Workspace, View } from '../features/scenarios/useWorkspace'
 import { Icon } from './Icon'
 const sections: { view: View; label: string; name: string; icon: string }[] = [
+  { view: 'map', label: 'Mapa Huachi', name: 'Mapa Huachi', icon: 'map' },
   {
     view: 'main',
     label: 'Laboratorio',
@@ -15,7 +16,6 @@ const sections: { view: View; label: string; name: string; icon: string }[] = [
     icon: 'layers',
   },
   { view: 'editor', label: 'Editar red', name: 'Editar red', icon: 'edit' },
-  { view: 'simulation', label: 'Simulación', name: 'Simulación', icon: 'city' },
   { view: 'results', label: 'Resultados', name: 'Resultados', icon: 'chart' },
 ]
 export function Header({ w }: { w: Workspace }) {

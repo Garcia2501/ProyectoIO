@@ -6,7 +6,7 @@ import { validateNetwork } from '../network/validation'
 import { optimize } from '../../services/api'
 import { metropolitanDemo } from '../simulation3d/metropolitanDemo'
 export type Selection = { type: 'node' | 'road'; id: string } | null
-export type View = 'main' | 'editor' | 'comparison' | 'simulation' | 'results'
+export type View = 'map' | 'main' | 'editor' | 'comparison' | 'results'
 export function freshScenarios(): Scenario[] {
   const base = structuredClone(referenceScenario)
   return [
@@ -18,12 +18,29 @@ export function freshScenarios(): Scenario[] {
     },
   ]
 }
-export function useWorkspace() {
-  const [scenarios, setScenarios] = useState(freshScenarios)
+export interface WorkspaceOptions {
+  /** Escenarios iniciales (p. ej. los de Huachi). Sin ellos se usa la referencia A-B-C. */
+  initial?: Scenario[]
+  view?: View
+}
+export function useWorkspace({
+  initial,
+  view: initialView,
+}: WorkspaceOptions = {}) {
+  // Copia para restablecer; se calcula una sola vez.
+  const [baseline] = useState<Scenario[]>(() =>
+    initial?.length ? structuredClone(initial) : freshScenarios(),
+  )
+  const external = !!initial?.length
+  const [scenarios, setScenarios] = useState<Scenario[]>(() =>
+    structuredClone(baseline),
+  )
   const [active, setActive] = useState(0)
-  const [view, setView] = useState<View>('main')
+  const [view, setView] = useState<View>(initialView ?? 'main')
   const [selection, setSelection] = useState<Selection>(null)
-  const [results, setResults] = useState<(StoredResult | null)[]>([null, null])
+  const [results, setResults] = useState<(StoredResult | null)[]>(() =>
+    baseline.map(() => null),
+  )
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const controller = useRef<AbortController | null>(null)
@@ -150,6 +167,7 @@ export function useWorkspace() {
     message,
     loading,
     scenario: scenarios[active],
+    external,
     setView,
     setSelection,
     setMessage,
@@ -178,7 +196,7 @@ export function useWorkspace() {
     reset: () => {
       cancel()
       setScenarios((all) =>
-        all.map((s, i) => (i === active ? freshScenarios()[active] : s)),
+        all.map((s, i) => (i === active ? structuredClone(baseline[active]) : s)),
       )
       setResults((all) => all.map((r, i) => (i === active ? null : r)))
       setSelection(null)

@@ -4,6 +4,11 @@ import { expect, test } from 'vitest'
 import { referenceScenario } from '../features/network/referenceScenario'
 import { urbanRoads, vehicleCount } from '../features/simulation/urbanGeometry'
 import App from '../App'
+import { loadHuachiData } from '../features/huachi/data'
+
+// Red de referencia A-B-C: no depende del dataset real de Huachi, que de
+// estar presente abre la aplicación con sus propios escenarios.
+const noDataset = loadHuachiData({})
 
 test('la proyección urbana conserva dirección y propiedades sin alterar el modelo', () => {
   const original = structuredClone(referenceScenario)
@@ -40,51 +45,9 @@ test('una vía cerrada nunca representa vehículos aunque se reciba un flujo', (
   })
   expect(roads[0].flow).toBe(0)
 })
-test('sin resultado la ciudad muestra espera y no inventa circulación', async () => {
-  const user = userEvent.setup()
-  const { container } = render(<App />)
-  await user.click(screen.getByRole('button', { name: 'Simulación' }))
-  await waitFor(() =>
-    expect(
-      screen.getByText(
-        /Optimiza la red o carga la demostración para visualizar vehículos/,
-      ),
-    ).toBeVisible(),
-  )
-  expect(container.querySelectorAll('[data-vehicle]')).toHaveLength(0)
-  expect(
-    screen.getByRole('button', { name: 'Pausar simulación' }),
-  ).toBeDisabled()
-})
-test('cambia de representación sin perder selección y permite pausa y velocidad', async () => {
-  const user = userEvent.setup()
-  const { container } = render(<App />)
-  await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
-  await user.click(screen.getByRole('button', { name: /R2.*B/ }))
-  await user.click(screen.getByRole('button', { name: 'Vista urbana' }))
-  expect(container.querySelectorAll('[data-vehicle]')).toHaveLength(24)
-  expect(
-    screen.getByRole('heading', { name: /Detalle de la vía seleccionada.*R2/ }),
-  ).toBeVisible()
-  await user.click(screen.getByRole('button', { name: 'Pausar simulación' }))
-  expect(
-    screen.getByRole('button', { name: 'Reproducir simulación' }),
-  ).toBeEnabled()
-  await user.selectOptions(
-    screen.getByRole('combobox', { name: 'Velocidad de reproducción' }),
-    '2',
-  )
-  expect(
-    screen.getByRole('combobox', { name: 'Velocidad de reproducción' }),
-  ).toHaveValue('2')
-  await user.click(screen.getByRole('button', { name: 'Vista matemática' }))
-  expect(
-    screen.getByRole('heading', { name: /Detalle de la vía seleccionada.*R2/ }),
-  ).toBeVisible()
-})
 test('las cinco secciones navegan por teclado y Resultados tiene tabla real', async () => {
   const user = userEvent.setup()
-  render(<App />)
+  render(<App data={noDataset} />)
   const nav = screen.getByRole('navigation', { name: 'Vistas de SmartFlow' })
   within(nav).getByRole('button', { name: 'Red y análisis' }).focus()
   await user.keyboard('{ArrowRight}')

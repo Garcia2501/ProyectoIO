@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { MotionConfig, motion, useReducedMotion } from 'motion/react'
-import { UrbanCanvas } from './features/simulation/UrbanCanvas'
 import { ResultsView } from './features/results/ResultsView'
 import './premium.css'
 import './mega.css'
-import { MegaSimulation } from './features/simulation3d/MegaSimulation'
+import './huachi.css'
+import { huachiData } from './features/huachi/data'
+import type { HuachiData } from './features/huachi/data'
+import { HuachiView } from './features/huachi/HuachiView'
 import { Header } from './components/Header'
 import { Icon } from './components/Icon'
 import { Inspector } from './components/Inspector'
@@ -14,11 +16,14 @@ import { validateNetwork } from './features/network/validation'
 import { Analysis } from './features/results/Analysis'
 import { Comparison } from './features/scenarios/Comparison'
 import { useWorkspace } from './features/scenarios/useWorkspace'
-export default function App() {
-  const w = useWorkspace()
+export default function App({ data = huachiData }: { data?: HuachiData } = {}) {
+  const geoReady = data.status === 'ready'
+  const w = useWorkspace({
+    initial: data.status === 'ready' ? (data.scenarios ?? undefined) : undefined,
+    // Con el dataset cartográfico disponible el mapa real es la vista principal.
+    view: geoReady ? 'map' : 'main',
+  })
   const reduced = useReducedMotion()
-  const [urban, setUrban] = useState(false)
-  const [playback, setPlayback] = useState({ playing: true, speed: 1 })
   const [snap, setSnap] = useState(true),
     [grid, setGrid] = useState(false),
     [deleting, setDeleting] = useState(false)
@@ -96,10 +101,12 @@ export default function App() {
             <i className="dot green" />
             Sesión en memoria
           </span>
-          <button className="quiet-button" onClick={w.demo}>
-            <Icon name="play" size={15} />
-            Cargar demostración
-          </button>
+          {!w.external && (
+            <button className="quiet-button" onClick={w.demo}>
+              <Icon name="play" size={15} />
+              Cargar demostración
+            </button>
+          )}
           <button
             className="quiet-button"
             onClick={() => w.setMessage('CONFIRM_RESET')}
@@ -127,9 +134,9 @@ export default function App() {
         {w.view === 'results' ? (
           <ResultsView w={w} />
         ) : w.view === 'comparison' ? (
-          <Comparison w={w} />
-        ) : w.view === 'simulation' ? (
-          <MegaSimulation w={w} />
+          <Comparison w={w} data={data} />
+        ) : w.view === 'map' ? (
+          <HuachiView w={w} data={data} />
         ) : (
           <>
             {w.view === 'main' ? (
@@ -142,26 +149,6 @@ export default function App() {
                       Cada conexión cuenta. Explora tu red desde una nueva
                       perspectiva.
                     </p>
-                  </div>
-                  <div
-                    className="representation-switch"
-                    role="group"
-                    aria-label="Representación de la red"
-                  >
-                    <button
-                      aria-pressed={w.view === 'main' && !urban}
-                      onClick={() => {
-                        setUrban(false)
-                        w.setView('main')
-                      }}
-                    >
-                      <Icon name="network" size={16} />
-                      Vista matemática
-                    </button>
-                    <button aria-pressed={urban} onClick={() => setUrban(true)}>
-                      <Icon name="city" size={17} />
-                      Vista urbana
-                    </button>
                   </div>
                 </div>
                 <Metrics scenario={w.scenario} result={w.results[w.active]} />
@@ -272,30 +259,18 @@ export default function App() {
                       </button>
                     </div>
                   )}
-                  {w.view === 'main' && urban ? (
-                    <UrbanCanvas
-                      key={w.active}
-                      scenario={w.scenario}
-                      result={w.results[w.active]}
-                      selection={w.selection}
-                      onSelect={w.setSelection}
-                      playback={playback}
-                      setPlayback={setPlayback}
-                    />
-                  ) : (
-                    <NetworkCanvas
-                      key={w.active + '-' + w.view}
-                      scenario={w.scenario}
-                      selection={w.selection}
-                      onSelect={w.setSelection}
-                      onChange={w.update}
-                      onPositionsChange={w.moveNodes}
-                      editing={w.view === 'editor'}
-                      grid={grid}
-                      snap={w.view === 'editor' && snap}
-                      result={w.results[w.active]}
-                    />
-                  )}
+                  <NetworkCanvas
+                    key={w.active + '-' + w.view}
+                    scenario={w.scenario}
+                    selection={w.selection}
+                    onSelect={w.setSelection}
+                    onChange={w.update}
+                    onPositionsChange={w.moveNodes}
+                    editing={w.view === 'editor'}
+                    grid={grid}
+                    snap={w.view === 'editor' && snap}
+                    result={w.results[w.active]}
+                  />
                 </section>
                 {w.view === 'editor' && (
                   <section className="editor-bottom">
