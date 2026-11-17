@@ -1,0 +1,437 @@
+\documentclass{article}
+
+% ---------------------------------------------------------------------------
+% Idioma y codificación
+% ---------------------------------------------------------------------------
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---------------------------------------------------------------------------
+% Márgenes y encabezado (formato guía práctica UTA)
+% ---------------------------------------------------------------------------
+\usepackage[letterpaper,top=2cm,bottom=5cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{70pt}
+
+% ---------------------------------------------------------------------------
+% Figuras
+% ---------------------------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{imagenes/}}
+\usepackage{float}
+
+% ---------------------------------------------------------------------------
+% Matemáticas y tablas
+% ---------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+
+% ---------------------------------------------------------------------------
+% Enlaces y bibliografía
+% ---------------------------------------------------------------------------
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+% ---------------------------------------------------------------------------
+% Encabezado institucional (logos + universidad)
+% ---------------------------------------------------------------------------
+\fancyhead[C]{%
+    \begin{minipage}[c]{1.5cm}
+        \includegraphics[width=1.5cm]{uta.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{10cm}
+        \centering
+        \small {\textbf{UNIVERSIDAD TÉCNICA DE AMBATO}} \\[0.1cm]
+        \scriptsize \textit{FACULTAD DE INGENIERÍA EN SISTEMAS ELECTRÓNICA E INDUSTRIAL} \\[0.1cm]
+        \scriptsize \textbf{CARRERA SOFTWARE} \\[0.1cm]
+        \scriptsize \textbf{CICLO ACADÉMICO: JULIO - DICIEMBRE 2026}
+        \vspace{0.2cm}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{1.5cm}
+        \centering
+        \includegraphics[width=1.5cm]{fisei.png}
+    \end{minipage}%
+}
+
+\begin{document}
+
+\begin{center}
+    {\large \textbf{INFORME DE GUÍA PRÁCTICA}} \\
+\end{center}
+
+% ===========================================================================
+% PORTADA
+% ===========================================================================
+\begin{flushleft}
+\begin{tabular}{ l p{11cm} }
+    \textbf{Tema:} & Optimización del flujo de costo mínimo en la red vial de Huachi (SmartFlow) \\
+    \textbf{Unidad de Organización Curricular:} & Profesional \\
+    \textbf{Nivel y Paralelo:} & 5 - A \\
+    \textbf{Alumnos participante(s):} & Kevin Andres Velasco Huayamave \\
+                                      & Garcia Amores Manolo Jose \\
+                                      & Juan Pashma \\
+    \textbf{Asignatura:} & Investigación Operativa \\
+    \textbf{Docente:} & Ing. Ortiz Fernandez William Wladimir \\
+\end{tabular}
+\end{flushleft}
+
+\tableofcontents
+\newpage
+
+% ===========================================================================
+% 1. OBJETIVOS
+% ===========================================================================
+\section{Objetivos}
+
+\subsection{General}
+Aplicar la Investigación Operativa a un problema real de transporte, mediante
+el desarrollo de \textbf{SmartFlow}: un sistema que modela la red vial del sector
+Huachi (Ambato) como un problema de flujo de costo mínimo y determina la
+asignación de flujo que minimiza el costo total, respetando la capacidad de las
+vías y el balance de oferta y demanda de los nodos.
+
+\subsection{Específicos}
+\begin{itemize}
+    \item Importar y validar la red vial de Huachi a partir de los datos
+          geográficos (GeoJSON) proporcionados por el equipo GIS.
+    \item Formular matemáticamente el problema como un modelo de flujo de costo
+          mínimo, definiendo conjuntos, parámetros, variable de decisión,
+          función objetivo y restricciones.
+    \item Implementar la resolución del modelo con el solucionador OR-Tools y
+          exponerla mediante una API REST.
+    \item Construir escenarios experimentales (base, cierre de vía y caso
+          límite) y evaluar el comportamiento del sistema en cada uno.
+    \item Interpretar los resultados de la optimización y documentar las
+          limitaciones y supuestos del modelo.
+\end{itemize}
+
+% ===========================================================================
+% 2. MODALIDAD Y DURACIÓN
+% ===========================================================================
+\section{Modalidad y tiempo de duración}
+
+\subsection{Modalidad}
+Presencial.
+
+\subsection{Tiempo de duración}
+Presenciales: 4. \\
+No presenciales: 0.
+
+% ===========================================================================
+% 3. CONTEXTO Y PROBLEMA
+% ===========================================================================
+\section{Contexto y planteamiento del problema}
+
+El sector de Huachi (Ambato) cuenta con una red de vías que conecta un conjunto
+de intersecciones. Cada vía tiene una capacidad limitada (cantidad de flujo que
+puede transportar) y un costo unitario asociado a su uso. En la red existen
+nodos que \textbf{ofrecen} flujo (oferta) y nodos que \textbf{demandan} flujo
+(demanda).
+
+El problema consiste en decidir cuánto flujo enviar por cada vía de manera que:
+\begin{enumerate}
+    \item se satisfaga el balance de cada nodo (la oferta y la demanda);
+    \item no se exceda la capacidad de ninguna vía;
+    \item se minimice el costo total de transportar el flujo por la red.
+\end{enumerate}
+
+La red se representa como un grafo dirigido, de modo que cada vía puede
+recorrerse en uno o ambos sentidos según la información disponible. Cuando una
+vía es bidireccional, se modela mediante dos arcos dirigidos, uno por sentido.
+
+% ===========================================================================
+% 4. FUNDAMENTO DE INVESTIGACIÓN OPERATIVA
+% ===========================================================================
+\section{Fundamento de Investigación Operativa}
+
+El modelo seleccionado es el \textbf{problema de flujo de costo mínimo}
+(Minimum-Cost Flow Problem, MCFP), uno de los problemas clásicos de la
+optimización en redes. La elección se justifica porque el problema cumple,
+de forma natural, las tres condiciones que definen un modelo de flujo en red:
+
+\begin{itemize}
+    \item \textbf{Estructura de red.} Existe un conjunto de nodos (intersecciones)
+          conectados por arcos dirigidos (vías), que forman un grafo.
+    \item \textbf{Conservación de flujo.} En cada nodo, el flujo que entra menos
+          el flujo que sale debe igualar la oferta (positiva) o la demanda
+          (negativa) del nodo; en nodos de tránsito el balance es nulo.
+    \item \textbf{Capacidades y costos.} Cada arco tiene una capacidad máxima y
+          un costo unitario por enviar una unidad de flujo a través de él.
+\end{itemize}
+
+Frente a otras alternativas, el MCFP se ajusta mejor que el problema de la ruta
+más corta: este último determina una única ruta de mínimo costo entre dos
+puntos, mientras que SmartFlow debe asignar flujo entre múltiples orígenes y
+destinos, repartiéndolo por varias vías y respetando capacidades. La
+formulación como problema de transporte tampoco basta, pues no representa
+directamente las vías intermedias ni sus restricciones de capacidad.
+
+Por lo tanto, el problema se resuelve como un \textbf{problema de flujo de costo
+mínimo}, y se optimiza el costo total definido en el modelo (no el tiempo de
+viaje ni otros criterios, salvo que estos queden representados en los costos).
+
+% ===========================================================================
+% 5. MODELO MATEMÁTICO
+% ===========================================================================
+\section{Modelo matemático}
+
+\subsection{Conjuntos y parámetros}
+
+Sea $G = (N, A)$ el grafo dirigido de la red, donde:
+\begin{itemize}
+    \item $N$: conjunto de nodos (intersecciones) de la red.
+    \item $A$: conjunto de arcos dirigidos (vías en un sentido determinado).
+\end{itemize}
+
+Para cada arco $(i,j) \in A$ se definen:
+\begin{itemize}
+    \item $c_{ij}$: costo unitario por enviar una unidad de flujo por el arco.
+    \item $u_{ij}$: capacidad máxima del arco (límite de flujo).
+\end{itemize}
+
+Para cada nodo $i \in N$ se define:
+\begin{itemize}
+    \item $b_i$: balance del nodo; $b_i > 0$ si es un nodo de oferta,
+          $b_i < 0$ si es un nodo de demanda y $b_i = 0$ si es de tránsito.
+\end{itemize}
+
+Los balances deben cumplir la condición de factibilidad global:
+\begin{equation}
+    \sum_{i \in N} b_i = 0 .
+\end{equation}
+
+\subsection{Variable de decisión}
+
+La variable de decisión es el flujo enviado por cada arco:
+\begin{equation}
+    x_{ij} \ge 0 \quad \forall\, (i,j) \in A .
+\end{equation}
+
+\subsection{Función objetivo}
+
+Se minimiza el costo total de transportar el flujo por la red:
+\begin{equation}
+    \min \; \sum_{(i,j) \in A} c_{ij} \, x_{ij} .
+\end{equation}
+
+\subsection{Restricciones}
+
+\textbf{Conservación de flujo.} Para cada nodo $i \in N$, la diferencia entre
+el flujo que sale y el que entra debe igualar su balance:
+\begin{equation}
+    \sum_{j : (i,j) \in A} x_{ij} \; - \sum_{j : (j,i) \in A} x_{ji} \;=\; b_i
+    \quad \forall\, i \in N .
+\end{equation}
+
+\textbf{Capacidades.} El flujo por cada arco no puede exceder su capacidad:
+\begin{equation}
+    0 \le x_{ij} \le u_{ij} \quad \forall\, (i,j) \in A .
+\end{equation}
+
+El problema es un programa lineal (función objetivo y restricciones lineales).
+Su solución, cuando existe, indica cuánto flujo debe circular por cada vía para
+minimizar el costo total respetando oferta, demanda y capacidades. Si no existe
+ninguna asignación que satisfaga todas las restricciones, el problema es
+\textbf{infactible}.
+
+% ===========================================================================
+% 6. DATOS, SUPUESTOS Y ALCANCE
+% ===========================================================================
+\section{Datos, supuestos y alcance}
+
+\subsection{Datos geográficos}
+La topología de la red (nodos y vías) proviene de los datos de OpenStreetMap
+procesados por el equipo GIS. Se importan como GeoJSON: los nodos son puntos y
+las vías son líneas. El importador valida que la estructura sea consistente
+(nodos con identificador único, vías cuyos extremos coinciden con nodos
+existentes, etc.).
+
+\subsection{Supuestos experimentales}
+Los valores de capacidad, costo unitario y oferta/demanda de los escenarios son
+\textbf{supuestos experimentales} definidos por el equipo con fines
+académicos, no mediciones de campo. El costo unitario representa el costo
+definido para el modelo, y su interpretación (por ejemplo, longitud o un costo
+asociado) debe declararse de forma explícita al presentar los resultados.
+
+\subsection{Alcance}
+SmartFlow optimiza la asignación de flujo para el costo definido. No debe
+interpretarse el resultado como la ruta más rápida ni más segura salvo que
+dichos criterios estén efectivamente representados en los costos del modelo.
+
+% ===========================================================================
+% 7. METODOLOGÍA Y FUNCIONAMIENTO DEL SISTEMA
+% ===========================================================================
+\section{Metodología y funcionamiento del sistema}
+
+\subsection{Arquitectura}
+El sistema se compone de:
+\begin{itemize}
+    \item \textbf{Frontend}: visualización de la red en el mapa y selección de
+          escenarios.
+    \item \textbf{Backend (API REST)}: validación de datos, construcción de
+          escenarios y ejecución del optimizador.
+    \item \textbf{Motor de optimización}: OR-Tools, que resuelve el problema de
+          flujo de costo mínimo.
+    \item \textbf{Datos geográficos}: GeoJSON procesado por el equipo GIS.
+\end{itemize}
+
+\subsection{Proceso de optimización}
+\begin{enumerate}
+    \item Se importa y valida la red geográfica (nodos y vías).
+    \item Se carga la semilla del escenario (balances, capacidades, costos y
+          configuraciones como cierres de vía).
+    \item Se construye el modelo de flujo de costo mínimo a partir de la red y
+          el escenario.
+    \item Se resuelve con OR-Tools.
+    \item Se devuelve el estado (óptimo o infactible), el costo total y el
+          flujo por cada vía.
+\end{enumerate}
+
+% ===========================================================================
+% 8. MANUAL DE USUARIO
+% ===========================================================================
+\section{Manual de usuario}
+
+\subsection{Inicio del sistema}
+\begin{enumerate}
+    \item Iniciar el backend (API) y el frontend según las instrucciones del
+          proyecto.
+    \item Abrir la aplicación en el navegador para visualizar el mapa de la red
+          de Huachi.
+\end{enumerate}
+
+\subsection{Selección y ejecución de un escenario}
+\begin{enumerate}
+    \item Seleccionar uno de los escenarios disponibles: \textbf{Base},
+          \textbf{Cierre de vía} o \textbf{Caso límite}.
+    \item Ejecutar la optimización.
+\end{enumerate}
+
+\subsection{Interpretación de resultados}
+\begin{itemize}
+    \item \textbf{Estado}: indica si existe solución (\texttt{optimal}) o si el
+          problema es \texttt{infeasible}.
+    \item \textbf{Costo total}: valor de la función objetivo en el óptimo.
+    \item \textbf{Flujo por vía}: cantidad de flujo asignada a cada vía.
+    \item \textbf{Capacidad y utilización}: relación entre el flujo asignado y
+          la capacidad de la vía.
+\end{itemize}
+
+Un resultado \texttt{infeasible} significa que, con las restricciones dadas
+(por ejemplo, capacidades reducidas o vías cerradas), no es posible satisfacer
+la oferta y la demanda de la red.
+
+% ===========================================================================
+% 9. ACTIVIDADES Y ESCENARIOS EVALUADOS
+% ===========================================================================
+\section{Actividades por desarrollar}
+
+Se desarrolla la guía práctica mediante la implementación del sistema SmartFlow
+y la evaluación de tres escenarios:
+
+\begin{itemize}
+    \item \textbf{Base}: todas las vías habilitadas con sus capacidades y
+          costos originales.
+    \item \textbf{Cierre de vía}: se deshabilitan una o más vías (simulación de
+          un cierre) y se observa cómo cambia la asignación de flujo.
+    \item \textbf{Caso límite}: se reducen las capacidades mediante un factor,
+          llevando el sistema a una situación cercana o directamente a la
+          infactibilidad.
+\end{itemize}
+
+% ===========================================================================
+% 10. RESULTADOS OBTENIDOS
+% ===========================================================================
+\section{Resultados obtenidos}
+
+\subsection{Resultados de la optimización}
+La siguiente tabla resume los resultados observados para la red de Huachi
+(pendiente de contrastar con la versión final antes de la entrega):
+
+\begin{center}
+\begin{tabular}{ l c c }
+    \toprule
+    \textbf{Escenario} & \textbf{Estado} & \textbf{Costo total} \\
+    \midrule
+    Base            & optimal    & 34\,080 \\
+    Cierre de vía   & optimal    & 42\,600 \\
+    Caso límite     & infeasible & --- \\
+    \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Validación}
+La implementación se valida mediante pruebas automatizadas que verifican el
+importador de datos, la construcción de escenarios, la resolución del modelo y
+la persistencia de resultados. Los valores numéricos se restringen al rango de
+enteros seguros de JavaScript para garantizar consistencia entre el frontend y
+el backend.
+
+% ===========================================================================
+% 11. HABILIDADES BLANDAS
+% ===========================================================================
+\section{Habilidades blandas empleadas en la práctica}
+
+\begin{itemize}
+    \item[$\square$] Liderazgo
+    \item[$\blacksquare$] Trabajo en equipo
+    \item[$\square$] Comunicación asertiva
+    \item[$\square$] La empatía
+    \item[$\blacksquare$] Pensamiento crítico
+    \item[$\square$] Flexibilidad
+    \item[$\square$] La resolución de conflictos
+    \item[$\square$] Adaptabilidad
+    \item[$\blacksquare$] Responsabilidad
+\end{itemize}
+
+% ===========================================================================
+% 12. CONCLUSIONES
+% ===========================================================================
+\section{Conclusiones}
+
+\begin{itemize}
+    \item El problema de flujo de costo mínimo permite modelar de forma
+          adecuada la asignación de flujo sobre la red vial de Huachi, al
+          representar nodos, vías, capacidades, oferta y demanda.
+    \item La separación entre datos geográficos y supuestos experimentales es
+          clave: los resultados son válidos para el modelo definido y deben
+          interpretarse en función de cómo se definan los costos.
+    \item La implementación con OR-Tools resuelve el modelo de forma eficiente
+          y permite evaluar escenarios distintos (base, cierre y caso límite).
+    \item Los casos en que no existe solución (infactibles) son tan
+          informativos como los óptimos, pues evidencian restricciones
+          incompatibles en la red.
+\end{itemize}
+
+% ===========================================================================
+% 13. RECOMENDACIONES
+% ===========================================================================
+\section{Recomendaciones}
+
+\begin{itemize}
+    \item Declarar de forma explícita el significado de los costos y de los
+          supuestos experimentales al presentar los resultados.
+    \item Validar la geometría y la topología de la red con el equipo GIS
+          (sentidos de circulación, vías paralelas y bucles).
+    \item Ampliar los escenarios para estudiar el impacto de distintos cierres
+          y variaciones de capacidad sobre la red.
+    \item Documentar con capturas cada escenario para facilitar la
+          interpretación de los resultados por parte del lector.
+\end{itemize}
+
+% ===========================================================================
+% 14. REFERENCIAS
+% ===========================================================================
+\section{Referencias}
+
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{referencias}
+
+\end{document}
