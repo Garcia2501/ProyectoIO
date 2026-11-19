@@ -332,8 +332,8 @@ export function Comparison({
           carecen de flujos calculados.
         </p>
       </details>
-      <div className="comparison-bottom">
-        <section className="panel">
+      <div className="comparison-bottom" style={{ gridTemplateColumns: 'minmax(0, 1fr)' }}>
+        <section className="panel" hidden style={{ display: 'none' }}>
           <h2>
             <Icon name="chart" />
             Capacidades de las redes
@@ -368,7 +368,7 @@ export function Comparison({
             redes.
           </p>
         </section>
-        <section className="panel">
+        <section className="panel" hidden style={{ display: 'none' }}>
           <h2>
             <Icon name="chart" />
             Flujo por tramo

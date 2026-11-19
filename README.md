@@ -39,7 +39,7 @@ Desde `frontend/`: `npm run build` genera `dist/`; `npm run lint` revisa el cód
 
 `npm test` ejecuta las pruebas de componentes con Vitest y React Testing Library. `npm run test:watch` mantiene las pruebas en modo interactivo.
 
-Desde la raíz, las pruebas del backend se ejecutan con `backend\.venv\Scripts\python.exe -m pytest -q backend/tests`. La versión integrada dispone de 48 pruebas de backend y 51 de frontend. El entorno virtual, las dependencias y los archivos compilados no se incluyen en Git.
+Desde la raíz, las pruebas del backend se ejecutan con `backend\.venv\Scripts\python.exe -m pytest -q backend/tests`. La versión integrada dispone de 48 pruebas de backend y 56 de frontend. El entorno virtual, las dependencias y los archivos compilados no se incluyen en Git.
 
 Con el backend arrancado, `npm run test:integration` desde `frontend/` verifica la API real utilizando el mismo cliente REST de la interfaz: referencia, cierres, dos redes metropolitanas, errores 422, CORS y coincidencia de OpenAPI. Opcionalmente configurar `SMARTFLOW_API_URL` si el servicio está en otra URL.
 
@@ -75,7 +75,7 @@ Este README se actualizará conforme avance el proyecto.
 - Eliminación con confirmación; eliminar un nodo elimina también sus conexiones. Restablecer requiere confirmación.
 - Dos escenarios independientes: base y cierre de R1. Selector superior y vista de comparación.
 - Gráficos Recharts de flujo, utilización, costo y capacidad efectiva; nunca se inventan series de tiempo.
-- Resultados invalidados al modificar el modelo. Mover nodos solo cambia coordenadas visuales y conserva el resultado. Al recargar se pierde la sesión; no se simula persistencia.
+- Resultados invalidados al modificar el modelo. Mover nodos solo cambia coordenadas visuales y conserva el resultado. Las redes se recuperan al recargar mediante un borrador local del navegador; los resultados se recalculan.
 - Navegación superior con cinco destinos funcionales: Laboratorio, Comparar, Editar red, Simulación y Resultados. Las flechas y Home/End permiten recorrer los accesos.
 - Estilo compartido en `premium.css`: vidrio claro, acentos menta/azul y paneles flotantes. Motion anima la entrada de vistas, el indicador de navegación y la expansión del inspector.
 - Vista matemática y vista urbana comparten escenario, selección y resultado. El laboratorio conserva la representación SVG; Simulación incorpora una ciudad 3D generada desde la misma red, sin crear otro modelo de optimización.
@@ -186,4 +186,10 @@ El panel registra FPS, llamadas de dibujo y cantidades efectivas durante la sesi
 - `metropolitanDemo`: ejemplos docentes aislados del cliente y del optimizador.
 - `mega.css`: identidad visual y adaptación de las nuevas experiencias.
 
-La API integrada proporciona una solución estática por solicitud. No aporta historia temporal, tiempos de viaje, emisiones, ciclos semafóricos, geometría geográfica ni simulación física de tráfico; esas métricas y acciones no se muestran como resultados. El MVP guarda las redes en memoria y permite exportar sus resultados a JSON. La persistencia en SQLite es una ampliación opcional del plan, fuera de los endpoints del MVP; al recargar se pierde la sesión.
+La API integrada proporciona una solución estática por solicitud. No aporta historia temporal, tiempos de viaje, emisiones, ciclos semafóricos, geometría geográfica ni simulación física de tráfico; esas métricas y acciones no se muestran como resultados. El MVP guarda las redes en memoria y mantiene una copia local en este navegador; permite exportar sus resultados a JSON. La persistencia en SQLite es una ampliación opcional del plan, fuera de los endpoints del MVP; al recargar se recuperan las redes y el escenario activo, pero se debe optimizar de nuevo. La copia local no equivale a guardado en el servidor y puede perderse al borrar los datos del navegador. Cargar una demostración solicita confirmación antes de sustituir las redes. Si la copia falla, la interfaz lo indica. Las solicitudes de optimización tienen un límite de espera de 20 segundos; la carga inicial 3D ofrece una alternativa vectorial y la activa tras 15 segundos sin completar la descarga.
+
+## Presentación simplificada
+
+El botón **Grafica** abre tres casos de tres nodos, independientes de Huachi: Camino libre (costo esperado 500), Capacidad limitada (620) y Camino cerrado (infactible). Cada caso se calcula pulsando **Optimizar red** contra la API real. Cambiar entre Grafica y Mapa de Huachi conserva los estados montados durante la sesión. Los ejemplos no se guardan en SQLite ni se presentan como resultados DEMO.
+
+Para la defensa están ocultos los accesos Laboratorio, Editar red y Resultados, y los gráficos Capacidades de las redes y Flujo por tramo en Comparar. Las implementaciones se conservan. El borrador local se aplica al laboratorio sin dataset externo, no a los escenarios Huachi ni al ejemplo Grafica.

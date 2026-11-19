@@ -4,7 +4,8 @@ import { ResultsView } from './features/results/ResultsView'
 import './premium.css'
 import './mega.css'
 import './huachi.css'
-import { huachiData } from './features/huachi/data'
+import { huachiData, loadHuachiData } from './features/huachi/data'
+import { teachingScenarios } from './features/network/teachingScenarios'
 import type { HuachiData } from './features/huachi/data'
 import { HuachiView } from './features/huachi/HuachiView'
 import { Header } from './components/Header'
@@ -16,10 +17,25 @@ import { validateNetwork } from './features/network/validation'
 import { Analysis } from './features/results/Analysis'
 import { Comparison } from './features/scenarios/Comparison'
 import { useWorkspace } from './features/scenarios/useWorkspace'
+const teachingData = loadHuachiData({})
 export default function App({ data = huachiData }: { data?: HuachiData } = {}) {
+  const [simple, setSimple] = useState(false)
+  const [opened, setOpened] = useState(false)
+  if (data.status !== 'ready') return <WorkspaceApp data={data} />
+  return <>
+    <nav aria-label="Tipo de red" style={{display:'flex', gap:12, padding:'12px 20px', alignItems:'center', flexWrap:'wrap'}}>
+      <button className={simple ? 'primary' : 'quiet-button'} aria-pressed={simple} onClick={() => { setOpened(true); setSimple(true) }}>Grafica</button>
+      <button className={!simple ? 'primary' : 'quiet-button'} aria-pressed={!simple} onClick={() => setSimple(false)}>Mapa de Huachi</button>
+      <small>{simple ? 'Tres nodos para entender el modelo. Resultados calculados por el backend.' : 'Red geográfica completa. Puedes empezar por Grafica.'}</small>
+    </nav>
+    <div hidden={simple}><WorkspaceApp data={data} /></div>
+    {opened && <div hidden={!simple}><WorkspaceApp data={teachingData} learning /></div>}
+  </>
+}
+function WorkspaceApp({ data, learning = false }: { data: HuachiData; learning?: boolean }) {
   const geoReady = data.status === 'ready'
   const w = useWorkspace({
-    initial: data.status === 'ready' ? (data.scenarios ?? undefined) : undefined,
+    initial: learning ? teachingScenarios() : data.status === 'ready' ? (data.scenarios ?? undefined) : undefined,
     // Con el dataset cartográfico disponible el mapa real es la vista principal.
     view: geoReady ? 'map' : 'main',
   })
@@ -71,6 +87,9 @@ export default function App({ data = huachiData }: { data?: HuachiData } = {}) {
   return (
     <MotionConfig reducedMotion="user">
       <Header w={w} />
+      {learning && <section className="notice" aria-label="Cómo explicar el ejemplo">
+        <div><strong>100 vehículos deben viajar de A a C.</strong><p>Por B cuesta 2 + 3 = 5 por vehículo; el camino directo cuesta 8. Selecciona un caso y pulsa Optimizar red.</p><p>1. Camino libre: todos por B. 2. Capacidad limitada: 60 por B y 40 directos. 3. Cierre: no hay capacidad suficiente. Los costos son unidades del modelo.</p></div>
+      </section>}
       <motion.main
         id="main"
         className={'workspace view-' + w.view}
@@ -99,7 +118,7 @@ export default function App({ data = huachiData }: { data?: HuachiData } = {}) {
           </label>
           <span className="session-indicator">
             <i className="dot green" />
-            Sesión en memoria
+            {w.draftSaved ? 'Borrador guardado en este navegador' : 'Sin copia local · exporta tu red'}
           </span>
           {!w.external && (
             <button className="quiet-button" onClick={w.demo}>
@@ -115,6 +134,13 @@ export default function App({ data = huachiData }: { data?: HuachiData } = {}) {
             Restablecer
           </button>
         </section>
+        {w.replacement && (
+          <div className="notice" role="dialog" aria-label="Reemplazar redes">
+            <span>Cargar esta demostración reemplazará tus dos redes actuales. Cancela si quieres conservarlas.</span>
+            <button onClick={() => w.setReplacement(null)}>Cancelar</button>
+            <button onClick={w.confirmReplacement}>Reemplazar redes</button>
+          </div>
+        )}
         {w.message && w.message !== 'CONFIRM_RESET' && (
           <div className="notice" role="status">
             <Icon name="info" />

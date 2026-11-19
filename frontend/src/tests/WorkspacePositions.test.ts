@@ -5,6 +5,7 @@ import { useWorkspace } from '../features/scenarios/useWorkspace'
 test('mover nodos conserva resultados, selección y datos matemáticos del escenario', () => {
   const { result } = renderHook(() => useWorkspace())
   act(() => result.current.demo())
+  act(() => result.current.confirmReplacement())
   act(() => result.current.setSelection({ type: 'node', id: 'A' }))
   const optimized = result.current.results[0]
   const alternate = result.current.scenarios[1]

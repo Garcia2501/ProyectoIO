@@ -7,18 +7,21 @@ import { loadHuachiData } from '../features/huachi/data'
 // Red de referencia A-B-C: no depende del dataset real de Huachi, que de
 // estar presente abre la aplicación con sus propios escenarios.
 const noDataset = loadHuachiData({})
+// El editor sigue implementado pero su acceso se oculta en la presentación.
+// Estas pruebas ejercitan la funcionalidad interna, no su descubribilidad.
 
 test('guarda capacidad y cierre en memoria e invalida la demostración', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
-  await user.click(screen.getByRole('button', { name: 'Editar red' }))
+  await user.click(screen.getByRole('button', { name: 'Reemplazar redes' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Editar red"]')!)
   await user.click(screen.getByRole('button', { name: /R1.*A/ }))
   await user.clear(screen.getByLabelText('Capacidad (vehículos)'))
   await user.type(screen.getByLabelText('Capacidad (vehículos)'), '70')
   await user.selectOptions(screen.getByLabelText('Estado'), 'false')
   await user.click(screen.getByRole('button', { name: 'Guardar cambios' }))
-  await user.click(screen.getByRole('button', { name: 'Red y análisis' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Red y análisis"]')!)
   await user.click(screen.getByRole('button', { name: /R1.*A/ }))
   expect(screen.getByText('70 veh.')).toBeVisible()
   expect(screen.getByText('× Cerrada')).toBeVisible()
@@ -28,7 +31,7 @@ test('guarda capacidad y cierre en memoria e invalida la demostración', async (
 test('agrega un nodo y requiere confirmación para eliminarlo', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
-  await user.click(screen.getByRole('button', { name: 'Editar red' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Editar red"]')!)
   await user.click(screen.getByRole('button', { name: 'Agregar nodo' }))
   expect(screen.getByLabelText('Nombre del nodo')).toHaveValue('Nueva zona')
   await user.click(screen.getByRole('button', { name: 'Eliminar nodo' }))
@@ -47,7 +50,7 @@ test('agrega un nodo y requiere confirmación para eliminarlo', async () => {
 test('crea conexiones dirigidas mediante el formulario', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
-  await user.click(screen.getByRole('button', { name: 'Editar red' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Editar red"]')!)
   await user.click(screen.getByRole('button', { name: 'Agregar vía' }))
   await user.type(screen.getByLabelText('Nombre de la vía'), 'R4')
   await user.selectOptions(screen.getByLabelText('Origen'), 'C')
@@ -60,6 +63,7 @@ test('la comparación no recomienda resultados infactibles ni inventa porcentaje
   const user = userEvent.setup()
   render(<App data={noDataset} />)
   await user.click(screen.getByRole('button', { name: 'Cargar demostración' }))
+  await user.click(screen.getByRole('button', { name: 'Reemplazar redes' }))
   await user.click(screen.getByRole('button', { name: 'Comparar escenarios' }))
   expect(
     screen.getByRole('heading', { name: 'Comparación de escenarios' }),
@@ -85,7 +89,7 @@ test('un fallo de red muestra el backend pendiente sin resultados ficticios', as
 test('eliminar un nodo elimina todas sus vías conectadas y conserva las restantes', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
-  await user.click(screen.getByRole('button', { name: 'Editar red' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Editar red"]')!)
   // React Flow labels remain available even though jsdom does not lay out edges.
   fireEvent.click(
     screen.getByText('Origen', { exact: true, selector: '.zone strong' }),
@@ -108,7 +112,7 @@ test('eliminar un nodo elimina todas sus vías conectadas y conserva las restant
 test('restablecer requiere confirmación y recupera la capacidad original', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
-  await user.click(screen.getByRole('button', { name: 'Editar red' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Editar red"]')!)
   await user.click(screen.getByRole('button', { name: /R1.*A/ }))
   await user.clear(screen.getByLabelText('Capacidad (vehículos)'))
   await user.type(screen.getByLabelText('Capacidad (vehículos)'), '70')

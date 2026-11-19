@@ -5,6 +5,7 @@ import { referenceScenario } from '../network/referenceScenario'
 import { validateNetwork } from '../network/validation'
 import { optimize } from '../../services/api'
 import { metropolitanDemo } from '../simulation3d/metropolitanDemo'
+import { readDraft, saveDraft } from './localDraft'
 export type Selection = { type: 'node' | 'road'; id: string } | null
 export type View = 'map' | 'main' | 'editor' | 'comparison' | 'results'
 export function freshScenarios(): Scenario[] {
@@ -32,16 +33,26 @@ export function useWorkspace({
     initial?.length ? structuredClone(initial) : freshScenarios(),
   )
   const external = !!initial?.length
+  const [restored] = useState(() => external ? null : readDraft())
+  const [replacement, setReplacement] = useState<'demo' | 'metro' | null>(null)
+  const [draftSaved, setDraftSaved] = useState(false)
   const [scenarios, setScenarios] = useState<Scenario[]>(() =>
-    structuredClone(baseline),
+    restored?.scenarios ?? structuredClone(baseline),
   )
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(restored?.active ?? 0)
   const [view, setView] = useState<View>(initialView ?? 'main')
   const [selection, setSelection] = useState<Selection>(null)
   const [results, setResults] = useState<(StoredResult | null)[]>(() =>
-    baseline.map(() => null),
+    (restored?.scenarios ?? baseline).map(() => null),
   )
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(restored ? 'Red recuperada de este navegador. Optimiza para volver a calcular los resultados.' : '')
+  useEffect(() => {
+    if (external) return
+    const saved = saveDraft(scenarios, active)
+    let current = true
+    queueMicrotask(() => { if (current) setDraftSaved(saved) })
+    return () => { current = false }
+  }, [scenarios, active, external])
   const [loading, setLoading] = useState(false)
   const controller = useRef<AbortController | null>(null)
   useEffect(() => () => controller.current?.abort(), [])
@@ -92,6 +103,14 @@ export function useWorkspace({
     cancel()
     const c = new AbortController()
     controller.current = c
+    const timeout = window.setTimeout(() => {
+      if (controller.current === c) {
+        c.abort()
+        controller.current = null
+        setLoading(false)
+        setMessage('El servidor tardó más de 20 segundos. Tu red se conserva; comprueba el backend y vuelve a intentarlo.')
+      }
+    }, 20000)
     setLoading(true)
     setMessage('')
     setResults((all) => all.map((r, i) => (i === active ? null : r)))
@@ -116,6 +135,7 @@ export function useWorkspace({
             : (error as Error).message,
         )
     } finally {
+      window.clearTimeout(timeout)
       if (controller.current === c) {
         controller.current = null
         setLoading(false)
@@ -166,6 +186,22 @@ export function useWorkspace({
     results,
     message,
     loading,
+    draftSaved,
+    replacement,
+    setReplacement,
+    confirmReplacement: () => {
+      if (replacement === 'demo') demo()
+      else if (replacement === 'metro') {
+        cancel()
+        const fixture = metropolitanDemo()
+        setScenarios(fixture.scenarios)
+        setResults(fixture.results)
+        setActive(0)
+        setSelection(null)
+        setMessage('DEMOSTRACIÓN METROPOLITANA: datos ilustrativos; no se ha ejecutado el servidor.')
+      }
+      setReplacement(null)
+    },
     scenario: scenarios[active],
     external,
     setView,
@@ -174,17 +210,9 @@ export function useWorkspace({
     update,
     moveNodes,
     run,
-    demo,
+    demo: () => setReplacement('demo'),
     metroDemo: () => {
-      cancel()
-      const fixture = metropolitanDemo()
-      setScenarios(fixture.scenarios)
-      setResults(fixture.results)
-      setActive(0)
-      setSelection(null)
-      setMessage(
-        'DEMOSTRACIÓN METROPOLITANA: 36 nodos y 60 vías. Soluciones estáticas verificadas; no se ha ejecutado el servidor. La demanda y el costo unitario son ilustrativos.',
-      )
+      setReplacement('metro')
     },
     selectScenario: (i: number) => {
       if (i === active) return

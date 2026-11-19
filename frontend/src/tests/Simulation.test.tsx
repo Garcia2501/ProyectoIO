@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { expect, test } from 'vitest'
 import { referenceScenario } from '../features/network/referenceScenario'
@@ -45,16 +45,16 @@ test('una vía cerrada nunca representa vehículos aunque se reciba un flujo', (
   })
   expect(roads[0].flow).toBe(0)
 })
-test('las cinco secciones navegan por teclado y Resultados tiene tabla real', async () => {
+test('la navegación visible omite accesos secundarios y Resultados conserva su tabla interna', async () => {
   const user = userEvent.setup()
   render(<App data={noDataset} />)
   const nav = screen.getByRole('navigation', { name: 'Vistas de SmartFlow' })
-  within(nav).getByRole('button', { name: 'Red y análisis' }).focus()
+  within(nav).getByRole('button', { name: 'Mapa Huachi' }).focus()
   await user.keyboard('{ArrowRight}')
   expect(
     within(nav).getByRole('button', { name: 'Comparar escenarios' }),
   ).toHaveFocus()
-  await user.click(within(nav).getByRole('button', { name: 'Resultados' }))
+  fireEvent.click(document.querySelector<HTMLButtonElement>('button[aria-label="Resultados"]')!)
   await waitFor(() =>
     expect(
       screen.getByRole('heading', { name: 'De la red a las decisiones.' }),

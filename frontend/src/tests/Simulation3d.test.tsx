@@ -194,6 +194,7 @@ test('cerrar y optimizar envía la red modificada, no la captura anterior del es
   try {
     const { result } = renderHook(() => useWorkspace())
     act(() => result.current.demo())
+  act(() => result.current.confirmReplacement())
     const next = {
       ...result.current.scenario,
       roads: result.current.scenario.roads.map((r) => ({

@@ -29,6 +29,7 @@ test('el resultado real no se anuncia como DEMO aunque el otro escenario sea de 
     await user.click(
       screen.getByRole('button', { name: 'Cargar demostración' }),
     )
+    await user.click(screen.getByRole('button', { name: 'Reemplazar redes' }))
     expect(container.querySelector('.demo-banner')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Optimizar red' }))
     await waitFor(() =>

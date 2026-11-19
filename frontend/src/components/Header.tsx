@@ -56,7 +56,7 @@ export function Header({ w }: { w: Workspace }) {
               return
             e.preventDefault()
             const buttons = Array.from(
-              e.currentTarget.querySelectorAll<HTMLButtonElement>('button'),
+              e.currentTarget.querySelectorAll<HTMLButtonElement>('button:not([hidden])'),
             )
             const index = buttons.indexOf(
               document.activeElement as HTMLButtonElement,
@@ -76,6 +76,8 @@ export function Header({ w }: { w: Workspace }) {
           {sections.map((s) => (
             <button
               key={s.view}
+              hidden={s.view === 'main' || s.view === 'editor' || s.view === 'results'}
+              style={s.view === 'main' || s.view === 'editor' || s.view === 'results' ? { display: 'none' } : undefined}
               aria-label={s.name}
               aria-current={w.view === s.view ? 'page' : undefined}
               onClick={() => w.setView(s.view)}

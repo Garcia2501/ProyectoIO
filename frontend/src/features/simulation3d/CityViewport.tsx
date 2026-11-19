@@ -1,8 +1,18 @@
-import { Component, lazy, Suspense, useEffect, useState } from 'react'
+import { Component, lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { UrbanCanvas } from '../simulation/UrbanCanvas'
 import type { SceneProps } from './CityScene'
 const Scene = lazy(() => import('./CityScene'))
+function SceneLoading({ onFallback }: { onFallback: () => void }) {
+  useEffect(() => {
+    const timer = window.setTimeout(onFallback, 15000)
+    return () => window.clearTimeout(timer)
+  }, [onFallback])
+  return <div className="scene-loading" role="status">
+    <span />Preparando la ciudad tridimensional…
+    <button onClick={onFallback}>Usar vista vectorial</button>
+  </div>
+}
 class SceneBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },
   { failed: boolean }
@@ -17,6 +27,7 @@ class SceneBoundary extends Component<
 }
 export function CityViewport(props: SceneProps) {
   const [lost, setLost] = useState(false)
+  const useFallback = useCallback(() => setLost(true), [])
   const [playback, setPlayback] = useState(() => props.clock.snapshot())
   useEffect(
     () => props.clock.subscribe(() => setPlayback(props.clock.snapshot())),
@@ -25,7 +36,7 @@ export function CityViewport(props: SceneProps) {
   const fallback = (
     <div className="city-fallback">
       <span className="fallback-notice">
-        WebGL 2 no disponible · representación vectorial alternativa
+        Vista 3D no disponible · representación vectorial alternativa
       </span>
       <UrbanCanvas
         scenario={props.scenario}
@@ -50,10 +61,7 @@ export function CityViewport(props: SceneProps) {
     <SceneBoundary fallback={fallback}>
       <Suspense
         fallback={
-          <div className="scene-loading" role="status">
-            <span />
-            Preparando la ciudad tridimensional…
-          </div>
+          <SceneLoading onFallback={useFallback} />
         }
       >
         <Scene {...props} onLost={() => setLost(true)} />
